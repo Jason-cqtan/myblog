@@ -1,0 +1,54 @@
+/* .content-wrapper{
+	background:url('../../common/dist/img/boxed-bg.jpg') repeat fixed;
+} */
+.content-header
+{
+    height: 50px;
+    margin-bottom: 20px;
+
+    widht: 100%;
+}
+.content-header > .breadcrumb
+{
+    font-size: 12px;
+
+    position: absolute;
+    top: 15px;
+    left: 0;
+
+    display: inline-block;
+    float: left;
+
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 7px 5px;
+
+    border-radius: 2px;
+    background: transparent;
+}
+@media (max-width: 767px)
+{
+    .fixed .content-wrapper,
+    .fixed .right-side
+    {
+        padding-top: 50px;
+    }
+}
+.weixin
+{
+    color: green;
+}
+.weibo
+{
+    color: red;
+}
+.qq
+{
+    color: #777;
+}
+.male{
+    color: #777;
+}
+.female{
+    color:#ec95b9;
+}

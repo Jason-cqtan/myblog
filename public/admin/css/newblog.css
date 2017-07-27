@@ -1,0 +1,21 @@
+.onetag{
+	display: inline-block;
+	padding: 5px 5px;
+	margin-right: 10px;
+	height: 30px;
+	line-height: -40px;
+	float: left;
+	position: relative;
+	background: #ccc;
+	border-radius: 5px;
+}
+.onetag i{
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	color: red;
+	cursor: pointer;
+}
+.othertags{
+	margin-top: 10px;
+}

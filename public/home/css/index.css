@@ -1,0 +1,59 @@
+/*所有文章*/
+.allarticle .box-title a{
+	color: #777;
+}
+.allarticle .box-body h3{
+	margin: 0;
+}
+.allarticle .title{
+	font-size: 22px;
+}
+.allarticle .box-footer span{
+    margin-right: 20px;
+}
+/*右侧*/
+.hots .box-body ul li,.random .box-body ul li{
+	height: 30px;
+	line-height: 30px;
+	word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    margin-bottom: 10px;
+}
+.hots .box-body ul li span:first-child{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	color: #fff;
+	border-radius: 3px;
+	margin-right: 10px;
+}
+.hots .box-body ul li a{
+	margin-right: 10px;
+}
+.hots .box-body ul li:first-child span:first-child{
+	background: red;
+}
+.hots .box-body ul li:nth-child(2) span:first-child{
+	background: #dd4b39;
+	opacity: .80;
+}
+.hots .box-body ul li:nth-child(3) span:first-child{
+	background: #dd4b39;
+	opacity: .56;
+}
+.hots .box-body ul li:nth-child(4) span:first-child,.hots .box-body ul li:nth-child(5) span:first-child{
+	background: #777;
+}
+.tags li{
+	display: inline-block;
+	padding-right: 0;
+	margin: 0 10px 10px 0;
+}
+.tags li a{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
