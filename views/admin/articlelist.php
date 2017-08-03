@@ -40,7 +40,7 @@
               <div class="row">
                  <div class="col-xs-4 form-group">
                     <label for="name">模块</label>
-                    <select name="moduleids[]" multiple class="select2" style="width: 100%" id="chosemodule">
+                    <select name="module_ids[]" multiple class="select2" style="width: 100%" id="chosemodule">
                       <?php foreach ($modules as $key => $module): ?>
                         <option value="<?php echo $module->id?>"><?php echo $module->name ?></option>
                       <?php endforeach ?>                      
@@ -48,7 +48,7 @@
                   </div>
                   <div class="col-xs-4 form-group">
                     <label for="tenantry">标签</label>
-                    <select name="tagids[]" multiple class="select2" style="width: 100%" id="chosetags">
+                    <select name="tag_ids[]" multiple class="select2" style="width: 100%" id="chosetags">
                       <option value="1">php</option>
                     </select>
                   </div>
@@ -65,7 +65,7 @@
               </div>
               <div class="row">
                 <div class="col-xs-12">
-                  <button type="button" class="btn btn-primary min_w_100" onclick="searchCustomer(true)"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                  <button type="button" class="btn btn-primary min_w_100" onclick="getarticle(true)"><i class="fa fa-search"></i>&nbsp;搜索</button>
                   &nbsp;&nbsp;                
                   <button type="reset" id="resetSearch" class="btn btn-info min_w_100"><i class="fa fa-refresh"></i>&nbsp;重置</button>
                 </div>
@@ -93,17 +93,23 @@
                         </tr>
                       </thead>
                       <tbody id="ajaxcontent">
-                         <tr>
-                          <td class="text-center"><input type="checkbox" name="[]" value=""></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                      <?php foreach ($list as $key => $article): ?>
+                        <tr>
+                          <td class="text-center"><input type="checkbox" name="articleids[]" value=""></td>
+                          <td><?php echo $article->id ?></td>
+                          <td><?php echo $article->module_name ?></td>
+                          <td><?php echo $article->tag_names ?></td>
+                          <td><?php echo $article->title ?></td>
+                          <td><?php echo $article->remark ?></td>
+                          <td><?php echo date("Y-m-d h:i:s",$article->create_time) ?></td>
+                          <td><?php echo date("Y-m-d h:i:s",$article->update_time) ?></td>
+                          <td>
+                              <a href="#">置顶</a>
+                              <a href="#">修改</a>
+                              <a href="#">删除</a>
+                          </td>
                         </tr>
+                      <?php endforeach ?>                         
                       </tbody>  
                     </table>
                 </div>  

@@ -24,89 +24,60 @@
 			          <li class="active">Top Navigation</li>
 			        </ol>
 			      </section>
-						<!-- 搜索结果，标记搜索填入的 -->
-						<section>
-							<form class="form-horizontal">
-							<div class="box-body">
-								<div class="form-group">
-									<label for="articletitle" class="col-sm-2 control-label">文章标题</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="articletitle" placeholder="请输入文章标题">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-										<div class="col-sm-10">
-										<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-									</div>
-								</div>
-							</div>
-						  </form>
-							<p>以下是搜索结果：</p>
-						</section>
-						<div class="box box-default">
+			<!-- 搜索结果，标记搜索填入的 -->
+			<section>
+				<form class="form-horizontal">
+				<div class="box-body">
+					<div class="form-group">
+						<label for="articletitle" class="col-sm-2 control-label">文章标题</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="articletitle" placeholder="请输入文章标题">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+							<div class="col-sm-10">
+							<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+						</div>
+					</div>
+				</div>
+			  </form>
+				<p>以下是搜索结果：</p>
+			</section>
+			<?php foreach ($list as $key => $article): ?>
+		    <div class="box box-default">
               <div class="box-header with-border">
-                <h3 class="box-title"><a href="info.html">导航下某分类名</a></h3>
+                <h3 class="box-title"><a href="info.html"><?php echo $article->module_name ?></a></h3>
               </div>
               <div class="box-body">
-                <h3><a href="#" class="title">某篇文站的标题</a></h3>
+                <h3><a href="#" class="title"><?php echo $article->title ?></a></h3>
                 <h4>
-                    <a type="button" href="#" class="btn btn-xs bg-gray">分类1</a>
-                    <a type="button" href="#" class="btn btn-xs bg-gray">分类2</a>
-                    <span><small class="text-gray">一点点备注</small></span>
+                <?php 
+                $needarr = [];
+                $tag_name = explode(',',$article->tag_names);
+                $tag_id = explode(',',$article->tag_ids);
+                foreach ($tag_name as $key => $tag) {
+                	$needarr[] = (object)array(
+                        'id' =>  $tag_id[$key],
+                        'name' => $tag
+                	);
+                }
+                foreach ($needarr as $key => $tag) {?>
+                    <a type="button" href="<?php echo site_url($tag->id) ?>" class="btn btn-xs bg-gray"><?php echo $tag->name ?></a>
+                    <?php } ?>
+                    <span><small class="text-gray"><?php echo $article->remark ?></small></span>
                 </h4>
-                乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文
+                <?php echo $article->brief ?>
                 <a type="button" href="#" class="btn btn-primary btn-sm">查看详情>></a>
               </div>
               <div class="box-footer">
-                <span><i class="fa fa-calendar"></i> 2017-11-12 </span>
-                 <span><i class="fa fa-eye"></i>( 1234 )</span>
+                 <span data-toggle="tooltip"  title="<?php echo date("Y-m-d H:i",$article->create_time) ?>"><i class="fa fa-calendar"></i> <?php echo $this->common->formatTime($article->create_time) ?></span>
+                 <span><i class="fa fa-eye"></i>( <?php echo $article->views ?> )</span>
                  <a href="#"><span><i class="fa fa-comment"></i>( 0 )</span></a>
               </div>
               <!-- /.box-body -->
             </div>
-            <div class="box box-default">
-              <div class="box-header with-border">
-                <h3 class="box-title"><a href="#">导航下某分类名</a></h3>
-              </div>
-              <div class="box-body">
-                <h3><a href="#" class="title">某篇文站的标题</a></h3>
-                <h4>
-                    <a type="button" href="#" class="btn btn-xs bg-gray">分类1</a>
-                    <a type="button" href="#" class="btn btn-xs bg-gray">分类2</a>
-                    <span><small class="text-gray">一点点备注</small></span>
-                </h4>
-                乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文
-                <a type="button" href="#" class="btn btn-primary btn-sm">查看详情>></a>
-              </div>
-              <div class="box-footer">
-                <span><i class="fa fa-calendar"></i> 2017-11-12 </span>
-                 <span><i class="fa fa-eye"></i>( 1234 )</span>
-                 <a href="#"><span><i class="fa fa-comment"></i>( 0 )</span></a>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <div class="box box-default">
-              <div class="box-header with-border">
-                <h3 class="box-title"><a href="#">导航下某分类名</a></h3>
-              </div>
-              <div class="box-body">
-                <h3><a href="#" class="title">某篇文站的标题</a></h3>
-                <h4>
-                    <a type="button" href="#" class="btn btn-xs bg-gray">分类1</a>
-                    <a type="button" href="#" class="btn btn-xs bg-gray">分类2</a>
-                    <span><small class="text-gray">一点点备注</small></span>
-                </h4>
-                乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文乱数假文
-                <a type="button" href="#" class="btn btn-primary btn-sm">查看详情>></a>
-              </div>
-              <div class="box-footer">
-                <span><i class="fa fa-calendar"></i> 2017-11-12 </span>
-                 <span><i class="fa fa-eye"></i>( 1234 )</span>
-                 <a href="#"><span><i class="fa fa-comment"></i>( 0 )</span></a>
-              </div>
-              <!-- /.box-body -->
-            </div>
+            <?php endforeach ?>
            <!-- 分页 -->
 
 						<div class="row">

@@ -67,3 +67,62 @@ function getarticle(init1)
   });
   return false;
 }
+//重置搜索条件
+$("#resetSearch").on('click', function() {
+  $("#searchform").find("#sexall").iCheck('check');
+  document.getElementById("searchform").reset();
+  var $obj = $(this);
+  $obj.find('i').addClass('fa-spin');
+  getarticle(true);
+  setTimeout(function() {
+    $obj.find('i').removeClass('fa-spin');
+  }, 1000);
+});
+  //跳转指定页面
+$(".jumppage").on("click", function() {
+  var skippagenum = $("#skippagenum").val().length;
+  if (skippagenum < 1) {
+    openNoticeModel("请先输入跳转页！");
+    return false;
+  }
+  var pageindex = $("#skippagenum").val();
+  $("#searchform").find("input[name='page_index']").val(pageindex);
+  getarticle(false);
+});
+document.onkeydown = function(e) {
+    var ev = document.all ? window.event : e;
+    if (ev.keyCode == 13) {
+      //有模态框退出
+      if ($(".modal").hasClass('in')) {
+        return false;
+      }
+      $(".jumppage").click();
+    }
+  }
+  //限制输入跳转页
+$("input[name='skippagenum']").on("change keyup", function() {
+  var maxnum = parseInt($(this).attr("max"));
+  var inptnum = parseInt($(this).val());
+  if (inptnum > maxnum) {
+    $(this).val(maxnum);
+  }
+  if (inptnum < 1) {
+    $(this).val(1);
+  }
+});
+
+//改变每页显示条数
+$('.dataTables_length').find("select").on("change", function() {
+  var pagesize = $(this).val();
+  $("#searchform").find("input[name='page_size']").val(pagesize);
+  getarticle(true);
+});
+//分页点击跳转
+$(".pagination").on("click", 'a', function() {
+  if ($(this).parent().hasClass('active')) {
+    return false;
+  }
+  var page = parseInt($(this).attr('pageval'));
+  $('#searchform').find("input[name='page_index']").val(page);
+  getarticle(false);
+});
