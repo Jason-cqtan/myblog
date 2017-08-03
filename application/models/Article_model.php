@@ -47,11 +47,13 @@ class Article_model extends CI_Model
     	}
     	$this->db->stop_cache();
     	$pagingsql = $this->db->where('a.deleted',0)
+    	                 ->where('a.status', 1)//发布
 		    	         ->where('a.create_time >= ', $data['create_time'])
 		    	         ->order_by('a.id', 'DESC')
 		                 ->limit($data['page_size'],$start_count)
 		                 ->get_compiled_select();
 		$totalsql = $this->db->where('a.deleted',0)
+		                 ->where('a.status', 1)
 		    	         ->where('a.create_time >= ', $data['create_time'])
 		    	         ->order_by('a.id', 'DESC')
 		    	         ->get_compiled_select();
@@ -63,7 +65,13 @@ class Article_model extends CI_Model
             'data' => $res
         ];    
     }
+    
 
+    public function getArticleById($id)
+    {
+        // $this->db->where('id',$id)->get('article')->resule()[0]
+        //          ->
+    }
     
     /**
      * 插入文章
@@ -87,6 +95,7 @@ class Article_model extends CI_Model
 		    'module_id' => $data['module_id'],
 		    'module_name' => $data['module_name'],
 		    'user_id' => $_SESSION['user_id'],
+		    'status' => 1,
 		    'monthy' => $month,
 		    'title' => $data['title'],
 		    'brief' => $brief,

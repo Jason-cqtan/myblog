@@ -33,3 +33,50 @@ $(".addtag").on("click",function(){
 })
 // 实例化编辑器
 var ue = UE.getEditor('container');
+
+//确认发布
+$("#surepush").on("click",function(){
+	var $form = $("#artileform");
+	var title = $.trim($form.find("input[name='title']").val());
+	if(title.length < 1){
+		layer.alert('请填写标题！', {icon: 5});
+		return false;
+	}
+	var index = layer.load(1);
+	var posturl = site_url + 'admin/article/insertArticle';
+	var $obj = $(this);
+	if($obj.hasClass('disabled')){
+		return false;
+	}
+	$obj.html('处理中...').addClass('disabled');
+	$.ajax({
+	   type: "POST",
+	   url: posturl,
+	   data: $("#artileform").serialize(),
+	   dataType:"json",
+	   success: function(msg){
+	   	 layer.close(index);
+         $obj.html('确认发布').removeClass('disabled');
+	     if(parseInt(msg['status']) === 0){
+	     	window.location.href=msg.url;
+	     }else{
+	     	layer.alert(msg.msg, {icon: 5});
+	     	return false;
+	     }
+	   }
+	});
+	return false;
+})
+//预览
+$("#review").on("click",function(){
+	var $form = $("#artileform");
+	var title = $.trim($form.find("input[name='title']").val());
+	if(title.length < 1){
+		layer.alert('请填写标题！', {icon: 5});
+		return false;
+	}
+	var posturl = site_url + 'admin/article/review';
+	$("#artileform").attr('action',posturl);
+    $form.submit();
+    return false;
+})

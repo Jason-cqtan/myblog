@@ -31,7 +31,7 @@
             <div class="operatepanel action_box">
               <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#searchpanel" aria-expanded="false" aria-controls="#searchpanel" id="clicksearch">点击筛选&nbsp; <i class="fa fa-angle-left"></i></button>
               <button type="button" class="btn btn-primary" id="selecteddel">选中删除</button>
-              <a href="newblog.html" class="btn btn-info" id="addoperate">撰写新文章</a>
+              <a href="<?php echo site_url('admin/article/createArticle')?>" class="btn btn-info" id="addoperate">撰写新文章</a>
             </div>
             <div class="collapse" id="searchpanel">
             <form id="searchform" action="" method="post">  

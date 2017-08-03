@@ -121,7 +121,11 @@ class Article extends MY_Controller
     	$data['modules'] = $this->module->getNavModules();
     	$this->load->view('admin/newblog',$data);
     }
-
+    
+    /**
+     * 插入文章
+     * @return [type] [description]
+     */
     public function insertArticle()
     {
     	//表单验证
@@ -135,11 +139,30 @@ class Article extends MY_Controller
     	$data['content'] = trim($this->input->post('content'));
     	$res = $this->article->insertArticle($data);
     	if(!is_array($res)){
-            redirect('admin/article/index');
+            echo json_encode(array('status'=>0,'url'=>'index'));
+            exit;
         }else{
             $error = $res['message'];
-            echo '<script>alert("新增失败！'.$error.'");</script>';
+            echo json_encode(array('status'=>1,'msg'=>$error));
             exit;
         }
+    }
+    
+    /**
+     * 预览
+     * @return [type] [description]
+     */
+    public function review()
+    {
+        $module_id_name = explode('-',$this->input->post('module_id_name'));
+        $data['module_id'] = $module_id_name[0];//已选的模型id
+        $data['module_name'] = $module_id_name[1];//已选的模型名称
+        $data['tag_ids'] = empty($this->input->post('tag_ids'))?[]:$this->input->post('tag_ids');//已选的标签id列表
+        $data['tagnames'] = empty($this->input->post('tagnames'))?[]:$this->input->post('tagnames');//打算新增的标签名称列表
+        $data['title'] = trim($this->input->post('title'));
+        $data['remark'] = trim($this->input->post('remark'));
+        $data['content'] = trim($this->input->post('content'));
+        $this->load->view('admin/review',$data);
+
     }
 }

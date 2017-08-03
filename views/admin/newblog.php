@@ -35,7 +35,7 @@
               </h3>
             </div>
             <div class="box-body pad">
-              <form class="form-horizontal" method="post" action="<?php echo site_url('admin/article/insertArticle')?>">
+              <form class="form-horizontal" method="post" action="" id="artileform" target="_blank">
                 <div class="form-group">
                   <label for="atitle" class="col-sm-2 control-label">所属模块</label>
                   <div class="col-sm-10">
@@ -78,8 +78,8 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <button type="button" class="btn btn-default">预览</button>
-                    <button type="submit" class="btn btn-primary">确定发布</button>
+                    <button type="button" class="btn btn-default" id="review">预览</button>
+                    <button type="button" class="btn btn-primary" id="surepush">确定发布</button>
                   </div>
                 </div>                    
               </form>
