@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-07-27 19:07:52
+Date: 2017-08-03 20:41:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,17 +35,20 @@ CREATE TABLE `article` (
   `browserdesc` char(255) DEFAULT NULL,
   `is_sticktop` tinyint(1) unsigned DEFAULT '0',
   `ipaddress` char(255) DEFAULT NULL,
+  `remark` char(255) DEFAULT NULL,
+  `tag_ids` char(255) DEFAULT NULL,
+  `tag_names` char(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '5', 'js', '1', '2017-07', '士大夫收到飞', '有25幅作品拿去投票，一次投票需要选16幅，单个作品一次投票只能选择一次。前面有个程序员捅了漏子，忘了把投票入库，有200个用户产生的投票序列为空。那么你会如何填补这个漏子？当然向上级反映情况。但是我们这里讨论的是技术，就是需要生成1-25之间的16个不重复的随机数，去填补。具体怎么设计函数呢？将随机数存入数组，再在数组中去除重复的值，即可生成一定数量的不重复随机数。', '1501150879', null, '0', '1', 'Windows 7', 'Chrome 59.0.3071.115', '0', '重庆市电信');
-INSERT INTO `article` VALUES ('2', '5', 'js', '1', '2017-07', '士大夫收到飞', '有25幅作品拿去投票，一次投票需要选16幅，单个作品一次投票只能选择一次。前面有个程序员捅了漏子，忘了把投票入库，有200个用户产生的投票序列为空。那么你会如何填补这个漏子？当然向上级反映情况。但是我们这里讨论的是技术，就是需要生成1-25之间的16个不重复的随机数，去填补。具体怎么设计函数呢？将随机数存入数组，再在数组中去除重复的值，即可生成一定数量的不重复随机数。', '1501151217', null, '0', '1', 'Windows 7', 'Chrome 59.0.3071.115', '0', '重庆市电信');
-INSERT INTO `article` VALUES ('3', '5', 'js', '1', '2017-07', '士大夫收到飞', '有25幅作品拿去投票，一次投票需要选16幅，单个作品一次投票只能选择一次。前面有个程序员捅了漏子，忘了把投票入库，有200个用户产生的投票序列为空。那么你会如何填补这个漏子？当然向上级反映情况。但是我们这里讨论的是技术，就是需要生成1-25之间的16个不重复的随机数，去填补。具体怎么设计函数呢？将随机数存入数组，再在数组中去除重复的值，即可生成一定数量的不重复随机数。', '1501151613', null, '0', '1', 'Windows 7', 'Chrome 59.0.3071.115', '0', '重庆市电信');
-INSERT INTO `article` VALUES ('4', '5', 'js', '1', '2017-07', '士大夫收到飞', '有25幅作品拿去投票，一次投票需要选16幅，单个作品一次投票只能选择一次。前面有个程序员捅了漏子，忘了把投票入库，有200个用户产生的投票序列为空。那么你会如何填补这个漏子？当然向上级反映情况。但是我们这里讨论的是技术，就是需要生成1-25之间的16个不重复的随机数，去填补。具体怎么设计函数呢？将随机数存入数组，再在数组中去除重复的值，即可生成一定数量的不重复随机数。', '1501151683', null, '0', '1', 'Windows 7', 'Chrome 59.0.3071.115', '0', '重庆市电信');
-INSERT INTO `article` VALUES ('5', '5', 'js', '1', '2017-07', '士大夫收到飞', '有25幅作品拿去投票，一次投票需要选16幅，单个作品一次投票只能选择一次。前面有个程序员捅了漏子，忘了把投票入库，有200个用户产生的投票序列为空。那么你会如何填补这个漏子？当然向上级反映情况。但是我们这里讨论的是技术，就是需要生成1-25之间的16个不重复的随机数，去填补。具体怎么设计函数呢？将随机数存入数组，再在数组中去除重复的值，即可生成一定数量的不重复随机数。', '1501152150', null, '0', '1', 'Windows 7', 'Chrome 59.0.3071.115', '0', '重庆市电信');
+INSERT INTO `article` VALUES ('1', '7', 'php', '1', '2017-08', '士大夫收到', '士大夫收到发送到', '1501761300', '1501761300', '0', '1', 'Windows 7', 'Chrome 60.0', '0', '重庆市电信', '士大夫收到', '17', 'gd2');
+INSERT INTO `article` VALUES ('2', '4', 'css3', '1', '2017-08', '这是标题', '发送到发送到发送到', '1501761359', '1501761359', '0', '1', 'Windows 7', 'Chrome 60.0', '0', '重庆市电信', '士大夫收到发送到', '6,18', '定位,动画');
+INSERT INTO `article` VALUES ('3', '7', 'php', '1', '2017-08', '这是标题', '是打发斯蒂芬士大夫收到是打发斯蒂芬士大夫收到是打发斯蒂芬士大夫收到是打发斯蒂芬士大夫收到', '1501761432', '1501761432', '0', '1', 'Windows 7', 'Chrome 60.0', '0', '重庆市电信', '这是备注', '2,19', 'curl,websokit');
+INSERT INTO `article` VALUES ('4', '4', 'css3', '1', '2017-08', 'zheshi basdfgsdf', 'sdfsdf ssdfsdfsdfsdf', '1501761816', '1501761816', '0', '1', 'Windows 7', 'Chrome 60.0', '0', '重庆市电信', 'sdfsdf sd', '18,20', '动画,were');
+INSERT INTO `article` VALUES ('5', '5', 'js', '1', '2017-08', 'sdfsdfsdfsdfsdf', '曾经看到过一篇文章，讲到的内容就是个人是如何通过创建一个博客，然后通过日积月累的更新文章，最后在百度中获得了不少的排名，并最终通过百度带的巨大流量中获得联盟广告的收益。现在国内流行恐怕就是：用Word', '1501762150', '1501762150', '0', '1', 'Windows 7', 'Chrome 60.0', '0', '重庆市电信', 'sdfsdfsdf', '1,3', 'ajax,vue');
 
 -- ----------------------------
 -- Table structure for `article_has_modules`
@@ -53,14 +56,19 @@ INSERT INTO `article` VALUES ('5', '5', 'js', '1', '2017-07', '士大夫收到�
 DROP TABLE IF EXISTS `article_has_modules`;
 CREATE TABLE `article_has_modules` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module_id` int(10) unsigned NOT NULL,
   `article_id` int(10) unsigned NOT NULL,
+  `module_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article_has_modules
 -- ----------------------------
+INSERT INTO `article_has_modules` VALUES ('1', '1', '7');
+INSERT INTO `article_has_modules` VALUES ('2', '2', '4');
+INSERT INTO `article_has_modules` VALUES ('3', '3', '7');
+INSERT INTO `article_has_modules` VALUES ('4', '4', '4');
+INSERT INTO `article_has_modules` VALUES ('5', '5', '5');
 
 -- ----------------------------
 -- Table structure for `article_has_tags`
@@ -71,11 +79,20 @@ CREATE TABLE `article_has_tags` (
   `article_id` int(10) unsigned NOT NULL,
   `tag_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article_has_tags
 -- ----------------------------
+INSERT INTO `article_has_tags` VALUES ('1', '1', '17');
+INSERT INTO `article_has_tags` VALUES ('2', '2', '6');
+INSERT INTO `article_has_tags` VALUES ('3', '2', '18');
+INSERT INTO `article_has_tags` VALUES ('4', '3', '2');
+INSERT INTO `article_has_tags` VALUES ('5', '3', '19');
+INSERT INTO `article_has_tags` VALUES ('6', '4', '18');
+INSERT INTO `article_has_tags` VALUES ('7', '4', '20');
+INSERT INTO `article_has_tags` VALUES ('8', '5', '1');
+INSERT INTO `article_has_tags` VALUES ('9', '5', '3');
 
 -- ----------------------------
 -- Table structure for `comments`
@@ -140,14 +157,16 @@ CREATE TABLE `contact` (
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `content` longblob NOT NULL,
+  `content` longtext NOT NULL,
   `article_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of content
 -- ----------------------------
+INSERT INTO `content` VALUES ('1', '<p>sdfsdf ssdfsdfsdfsdf</p>', '4');
+INSERT INTO `content` VALUES ('2', '<p>曾经看到过一篇文章，讲到的内容就是个人是如何通过创建一个博客，然后通过日积月累的更新文章，最后在百度中获得了不少的排名，并最终通过百度带的巨大流量中获得联盟广告的收益。</p><p>现在国内流行恐怕就是：用Wordpress搭建一个个人博客，然后天天熬夜地更新文章，每天早上查看百度收录是不是又增加了，每个月百度的总有“那么一次”排名更新，并期望百度能够带来更多的流量。最后从流量中获取些广告收入。</p><p>更新博客，期待更好排名，得到更多的流量，这也许是做博客赚钱最简单的方法，但是对部落来说的这也许是一条不归路，流量赚钱对原创个人博客来说更是一个死胡同。很多时候我们还没有走出这个“胡同”，就已经“筋疲力尽”地消失了。</p><p style=\"margin: 1.5em 0px 0.5em; text-indent: 24px; font-size: 14px; line-height: 21px; color: rgb(51, 51, 51); font-family: Georgia, &quot;Times New Roman&quot;, &quot;Bitstream Charter&quot;, Times, serif; white-space: normal; background-color: rgb(255, 255, 255);\">一、个人博客—个人的孤独自白</p><p>1、流量赚钱的前提是需要足够的流量，而流量主要来自搜索引擎，在国内的话就不要提Google了，流量基本上被百度给垄断了。搜索引擎对个人博客收录越多，权重越高，则有可能带来更多的流量。</p><p>2、但是个人博客由于个人精力有限，一天能够更新10篇以上的文章就已经相当不容易了。而相对于那些以团队或者公司化的运作方式去经营的网站或者博客，个人博客显然不容易得到搜索引擎的青睐。</p><p>3、根据博客的回访和观察，身边很多的博主都无法保持每天一篇文章更新规律（部落最近也是更新不频繁），即使执行力非常强的博主，也很难在保证文章质量的前提下又保证文章的数量。</p><p>4、个人博客由于个人的原因，注定是博主一个人的自白，且还是孤独的。也许，新博客一年之内也就是自己在文章中“呐喊”。</p><p>个人博客无法在量上获得高权重，那么只能从质上入手。高质量的博文，需要耗费博主更多的时间与精力，也会遇到一个很麻烦的问题 —— 抄袭。</p><p style=\"margin: 1.5em 0px 0.5em; text-indent: 24px; font-size: 14px; line-height: 21px; color: rgb(51, 51, 51); font-family: Georgia, &quot;Times New Roman&quot;, &quot;Bitstream Charter&quot;, Times, serif; white-space: normal; background-color: rgb(255, 255, 255);\">二、抄袭让原创成为别人流量的劳动力</p><p>1、很多人说搜索引擎喜欢原创的文章。这句话如果对谷歌讲的话，我还可以信几分，但是如对百度来讲的话，我会BS一眼。原创的文章想要在百度获得流量，除了要“拼爹”外，还要拼运气。</p><p>2、所谓“拼爹”是指网站权重是否足够拼得过那些门户网站或者已经采集了很多年的老网站。很多的新博客在最开始是没有什么权重的，这时候也是那些采集网站眼中的“羔羊”，往往发表出来的文章搜索出来的排名几乎在第10页都找不到。</p><p>3、很多的博主对于这种“赤裸裸”的抄袭都会非常地气愤，有的还会专门跑过去和他们理论起来。但是结果又如何呢？除了会碰一鼻子外，没有任何好处。在国内，抄袭往往成了王道，原创成了“歪门邪道”。</p><p>4、原创的人成为了抄袭最廉价的劳动力，这就是草根个人博客的《悲惨世界》。</p><p>抄袭是无可避免的，如果可以的话，在博文的字里行间必须要有博主自己的特色，和带一些软文的性质，否则就会被抄死。</p><p style=\"margin: 1.5em 0px 0.5em; text-indent: 24px; font-size: 14px; line-height: 21px; color: rgb(51, 51, 51); font-family: Georgia, &quot;Times New Roman&quot;, &quot;Bitstream Charter&quot;, Times, serif; white-space: normal; background-color: rgb(255, 255, 255);\">三、百度“利”字自己既要吃肉也喝汤</p><p>1、在百度中搜索“主机”这一个关键词，从上到下，从左到右，没有一项是和“主机”这个词是相关联的，整个电脑屏幕已经被百度的推广广告所“霸占”着。</p><p>2、百度把“肉”吃光了，于是很多草根站长就想是不是可以从百度那里获得长尾关键词排名呢？这样也许可以分得一杯羹。</p><p>3、但是事实证明，百度除了要吃掉所有的“肉”还要喝掉所有的“汤”，贴吧、百科、经验等就是用来喝汤的。</p><p>百度不可靠，哪怕你昨天还是上万的流量，今天就可能把你K得只剩下首页。网站到处讨好百度可不是好受的。</p><p style=\"margin: 1.5em 0px 0.5em; text-indent: 24px; font-size: 14px; line-height: 21px; color: rgb(51, 51, 51); font-family: Georgia, &quot;Times New Roman&quot;, &quot;Bitstream Charter&quot;, Times, serif; white-space: normal; background-color: rgb(255, 255, 255);\">四、时间成本让站长放下屠刀立地成佛</p><p>1、做站域名和主机是金钱成本，就现在的情况来讲，一年的几百块钱的域名和主机费用已经绰绰有余了，但是最可怕是时间成本。</p><p>2、也许在学生时代做网站最有激情，没日没夜地不计报酬地更新原创文章，但是一旦兴趣转移、就业招聘、工作家族等多种因素走入生活之中，这种激情就会马上消失了。</p><p>3、即便是想继续坚持个人博客的梦想，却也因为巨额的时间成本无法于微薄的收益划等号，于是绝大多数个人博主便“放下屠刀”，立地去做更能赚钱的事情了。</p><p>有精力经营一个网站去赚钱，对大部分人来说，还不如用其它途径来得快。如果没有激情、坚持等，或者目标不纯，那么还是及早收手，不要到了30岁才发现，花了那么多时间做的网站，还是没什么起色。</p><p style=\"margin: 1.5em 0px 0.5em; text-indent: 24px; font-size: 14px; line-height: 21px; color: rgb(51, 51, 51); font-family: Georgia, &quot;Times New Roman&quot;, &quot;Bitstream Charter&quot;, Times, serif; white-space: normal; background-color: rgb(255, 255, 255);\">五、个人+原创+博客+流量+百度+赚钱=死路！希望？</p><p>1、个人+原创+博客+流量+百度+赚钱=死路，能够用个人博客走出流量赚钱的博主真得是凤毛麟角，绝大多数是在为他人作“嫁衣”。</p><p>2、个人原创博客希望在哪里？也许个人博客像被多数人“诅咒”了一样注定要消亡。但也许个人博客像“四两拨千斤”一样，摆脱流量赢利模式，走专业营销的道路。</p><p>个人博客只是打造个人品牌的一个阵地，如果想要靠个人博客赚钱，趁早转型。特别是技术类博客，用户群很偏，流量不可能会很高，基本是不可能有多大盈利空间的。</p><p>个人博客到最后不是消失就是被商业化，或者在消失的路上，这就是个人博客的宿命。</p><p><br/></p>', '5');
 
 -- ----------------------------
 -- Table structure for `monthly`
@@ -158,11 +177,12 @@ CREATE TABLE `monthly` (
   `month` char(7) NOT NULL,
   `num` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of monthly
 -- ----------------------------
+INSERT INTO `monthly` VALUES ('1', '2017-08', '5');
 
 -- ----------------------------
 -- Table structure for `mudule`
@@ -173,7 +193,7 @@ CREATE TABLE `mudule` (
   `name` char(10) NOT NULL,
   `pid` int(10) unsigned NOT NULL DEFAULT '0',
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_nav` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `is_tag` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `couldclick` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
@@ -181,18 +201,18 @@ CREATE TABLE `mudule` (
 -- ----------------------------
 -- Records of mudule
 -- ----------------------------
-INSERT INTO `mudule` VALUES ('1', '首页', '0', '0', '1', '1');
-INSERT INTO `mudule` VALUES ('2', '前端', '0', '0', '1', '1');
+INSERT INTO `mudule` VALUES ('1', '首页', '0', '0', '0', '1');
+INSERT INTO `mudule` VALUES ('2', '前端', '0', '0', '0', '1');
 INSERT INTO `mudule` VALUES ('3', 'html5', '2', '0', '1', '1');
 INSERT INTO `mudule` VALUES ('4', 'css3', '2', '0', '1', '1');
 INSERT INTO `mudule` VALUES ('5', 'js', '2', '0', '1', '1');
-INSERT INTO `mudule` VALUES ('6', '后端', '0', '0', '1', '1');
+INSERT INTO `mudule` VALUES ('6', '后端', '0', '0', '0', '1');
 INSERT INTO `mudule` VALUES ('7', 'php', '6', '0', '1', '1');
 INSERT INTO `mudule` VALUES ('8', 'java', '6', '0', '1', '1');
-INSERT INTO `mudule` VALUES ('9', '移动端', '0', '0', '1', '1');
+INSERT INTO `mudule` VALUES ('9', '移动端', '0', '0', '0', '1');
 INSERT INTO `mudule` VALUES ('10', 'android', '9', '0', '1', '1');
 INSERT INTO `mudule` VALUES ('11', 'ios', '9', '0', '1', '1');
-INSERT INTO `mudule` VALUES ('12', '服务器/os', '0', '0', '1', '1');
+INSERT INTO `mudule` VALUES ('12', '服务器/os', '0', '0', '0', '1');
 INSERT INTO `mudule` VALUES ('13', 'linux', '12', '0', '1', '1');
 INSERT INTO `mudule` VALUES ('14', 'apache', '12', '0', '1', '1');
 INSERT INTO `mudule` VALUES ('15', 'nginx', '12', '0', '1', '1');
@@ -210,7 +230,7 @@ CREATE TABLE `tags` (
   `pid` int(10) unsigned NOT NULL DEFAULT '0',
   `for_article` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否是文章的标签',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tags
@@ -221,6 +241,10 @@ INSERT INTO `tags` VALUES ('3', 'vue', '5', '0', '1');
 INSERT INTO `tags` VALUES ('4', 'vim', '13', '0', '1');
 INSERT INTO `tags` VALUES ('5', 'composer', '7', '0', '1');
 INSERT INTO `tags` VALUES ('6', '定位', '4', '0', '1');
+INSERT INTO `tags` VALUES ('20', 'were', '4', '0', '1');
+INSERT INTO `tags` VALUES ('19', 'websokit', '7', '0', '1');
+INSERT INTO `tags` VALUES ('18', '动画', '4', '0', '1');
+INSERT INTO `tags` VALUES ('17', 'gd2', '7', '0', '1');
 
 -- ----------------------------
 -- Table structure for `usedname`
@@ -261,7 +285,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'tjc', '78354a342d40fc34f3ba825f26527f56', '1', null, null, null, '1501129344', null, null, null, null);
+INSERT INTO `user` VALUES ('1', 'tjc', '78354a342d40fc34f3ba825f26527f56', '1', null, null, null, '1501761761', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `websites`
