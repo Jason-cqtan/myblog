@@ -11,6 +11,13 @@
 .content hr{
 	border: 1px solid #ccc;
 }
+.paneltitle{
+	color: #888 !important;
+}
+.paneltitle:hover{
+	color: #444 !important;
+	background: none !important;
+}
 /*发表评论*/
 .postcomment textarea{
 	resize: vertical;

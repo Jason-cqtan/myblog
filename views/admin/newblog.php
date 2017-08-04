@@ -40,6 +40,7 @@
                   <label for="atitle" class="col-sm-2 control-label">所属模块</label>
                   <div class="col-sm-10">
                     <select class="form-control select2" id="module" name="module_id_name" required>
+                      <option value="-1">请选择模块</option>
                       <?php foreach ($modules as $key => $module) {?>
                       <option value="<?php echo $module->id.'-'.$module->name ?>"><?php echo $module->name ?></option>
                       <?php } ?>

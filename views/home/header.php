@@ -45,7 +45,7 @@
 	              </ul>
 	            </li>
 	            <li><a href="manual.html" target="view_window">开发手册</a></li>
-	            <li><a href="website.html" target="view_window">优站推荐</a></li>
+	            <li><a href="<?php echo site_url('website') ?>" target="view_window">优站推荐</a></li>
 	            <li><a href="#">生活娱乐</a></li>
 	            <li><a href="#">关于我</a></li>
 				<li id="search"><a href="#"><i class="fa fa-search"></i></a></li>

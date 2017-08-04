@@ -1,6 +1,6 @@
 <header class="main-header">
   <!-- Logo -->
-  <a href="../../index2.html" class="logo">
+  <a href="<?php echo base_url('index2.html') ?>" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>A</b>LT</span>
     <!-- logo for regular state and mobile devices -->
@@ -42,13 +42,13 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../common/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+            <img src="<?php echo base_url('public/common/dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
             <span class="hidden-xs">Alexander Pierce</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="../../common/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="<?php echo base_url('public/common/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 
               <p>
                 Alexander Pierce - Web Developer
@@ -92,7 +92,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../common/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url('public/common/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>谭佳成</p>
@@ -101,7 +101,8 @@
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">操作面板</li>
+        <li><a href="<?php echo site_url('admin/cate') ?>"><i class="fa fa-book"></i> <span>模块分类管理</span></a></li>
         <li class="active treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>文章管理</span>
@@ -114,18 +115,7 @@
             <li><a href="<?php echo site_url('admin/article/createArticle')?>"><i class="fa fa-circle-o"></i> 撰写新文章</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>文章管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> 所有文章</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> 撰写新文章</a></li>
-          </ul>
-        </li>
+        <li><a href="<?php echo site_url('admin/Website') ?>"><i class="fa fa-book"></i> <span>优站推荐</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
