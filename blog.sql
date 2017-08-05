@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-08-04 20:32:11
+Date: 2017-08-05 20:00:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -302,7 +302,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'tjc', '78354a342d40fc34f3ba825f26527f56', '1', null, null, null, '1501812948', null, null, null, null);
+INSERT INTO `user` VALUES ('1', 'tjc', '78354a342d40fc34f3ba825f26527f56', '1', null, null, null, '1501909267', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `websites`
@@ -318,7 +318,7 @@ CREATE TABLE `websites` (
   `create_time` int(10) unsigned NOT NULL,
   `deleted` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of websites
@@ -331,9 +331,11 @@ INSERT INTO `websites` VALUES ('5', '百度', 'http://www.baidu.com', null, '123
 INSERT INTO `websites` VALUES ('6', '摩客网', 'http://www.google.com', null, '123878->子模块', '24', '1501840168', '0');
 INSERT INTO `websites` VALUES ('7', '网易云课堂', 'http://www.93jc.pw', null, '在线学习->国内', '27', '1501841833', '0');
 INSERT INTO `websites` VALUES ('8', 'w3c', 'http://www.93jc.pw', null, '在线学习->国外', '28', '1501841849', '0');
-INSERT INTO `websites` VALUES ('9', '122', '53153', 'sdfdsfsdf', '建站工具', '25', '1501848494', '0');
-INSERT INTO `websites` VALUES ('10', '122', '53153', null, '建站工具', '25', '1501848689', '0');
-INSERT INTO `websites` VALUES ('11', '121425', '62538', '+2+6', '建站工具', '25', '1501848717', '0');
+INSERT INTO `websites` VALUES ('9', '122', '53153', 'sdfdsfsdf', '建站工具', '25', '1501848494', '1');
+INSERT INTO `websites` VALUES ('10', '122', '53153', null, '建站工具', '25', '1501848689', '1');
+INSERT INTO `websites` VALUES ('11', '慕课网', 'www', 'wwww', '在线学习->国内', '27', '1501848717', '1');
+INSERT INTO `websites` VALUES ('12', '慕课网', 'www', null, '在线学习->国内', '28', '1501910002', '1');
+INSERT INTO `websites` VALUES ('13', '耳机级', '1215', '123335', '在线学习->国内', '27', '1501910411', '1');
 
 -- ----------------------------
 -- Table structure for `words`
@@ -345,8 +347,17 @@ CREATE TABLE `words` (
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `create_time` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of words
 -- ----------------------------
+INSERT INTO `words` VALUES ('1', '1212', '1', '1501914290');
+INSERT INTO `words` VALUES ('2', '345', '1', '1501914320');
+INSERT INTO `words` VALUES ('3', '但是粉丝的士大夫收到士大夫收到发送到发送到', '1', '1501914353');
+INSERT INTO `words` VALUES ('4', '第三方士大夫反倒是复方丹参士大夫奋斗多少飞第三方士大夫士大夫收到防守打法顺丰速递反倒是发送到反倒是发送到反倒是发送到发送到发送到士大夫收到飞士大夫第三方士大夫士大夫', '1', '1501914417');
+INSERT INTO `words` VALUES ('5', '士大夫收到发送到发送到', '1', '1501914972');
+INSERT INTO `words` VALUES ('6', '士大夫收到反倒是发送到', '1', '1501914975');
+INSERT INTO `words` VALUES ('7', '是打发斯蒂芬士大夫士大夫收到f是打发斯蒂芬收到发送到', '0', '1501915049');
+INSERT INTO `words` VALUES ('8', '士大夫收到发送到发送到', '0', '1501915052');
+INSERT INTO `words` VALUES ('9', '1212', '0', '1501915056');

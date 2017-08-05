@@ -1,39 +1,42 @@
 $(".select2").select2();
 //根据模型id获取标签列表
-$('#chosemodule').on('change', function (evt) {
-    $.ajax({
-       type: "POST",
-       url: site_url +"admin/article/getTags",
-       data: $("#searchform").serialize(),
-       dataType:"json",
-       success: function(msg){
-          var htm = '';
-          $.each(msg['msg'],function(index,val){
-            htm += '<option value="'+val.id+'">'+val.name+'</option>';
-            
-          })
-          $("#chosetags").html('').append(htm);
-           $("#chosetags").select2();
-       }
-    });
-    return false;
+$('#chosemodule').on('change', function(evt) {
+  $.ajax({
+    type: "POST",
+    url: site_url + "admin/article/getTags",
+    data: $("#searchform").serialize(),
+    dataType: "json",
+    success: function(msg) {
+      var htm = '';
+      $.each(msg['msg'], function(index, val) {
+        htm += '<option value="' + val.id + '">' + val.name + '</option>';
+
+      })
+      $("#chosetags").html('').append(htm);
+      $("#chosetags").select2();
+    }
+  });
+  return false;
 });
 
-function getarticle(init1)
-{
+function getarticle(init1) {
   if (init1) {
     //初始化为第一页
     $("#searchform").find("input[name='page_index']").val(1);
   }
+  var index = layer.load(1, {
+    time: 10 * 1000
+  }); //又换了种风格，并且设定最长等待10秒 
   $.ajax({
     type: "POST",
     url: site_url + "admin/article/ajaxGetlist",
     data: $("#searchform").serialize(),
     dataType: "json",
     success: function(msg) {
+      layer.close(index);
       var status = msg['status'];
       if (status != 'ok') {
-        openNoticeModel(msg['msg']);
+        layer.alert(msg['msg'], {icon: 2});
         return false;
       }
       $("#ajaxcontent").html("").append(msg['list']);
@@ -53,9 +56,9 @@ function getarticle(init1)
       });
       $('thead input').on('ifUnchecked', function(event) {
         var obj = $("#ajaxcontent");
-        var checkednum = parseInt(obj.find('input:checked').size());
-        var trnum = parseInt(obj.find('tr').size());
-        if(checkednum != trnum){
+        var checkednum = parseInt(obj.find('input:checked').legnth);
+        var trnum = parseInt(obj.find('tr').legnth);
+        if (checkednum != trnum) {
           return false;
         }
         $("#ajaxcontent").find("input[type='checkbox']").iCheck('uncheck');
@@ -78,11 +81,11 @@ $("#resetSearch").on('click', function() {
     $obj.find('i').removeClass('fa-spin');
   }, 1000);
 });
-  //跳转指定页面
+//跳转指定页面
 $(".jumppage").on("click", function() {
   var skippagenum = $("#skippagenum").val().length;
   if (skippagenum < 1) {
-    openNoticeModel("请先输入跳转页！");
+    layer.alert('请先输入跳转页！', {icon: 2});
     return false;
   }
   var pageindex = $("#skippagenum").val();
@@ -92,10 +95,6 @@ $(".jumppage").on("click", function() {
 document.onkeydown = function(e) {
     var ev = document.all ? window.event : e;
     if (ev.keyCode == 13) {
-      //有模态框退出
-      if ($(".modal").hasClass('in')) {
-        return false;
-      }
       $(".jumppage").click();
     }
   }

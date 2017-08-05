@@ -88,7 +88,7 @@
                       <tbody id="ajaxcontent">
                       <?php foreach ($list as $key => $item): ?>
                         <tr>
-                          <td class="text-center"><input type="checkbox" name="ids[]" value=""></td>
+                          <td class="text-center"><input type="checkbox" name="ids[]" value="<?php echo $item->id?>"></td>
                           <td><?php echo $item->id ?></td>
                           <td><?php echo $item->module_name ?></td>
                           <td><?php echo $item->name ?></td>
@@ -233,7 +233,7 @@
                 <div class="form-group">
                   <label for="remark" class="col-sm-2 control-label">备注说明</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="remark" :value="editobj.remark" placeholder="备注说明">
+                    <input type="text" class="form-control" name="remark" id="remark" :value="editobj.remark" placeholder="备注说明">
                   </div>
                 </div>
               </div>

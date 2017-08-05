@@ -2,50 +2,40 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
-* 优站推荐
+* 心灵鸡汤
 */
-class Website extends MY_Controller
+class Soulwords extends MY_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Common_model','common');
-        $this->load->model("User_model",'user');
-        $this->load->model('Website_model','web');
-        $this->load->model('Module_model','module');
-        $this->load->model('Tags_model','tag');
+        $this->load->model('Soul_model','soul');
         $this->load->helper('bootpagination');
 	}
 
 	public function index()
 	{
-		//获取优站推荐的模块列表
-		$modules = $this->module->getWebModules();
-		$data['tree'] = $this->common->getTree($modules,0);
-        //默认显示10条列表
+		//默认显示10条列表
         $data['page_size'] = 10;//每页显示几条
         $data['page_index'] = (!empty($this->uri->segment(4)))?(int)$this->uri->segment(4):1;//当前第几页
-        $res = $this->web->getWebsites($data);
+        $res = $this->soul->getSouls($data);
         $data['total_page'] = $res['total_page'];//总页数
         $data['totalnum'] = $res['total_count'];//总条数
         $data['pagestr'] = bootpagination($data['page_index'],$data['total_page'],3);//分页
-        $data['list'] = $res['data'];        
-		$this->load->view('admin/website',$data);
+        $data['list'] = $res['data'];
+		$this->load->view('admin/soulwords',$data);
 	}
-
 	 /**
-     * ajax获取列表
+     * ajax获取文章列表
      * @return [type] [description]
      */
 	public function ajaxGetlist()
 	{
 		$data['page_index'] = (int)$this->input->post('page_index')<=0?1:(int)$this->input->post('page_index');
-        $data['page_size'] = (int)$this->input->post('page_size');      
-        $data['name'] = empty($this->input->post('name'))?"":$this->input->post('name');
-        $data['module_ids'] = empty($this->input->post('module_ids'))?[]:$this->input->post('module_ids');
-        $data['create_time'] = empty($this->input->post('create_time'))?"":$this->input->post('create_time');
-        $res = $this->web->getWebsites($data);
+        $data['page_size'] = (int)$this->input->post('page_size');
+        $res = $this->soul->getSouls($data);
         $totalnum = $res['total_count'];//(int)$res->count;//总条数
         $total_page = $res['total_page'];
         $pagestr = bootpagination($data['page_index'],$total_page,3);//分页
@@ -56,7 +46,7 @@ class Website extends MY_Controller
 	}
 
 	/**
-     * 表体html列表
+     * 表体html文章列表
      * @param array $data [description]
      */
     private function AjaxHtmlFormat($data = array())
@@ -67,34 +57,28 @@ class Website extends MY_Controller
                 $str .= '<tr>';
                 $str .= '<td class="text-center"><input type="checkbox" name="ids[]" value="'.$item->id.'"></td>';
                 $str .= '<td>'.$item->id.'</td>';                               
-                $str .= '<td>'.$item->module_name.'</td>';
-                $str .= '<td>'.$item->name.'</td>';
-                $str .= '<td><a href="'.$item->url.'" target="_blank">'.$item->url.'</a></td>';
-                $str .= '<td>'.$item->remark.'</td>';
+                $str .= '<td class="content">'.$item->content.'</td>';
                 $str .= '<td>'.date("Y-m-d h:i:s",$item->create_time).'</td>';
-                $str .= '<td data-urlid="'.$item->id.'">';
+                $str .= '<td data-id="'.$item->id.'">';
                 $str .= '<a href="#" class="edit">修改</a>
                       <a href="#" class="del">删除</a>';
                 $str .= '</td>';
                 $str .= '</tr>';
             }
          }else{
-            $str .= '<tr style="width:100%;text-align:center;color:red;"><td colspan="9">暂无数据！</td></tr>';
+            $str .= '<tr style="width:100%;text-align:center;color:red;"><td colspan="5">暂无数据！</td></tr>';
          }
          return $str;
     }
-    
+
     /**
-     * 插入优站
+     * 插入
      * @return [type] [description]
      */
-	public function insertWeb()
+	public function insertSoul()
 	{
-		$data['module_id'] = $this->input->post('module_id');
-		$data['name'] = $this->input->post('name');
-		$data['url'] = $this->input->post('url');
-		$data['remark'] = $this->input->post('remark');
-		$res = $this->web->insertWeb($data);
+		$content = $this->input->post('content');
+		$res = $this->soul->insertSoul($content);
 		if($res){
 			echo json_encode(array('status'=>1,'msg'=>$res['message']));
 			exit;
@@ -105,13 +89,13 @@ class Website extends MY_Controller
 	}
     
     /**
-     * 删除优站
+     * 删除
      * @return [type] [description]
      */
-	public function delWeb()
+	public function delSoul()
 	{
 		$id = $this->input->post('id');
-		$res = $this->web->delWeb($id);
+		$res = $this->soul->delSoul($id);
 		if($res){
 			echo json_encode(array('status'=>1,'msg'=>$res['message']));
 			exit;
@@ -122,15 +106,15 @@ class Website extends MY_Controller
 	}
 
 	 /**
-     * 批量删除优站
+     * 批量删除
      * @return [type] [description]
      */
-	public function delManyWeb()
+	public function delManySoul()
 	{
 		$error = '';
 		$ids = $this->input->post('ids');
 		foreach ($ids as $key => $id) {
-			$res = $this->web->delWeb($id);
+			$res = $this->soul->delSoul($id);
 			if($res){
 				$error .= $res['message'];
 				break;
@@ -148,27 +132,24 @@ class Website extends MY_Controller
 
     
     /**
-     * 获取优站信息
+     * 获取信息
      * @return [type] [description]
      */
-	public function getWeb()
+	public function getSoul()
 	{
 		$id = $this->input->post('id');
-		$res = $this->web->getWeb($id);
+		$res = $this->soul->getSoul($id);
 		echo json_encode(array('data'=>$res));exit;
 	}
 	/**
 	 * 修改网站
 	 * @return [type] [description]
 	 */
-	public function editWeb()
+	public function editSoul()
 	{
 		$data['id'] = $this->input->post('id');
-		$data['module_id'] = $this->input->post('module_id');
-		$data['name'] = $this->input->post('name');
-		$data['url'] = $this->input->post('url');
-		$data['remark'] = $this->input->post('remark');
-		$res = $this->web->editWeb($data);
+		$data['content'] = $this->input->post('content');
+		$res = $this->soul->editSoul($data);
 		if($res){
 			echo json_encode(array('status'=>1,'msg'=>$res['message']));
 			exit;

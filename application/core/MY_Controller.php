@@ -16,7 +16,7 @@ class MY_Controller extends CI_Controller
     private function _checkLogin()
     {
         if(!isset($_SESSION['user_id'])){//没登录不让进入主页面
-            redirect('Entrance/index','location');
+            redirect('admin/login','location');
             exit;
        }
     }

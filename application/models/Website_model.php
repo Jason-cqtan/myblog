@@ -158,8 +158,17 @@ class Website_model extends CI_Model
 
     public function editWeb($data)
     {
+        //查询module是否有父级
+        $module_name = '';
+        $parent = $this->module->getModuleParent((int)$data['module_id']);
+        if($parent){
+            $module_name .= $parent[0]->name.'->';
+        }
+        //获取选择的模块名称
+        $module_name .= $this->module->getModule((int)$data['module_id'])->name;
         $this->db->set('name', $data['name']);
         $this->db->set('module_id', $data['module_id']);
+        $this->db->set('module_name', $module_name);
         $this->db->set('url', $data['url']);
         $this->db->set('remark', $data['remark']);
         $this->db->where('id', $data['id']);

@@ -22,7 +22,7 @@ class Article extends MY_Controller
      * 文章列表
      * @return [type] [description]
      */
-	public function index()
+	public function allarticle()
 	{
 		$data['modules'] = $this->module->getNavModules();
         //默认显示10条文章列表
@@ -91,7 +91,7 @@ class Article extends MY_Controller
          if($data){
             foreach ($data as $key => $item) {
                 $str .= '<tr>';
-                $str .= '<td><input type="checkbox" name="articleids[]" value="'.$item->id.'"></td>';
+                $str .= '<td class="text-center"><input type="checkbox" name="articleids[]" value="'.$item->id.'"></td>';
                 $str .= '<td>'.$item->id.'</td>';                               
                 $str .= '<td>'.$item->module_name.'</td>';
                 $str .= '<td>'.$item->tag_names.'</td>';

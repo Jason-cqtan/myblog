@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="<?php echo base_url('public/common/plugins/iCheck/all.css') ?>">
 <!-- DataTables -->
 <link rel="stylesheet" href="<?php echo base_url('public/common/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>">
+<!-- Pace style -->
+  <link rel="stylesheet" href="<?php echo base_url('public/common/plugins/pace/pace.min.css') ?>">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

@@ -102,20 +102,21 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">操作面板</li>
-        <li><a href="<?php echo site_url('admin/cate') ?>"><i class="fa fa-book"></i> <span>模块分类管理</span></a></li>
-        <li class="active treeview">
+        <li currentmethod="cate"><a href="<?php echo site_url('admin/cate') ?>"><i class="fa fa-bookmark-o"></i> <span>模块分类管理</span></a></li>
+        <li class="treeview" currentmethod="article">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>文章管理</span>
+            <i class="fa fa-book"></i> <span>文章管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo site_url('admin/article/index')?>"><i class="fa fa-circle-o"></i> 所有文章</a></li>
-            <li><a href="<?php echo site_url('admin/article/createArticle')?>"><i class="fa fa-circle-o"></i> 撰写新文章</a></li>
+            <li currentmethod="allarticle"><a href="<?php echo site_url('admin/article/allarticle')?>"><i class="fa fa-file-text-o"></i> 所有文章</a></li>
+            <li currentmethod="createArticle"><a href="<?php echo site_url('admin/article/createArticle')?>"><i class="fa fa-pencil-square-o"></i> 撰写新文章</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo site_url('admin/Website') ?>"><i class="fa fa-book"></i> <span>优站推荐</span></a></li>
+        <li currentmethod="Website"><a href="<?php echo site_url('admin/Website') ?>"><i class="fa fa-mouse-pointer"></i> <span>优站推荐</span></a></li>
+        <li currentmethod="Soulwords"><a href="<?php echo site_url('admin/Soulwords') ?>"><i class="fa  fa-heart-o"></i> <span>心灵鸡汤</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

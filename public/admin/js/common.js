@@ -17,8 +17,8 @@ $('thead input').on('ifChecked', function(event) {
 });
 $('thead input').on('ifUnchecked', function(event) {
     var obj = $("#ajaxcontent");
-    var checkednum = parseInt(obj.find('input:checked').size());
-    var trnum = parseInt(obj.find('tr').size());
+    var checkednum = parseInt(obj.find('input:checked').length);
+    var trnum = parseInt(obj.find('tr').length);
     if(checkednum != trnum){
         return false;
     }
