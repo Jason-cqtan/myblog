@@ -30,4 +30,6 @@
     //清空表单
     $("#searchModal").modal("toggle");
   })
+  var site_url = "<?php echo site_url()?>";
+  var base_url = "<?php echo base_url()?>";
 </script>

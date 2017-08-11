@@ -19,6 +19,7 @@ class Article_model extends CI_Model
      */
     public function getArticles($data)
     {
+    	$deleted = isset($data['deleted'])?$data['deleted']:0;
     	$data = [
             'page_index' => isset($data['page_index'])?(int)$data['page_index']:1,
             'page_size' => isset($data['page_size'])?(int)$data['page_size']:10,
@@ -27,7 +28,7 @@ class Article_model extends CI_Model
             'module_ids' => isset($data['module_ids'])?$data['module_ids']:[],
             'tag_ids' => isset($data['tag_ids'])?$data['tag_ids']:[],
             'create_time' => (isset($data['create_time']) && strlen(trim($data['create_time'])) >= 1)?strtotime($data['create_time']):strtotime('2015-01-01'),
-    	];
+    	];    	
     	$start_count = ($data['page_index']-1)*$data['page_size'];
     	$this->db->start_cache();
     	$this->db->from("article as a");//文章主表
@@ -46,14 +47,12 @@ class Article_model extends CI_Model
     		$this->db->where_in('id', $sql,false);
     	}
     	$this->db->stop_cache();
-    	$pagingsql = $this->db->where('a.deleted',0)
-    	                 ->where('a.status', 1)//发布
+    	$pagingsql = $this->db->where('a.deleted',$deleted)
 		    	         ->where('a.create_time >= ', $data['create_time'])
 		    	         ->order_by('a.id', 'DESC')
 		                 ->limit($data['page_size'],$start_count)
 		                 ->get_compiled_select();
-		$totalsql = $this->db->where('a.deleted',0)
-		                 ->where('a.status', 1)
+		$totalsql = $this->db->where('a.deleted',$deleted)
 		    	         ->where('a.create_time >= ', $data['create_time'])
 		    	         ->order_by('a.id', 'DESC')
 		    	         ->get_compiled_select();
@@ -66,11 +65,41 @@ class Article_model extends CI_Model
         ];    
     }
     
-
-    public function getArticleById($id)
+    /**
+     * 获取热门文章
+     * @return [type] [description]
+     */
+    public function getHots()
     {
-        // $this->db->where('id',$id)->get('article')->resule()[0]
-        //          ->
+        $this->db->select('id, module_id, module_name,title,views');
+        $result = $this->db->order_by('views', 'DESC')->limit(5)->get('article')->result();       
+        return $result;
+    }
+    
+    /**
+     * 获取随机文章
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function getRandArticle()
+    {
+        $count = $this->db->select_max('id')->get('article')->result()[0]->id;
+        $randarr = [];
+        for ($i=0; $i < 10; $i++) { 
+            $randarr[] = rand(1,$count);
+        }
+        $needarr = [];
+        for ($i=0; $i < 10; $i++) { 
+            $res = $this->db->get_where('article', array('id' => $randarr[$i]))->result();
+            if($res){
+                if(count($needarr) < 5 && $res[0]->deleted == 0){
+                    $needarr[] = $res[0];
+                }else{
+                    break;
+                }                
+            }
+        }
+        return $needarr;
     }
     
     /**
@@ -95,7 +124,6 @@ class Article_model extends CI_Model
 		    'module_id' => $data['module_id'],
 		    'module_name' => $data['module_name'],
 		    'user_id' => $_SESSION['user_id'],
-		    'status' => 1,
 		    'monthy' => $month,
 		    'title' => $data['title'],
 		    'brief' => $brief,
@@ -188,8 +216,90 @@ class Article_model extends CI_Model
             	return $this->db->error();
             }
 		}
-		return true;
-		
+		return true;		
+    }
+
+     /**
+     * 移至回收站
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function recycleArticle($id)
+    {
+        $data = array(
+            'deleted' => 1
+        );
+        $this->db->where('id', $id);
+        if(!$this->db->update('article', $data)){
+            return $this->db->error();
+        }else{
+            return [];
+        }
+    }
+
+     /**
+     * 彻底删除
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function delArticle($id)
+    {
+        $monthy = $this->db->query('select id,monthy from article where id='.$id)->result()[0]->monthy;
+        $this->db->delete('article', array('id' => $id));//删除基础表
+        $this->db->delete('content', array('article_id' => $id));//删除内容表
+        $this->db->delete('article_has_modules', array('article_id' => $id));//删除module关系表
+        $this->db->where('article_id', $id);
+        $this->db->delete('article_has_tags');//删除tag关系表
+        $this->db->set('num', 'num-1', FALSE);
+		$this->db->where('month', $monthy);
+		$this->db->update('monthly');//按月统计数
+		$result = $this->db->error();
+		if($result['code'] === 0){
+			return [];
+		}else{
+			return $result;
+		}
+    }
+
+     /**
+     * 还原
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function restoreArticle($id)
+    {
+        $data = array(
+            'deleted' => 0
+        );
+        $this->db->where('id', $id);
+        if(!$this->db->update('article', $data)){
+            return $this->db->error();
+        }else{
+            return [];
+        }
+    }
+
+
+    /**
+     * 获取单个
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function getArticle($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->get('article')->result()[0];
+    }
+
+    public function editArticle($data)
+    {
+        $this->db->set('content', $data['content']);
+        $this->db->where('id', $data['id']);
+        if(!$this->db->update('article')){
+            return $this->db->error();
+        }else{
+            return [];
+        }
     }
 
 

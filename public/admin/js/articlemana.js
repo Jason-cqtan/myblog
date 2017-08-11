@@ -1,4 +1,7 @@
 $(".select2").select2();
+$("#showarticle").on("click",function(){
+getarticle(true);
+})
 //根据模型id获取标签列表
 $('#chosemodule').on('change', function(evt) {
   $.ajax({
@@ -36,7 +39,9 @@ function getarticle(init1) {
       layer.close(index);
       var status = msg['status'];
       if (status != 'ok') {
-        layer.alert(msg['msg'], {icon: 2});
+        layer.alert(msg['msg'], {
+          icon: 2
+        });
         return false;
       }
       $("#ajaxcontent").html("").append(msg['list']);
@@ -72,8 +77,9 @@ function getarticle(init1) {
 }
 //重置搜索条件
 $("#resetSearch").on('click', function() {
-  $("#searchform").find("#sexall").iCheck('check');
   document.getElementById("searchform").reset();
+  $("#searchform").find('select[name="module_ids[]"]').val(null).trigger("change");
+  $("#searchform").find('select[name="tag_ids[]"]').val(null).trigger("change");
   var $obj = $(this);
   $obj.find('i').addClass('fa-spin');
   getarticle(true);
@@ -85,7 +91,9 @@ $("#resetSearch").on('click', function() {
 $(".jumppage").on("click", function() {
   var skippagenum = $("#skippagenum").val().length;
   if (skippagenum < 1) {
-    layer.alert('请先输入跳转页！', {icon: 2});
+    layer.alert('请先输入跳转页！', {
+      icon: 2
+    });
     return false;
   }
   var pageindex = $("#skippagenum").val();
@@ -124,4 +132,62 @@ $(".pagination").on("click", 'a', function() {
   var page = parseInt($(this).attr('pageval'));
   $('#searchform').find("input[name='page_index']").val(page);
   getarticle(false);
+});
+//移动至回收站
+$("#ajaxcontent").on("click",'.del', function() {
+  var id = $(this).parent().data('id');
+  layer.confirm('移动至回收站该文章？', {
+    icon: 3,
+    title: '提示'
+  }, function(index) {
+    $.ajax({
+      type: "POST",
+      url: site_url + "admin/article/recycleArticle",
+      data: "id=" + id,
+      dataType: "json",
+      success: function(msg) {
+        if (msg.status === 0) {
+          getarticle();
+        } else {
+          layer.msg(msg.msg, {
+            icon: 5
+          });
+        }
+      }
+    });
+    layer.close(index);
+    return false;
+  });
+})
+  //选中移动至回收站
+$("#selecteddel").on("click", function() {
+  var selectednum = $("#ajaxcontent tr").find('div.checked').length;
+  if (selectednum < 1) {
+    layer.msg('请至少选中一个！', {
+      icon: 2
+    });
+    return false;
+  }
+  layer.confirm('你确移动至回收站所选中的吗？！', {
+    icon: 3,
+    title: '提示'
+  }, function(index) {
+    $.ajax({
+      type: "POST",
+      url: site_url + "admin/article/recycleManyArticle",
+      data: $("#operateform").serialize(),
+      dataType: "json",
+      success: function(msg) {
+        if (msg['status'] === 0) {
+          getarticle(false);
+        } else {
+          layer.alert(msg['msg'], {
+            icon: 2
+          });
+        }
+      }
+    });
+    layer.close(index);
+    return false;
+  })
 });

@@ -11,7 +11,6 @@ class Article extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('Common_model','common');
-        $this->load->model("User_model",'user');
         $this->load->model('Article_model','article');
         $this->load->model('Module_model','module');
         $this->load->model('Tags_model','tag');
@@ -91,7 +90,7 @@ class Article extends MY_Controller
          if($data){
             foreach ($data as $key => $item) {
                 $str .= '<tr>';
-                $str .= '<td class="text-center"><input type="checkbox" name="articleids[]" value="'.$item->id.'"></td>';
+                $str .= '<td class="text-center"><input type="checkbox" name="ids[]" value="'.$item->id.'"></td>';
                 $str .= '<td>'.$item->id.'</td>';                               
                 $str .= '<td>'.$item->module_name.'</td>';
                 $str .= '<td>'.$item->tag_names.'</td>';
@@ -99,10 +98,60 @@ class Article extends MY_Controller
                 $str .= '<td>'.$item->remark.'</td>';
                 $str .= '<td>'.date("Y-m-d h:i:s",$item->create_time).'</td>';
                 $str .= '<td>'.date("Y-m-d h:i:s",$item->update_time).'</td>';
-                $str .= '<td customerid="'.$item->id.'">';
+                $str .= '<td data-id="'.$item->id.'">';
                 $str .= '<a href="#">置顶</a>
                       <a href="#">修改</a>
-                      <a href="#">删除</a>';
+                      <a href="#" class="del">移至回收站</a>';
+                $str .= '</td>';
+                $str .= '</tr>';
+            }
+         }else{
+            $str .= '<tr style="width:100%;text-align:center;color:red;"><td colspan="9">暂无数据！</td></tr>';
+         }
+         return $str;
+    }
+
+    public function getRecycle()
+    {
+        $data['page_index'] = (int)$this->input->post('page_index')<=0?1:(int)$this->input->post('page_index');
+        $data['page_size'] = (int)$this->input->post('page_size');      
+        $data['title'] = empty($this->input->post('title'))?"":$this->input->post('title');
+        $data['module_ids'] = empty($this->input->post('module_ids'))?[]:$this->input->post('module_ids');
+        $data['tag_ids'] = empty($this->input->post('tag_ids'))?[]:$this->input->post('tag_ids');
+        $data['create_time'] = empty($this->input->post('create_time'))?"":$this->input->post('create_time');
+        $data['deleted'] = 1;
+        $res = $this->article->getArticles($data);
+        $totalnum = $res['total_count'];//(int)$res->count;//总条数
+        $total_page = $res['total_page'];
+        $pagestr = bootpagination($data['page_index'],$total_page,3);//分页
+        $statistics = array('currentpage'=>$data['page_index'],'total_page'=>$total_page,'totalnum'=>$totalnum);
+        $ajaxcontent = $this->AjaxHtmlFormat2($res['data']);
+        echo json_encode(array('status'=>'ok','list'=>$ajaxcontent,'pagestr'=>$pagestr,'statistics'=>$statistics));
+        exit;
+    }
+
+    /**
+     * 表体html文章列表
+     * @param array $data [description]
+     */
+    private function AjaxHtmlFormat2($data = array())
+    {
+         $str = '';
+         if($data){
+            foreach ($data as $key => $item) {
+                $str .= '<tr>';
+                $str .= '<td class="text-center"><input type="checkbox" name="ids[]" value="'.$item->id.'"></td>';
+                $str .= '<td>'.$item->id.'</td>';                               
+                $str .= '<td>'.$item->module_name.'</td>';
+                $str .= '<td>'.$item->tag_names.'</td>';
+                $str .= '<td>'.$item->title.'</td>';
+                $str .= '<td>'.$item->remark.'</td>';
+                $str .= '<td>'.date("Y-m-d h:i:s",$item->create_time).'</td>';
+                $str .= '<td>'.date("Y-m-d h:i:s",$item->update_time).'</td>';
+                $str .= '<td data-id="'.$item->id.'">';
+                $str .= '
+                      <a href="#" class="recycle">还原</a>
+                      <a href="#" class="realdel">彻底删除</a>';
                 $str .= '</td>';
                 $str .= '</tr>';
             }
@@ -139,7 +188,7 @@ class Article extends MY_Controller
     	$data['content'] = trim($this->input->post('content'));
     	$res = $this->article->insertArticle($data);
     	if(!is_array($res)){
-            echo json_encode(array('status'=>0,'url'=>'index'));
+            echo json_encode(array('status'=>0,'url'=>'allarticle'));
             exit;
         }else{
             $error = $res['message'];
@@ -165,4 +214,107 @@ class Article extends MY_Controller
         $this->load->view('admin/review',$data);
 
     }
+
+    /**
+     * 移至回收站
+     * @return [type] [description]
+     */
+    public function recycleArticle()
+    {
+        $id = $this->input->post('id');
+        $res = $this->article->recycleArticle($id);
+        if($res){
+            echo json_encode(array('status'=>1,'msg'=>$res['message']));
+            exit;
+        }else{
+            echo json_encode(array('status'=>0));
+            exit;
+        }
+    }
+
+     /**
+     * 批量移至回收站
+     * @return [type] [description]
+     */
+    public function recycleManyArticle()
+    {
+        $error = '';
+        $ids = $this->input->post('ids');
+        foreach ($ids as $key => $id) {
+            $res = $this->article->recycleArticle($id);
+            if($res){
+                $error .= $res['message'];
+                break;
+            }
+        }
+        if(strlen($error) > 1){
+            echo json_encode(array('status'=>1,'msg'=>$error));
+            exit;
+        }else{
+            echo json_encode(array('status'=>0));
+            exit;
+        }
+    }
+
+    /**
+     * 彻底删除
+     * @return [type] [description]
+     */
+    public function delArticle()
+    {
+        $id = $this->input->post('id');
+        $res = $this->article->delArticle($id);
+        if($res){
+            echo json_encode(array('status'=>1,'msg'=>$res['message']));
+            exit;
+        }else{
+            echo json_encode(array('status'=>0));
+            exit;
+        }
+    }
+
+     /**
+     * 批量彻底删除
+     * @return [type] [description]
+     */
+    public function delManyArticle()
+    {
+        $error = '';
+        $ids = $this->input->post('ids');
+        foreach ($ids as $key => $id) {
+            $res = $this->article->delArticle($id);
+            if($res){
+                $error .= $res['message'];
+                break;
+            }
+        }
+        if(strlen($error) > 1){
+            echo json_encode(array('status'=>1,'msg'=>$error));
+            exit;
+        }else{
+            echo json_encode(array('status'=>0));
+            exit;
+        }
+    }
+
+    /**
+     * 还原
+     * @return [type] [description]
+     */
+    public function restoreArticle()
+    {
+        $id = $this->input->post('id');
+        $res = $this->article->restoreArticle($id);
+        if($res){
+            echo json_encode(array('status'=>1,'msg'=>$res['message']));
+            exit;
+        }else{
+            echo json_encode(array('status'=>0));
+            exit;
+        }
+    }
+
+
+
+
 }

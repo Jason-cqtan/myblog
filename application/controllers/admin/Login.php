@@ -22,7 +22,7 @@ class Login extends CI_Controller {
 	{
 		$_SESSION['usererror'] = 0;
 		if(isset($_SESSION['admin_username'])){
-			redirect('admin/Article');
+			redirect('admin/Article/allarticle');
 		}
         //检测是否有cookie，有、使用cookie登录
         $username = $this->input->cookie('93jc.pw_username');
@@ -33,7 +33,7 @@ class Login extends CI_Controller {
             if($res){
                 $this->load->view('admin/login');
             }else{
-                redirect('admin/Article');
+                redirect('admin/Article/allarticle');
             }
         }else{
             $this->load->view('admin/login');

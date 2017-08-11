@@ -135,7 +135,7 @@ $(function () {
        success: function(msg){
          $obj.removeClass('disabled').html('登录');
          if(msg['status'] == 'ok'){
-          window.location.href='article/';
+          window.location.href='article/allarticle';
          }else{
           errornum++;
           if(errornum > 1){

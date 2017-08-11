@@ -88,4 +88,23 @@ class Soul_model extends CI_Model
             return [];
         }
     }
+    
+    /**
+     * 获取随机心灵鸡汤
+     * @return [type] [description]
+     */
+    public function getRand()
+    {
+        $count = $this->db->count_all('words');
+        $randarr = [];
+        for ($i=0; $i <= 3; $i++) { 
+            $randarr[] = rand(1,$count);
+        }
+        for ($i=0; $i <= 3; $i++) { 
+            $res = $this->db->get_where('words', array('id' => $randarr[$i]))->result();
+            if($res[0]->deleted == 0){
+                return $res[0];
+            }
+        }
+    }
 }

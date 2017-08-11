@@ -7,11 +7,11 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Common_model','common');
-        $this->load->model("User_model",'user');
-        $this->load->model('Article_model','article');
-        $this->load->model('Module_model','module');
-        $this->load->model('Tags_model','tag');
-        $this->load->helper('bootpagination');
+                $this->load->model("User_model",'user');
+                $this->load->model('Article_model','article');
+                $this->load->model('Module_model','module');
+                $this->load->model("Soul_model",'soul');
+                $this->load->helper('bootpagination');
 	}
 
 	public function index()
@@ -29,4 +29,34 @@ class Home extends CI_Controller {
         // print_R($data);exit;
 		$this->load->view('home/index',$data);
 	}
+
+        public function getHots()
+        {
+            $res = $this->article->getHots();
+            echo json_encode(array('list'=>$res));
+            exit;
+        }
+
+        public function getRand()
+        {
+            $res = $this->article->getRandArticle();
+            echo json_encode(array('list'=>$res));
+            exit;    
+        }
+
+        public function getclicknum()
+        {
+            echo json_encode(array('num'=>$_SESSION['randsoulnum'],'msg'=>'鸡汤看这么多干嘛，撸代码去！'));
+            exit;
+        }
+
+        public function getSoul()
+        {
+            $_SESSION['randsoulnum'] = isset($_SESSION['randsoulnum'])?$_SESSION['randsoulnum']+=1:1;
+            $res = $this->soul->getRand();
+            echo json_encode(array('status'=>0,'word'=>$res));
+            exit;
+        }
+
+
 }

@@ -53,18 +53,20 @@
                 <h3><a href="#" class="title"><?php echo $article->title ?></a></h3>
                 <h4>
                 <?php 
-                $needarr = [];
-                $tag_name = explode(',',$article->tag_names);
-                $tag_id = explode(',',$article->tag_ids);
-                foreach ($tag_name as $key => $tag) {
-                	$needarr[] = (object)array(
-                        'id' =>  $tag_id[$key],
-                        'name' => $tag
-                	);
-                }
-                foreach ($needarr as $key => $tag) {?>
+                
+                if(strlen($article->tag_ids) > 1){
+                    $needarr = [];
+	                $tag_name = explode(',',$article->tag_names);
+	                $tag_id = explode(',',$article->tag_ids);
+	                foreach ($tag_name as $key => $tag) {
+	                	$needarr[] = (object)array(
+	                        'id' =>  $tag_id[$key],
+	                        'name' => $tag
+	                	);
+	                }
+	                foreach ($needarr as $key => $tag) {?>
                     <a type="button" href="<?php echo site_url($tag->id) ?>" class="btn btn-xs bg-gray"><?php echo $tag->name ?></a>
-                    <?php } ?>
+                <?php }} ?>
                     <span><small class="text-gray"><?php echo $article->remark ?></small></span>
                 </h4>
                 <?php echo $article->brief ?>
@@ -79,42 +81,41 @@
             </div>
             <?php endforeach ?>
            <!-- 分页 -->
-
-						<div class="row">
-								<div class="col-xs-12 col-sm-3">
-								  <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">当前第一页，共20页，共100条</div>
-							  </div>
-								<div class="col-xs-12 col-sm-3">
-									<div class="dataTables_length" id="example1_length">
-										<label>每页显示
-											<select name="example1_length" aria-controls="example1" class="form-control input-sm">
-												<option value="10">10</option>
-												<option value="25">25</option>
-												<option value="50">50</option>
-												<option value="100">100</option>
-											</select> 条记录
-									</label>
-									</div>
-								</div>
-							  <div class="col-xs-12 col-sm-6">
-									<div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-										<ul class="pagination">
-											<li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
-											<li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li>
-											<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li>
-											<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li>
-											<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li>
-											<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li>
-											<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li>
-											<li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li>
-										</ul>
-									</div>
-							  </div>
+			<div class="row">
+					<div class="col-xs-12 col-sm-3">
+					  <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">当前第一页，共20页，共100条</div>
+				  </div>
+					<div class="col-xs-12 col-sm-3">
+						<div class="dataTables_length" id="example1_length">
+							<label>每页显示
+								<select name="example1_length" aria-controls="example1" class="form-control input-sm">
+									<option value="10">10</option>
+									<option value="25">25</option>
+									<option value="50">50</option>
+									<option value="100">100</option>
+								</select> 条记录
+						</label>
 						</div>
+					</div>
+				  <div class="col-xs-12 col-sm-6">
+						<div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+							<ul class="pagination">
+								<li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+								<li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li>
+								<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li>
+								<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li>
+								<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li>
+								<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li>
+								<li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li>
+								<li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li>
+							</ul>
+						</div>
+				  </div>
+			</div>
 
           </div>
           <div class="col-xs-12 col-sm-4 right_aside">
-						<!-- 什么网站 -->
+			<!-- 什么网站 -->
             <div class="box box-primary box-solid">
               <div class="box-header">
                 <h3 class="box-title">这是什么网站</h3>
@@ -127,20 +128,15 @@
             <!-- 热度排行 -->
             <div class="box box-primary hots">
               <div class="box-header with-border">
-                <h3 class="box-title">最热文章</h3>
-
-                <div class="box-tools pull-right">
+                  <h3 class="box-title">最热文章</h3>
+                  <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                   </button>
-                </div>
+                  </div>
               </div>
               <div class="box-body">
                 <ul class="list-unstyled">
-                  <li><span>1</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li>
-                  <li><span>2</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li>
-                  <li><span>3</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li>
-                  <li><span>4</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li>
-                  <li><span>5</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li>
+                  <!-- <li><span>1</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li> -->
                 </ul>
               </div>
             </div>
@@ -150,36 +146,33 @@
 	            <div class="box-header with-border">
 	              <h3 class="box-title">喔唷，手气不错</h3>
 	              <div class="box-tools pull-right">
-	                <button data-toggle="tooltip" title="点击随机" class="btn btn-box-tool"  data-original-title="点击随机"><i class="fa fa-refresh"></i></button>
-									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	                <button data-toggle="tooltip" title="点击随机" class="btn btn-box-tool"  data-original-title="点击随机" onclick="getrand()"><i class="fa fa-refresh"></i></button>
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	              </div>
 	            </div>
 	            <div class="box-body">
 	              <ul class="list-unstyled">
-	                <li><span><a href="#">[分类名]</a></span> <span><a href="#" title="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li>
-	                <li><span><a href="#">[分类名]</a></span> <span><a href="#" itle="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li>
-	                <li><span><a href="#">[分类名]</a></span> <span><a href="#" title="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li>
-	                <li><span><a href="#">[分类名]</a></span> <span><a href="#" title="文章标题文章标题">文章标题文章标题</a></span></li>
+	                <!-- <li><span><a href="#">[分类名]</a></span> <span><a href="#" title="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li> -->
 	              </ul>
 	            </div>
 	          </div>
 
-						<!-- 碎语 -->
-						<div class="box box-primary random">
+			  <!-- 心灵鸡汤 -->
+			  <div class="box box-primary soul">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">唧唧复唧唧</h3>
 	              <div class="box-tools pull-right">
-	                <button data-toggle="tooltip" title="点击随机" class="btn btn-box-tool"  data-original-title="点击随机"><i class="fa fa-refresh"></i></button>
-									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	                <button data-toggle="tooltip" title="换一个" class="btn btn-box-tool"  data-original-title="换一个" id="getsoul"><i class="fa fa-refresh"></i></button>
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	              </div>
 	            </div>
 	            <div class="box-body">
-	              <span>学而不思则亡，思而不学则殆。</span>
+	              <!-- <span>学而不思则亡，思而不学则殆。</span> -->
 	            </div>
 	          </div>
 
-						<!-- 标签云 -->
-						<div class="nav-tabs-custom">
+			  <!-- 标签云 -->
+			  <div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">标签云</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">按月归档</a></li>
@@ -290,5 +283,6 @@
   </section>
  <?php $this->load->view('home/footer')?>
  <!-- 下面加载自己的js -->
+ <script src="<?php echo base_url('public/home/js/index.js')?>" async="true"></script>
 </body>
 </html>

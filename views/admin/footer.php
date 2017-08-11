@@ -49,4 +49,12 @@
        $(".sidebar-menu").find('li[currentmethod="'+current_method+'"]').addClass('active').parent().parent().addClass('active');
      }
   });
+  //退出登录
+  $("#loginout").on("click",function(){
+    layer.confirm('确定退出后台登录?', {icon: 3, title:'提示'}, function(index){
+      window.location.href="<?php echo site_url('admin/login/loginout')?>";
+      layer.close(index);
+      return false;
+    });
+  })
 </script>
