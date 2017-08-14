@@ -81,6 +81,9 @@ $(function(){
 	gethots();
 	getrand();
 	getsoul();
+	getTags();
+	getMonthly();
+	getstatistics();
 })
 //点击获取鸡汤
 $("#getsoul").on("click",function(){
@@ -101,3 +104,59 @@ $("#getsoul").on("click",function(){
 	});
 	return false;
 })
+
+function getMonthly()
+{
+	$.ajax({
+	   type: "POST",
+	   url: site_url + "home/getStatisticsBymonth",
+	   data: "",
+	   dataType:"json",
+	   success: function(msg){
+	   	 var obj = $("#monthbody");
+	   	 obj.html('');
+	     $.each(msg.list,function(key,val){
+	     	var one = '<li><a href="#" class="btn btn-primary btn-sm">'+val.month+' <small>('+val.num+')</small></a></li>';
+	     	obj.append(one);
+	     });
+	     return false;
+	   }
+	});
+	return false;
+}
+
+function getTags()
+{
+	$.ajax({
+	   type: "POST",
+	   url: site_url + "home/getStatisticsByTags",
+	   data: "",
+	   dataType:"json",
+	   success: function(msg){
+	   	 var obj = $("#tagsbody");
+	   	 obj.html('');
+	     $.each(msg.list,function(key,val){
+	     	var one = '<li><a href="#" class="btn btn-primary btn-sm">'+val.name+' <small>('+val.num+')</small></a></li>';
+	     	obj.append(one);
+	     });
+	     return false;
+	   }
+	});
+	return false;
+}
+
+function getstatistics()
+{
+	$.ajax({
+	   type: "POST",
+	   url: site_url + "home/getSimpleStatistics",
+	   data: "",
+	   dataType:'json',
+	   success: function(msg){
+	   	 var simplebody = $("#simplebody");
+	     simplebody.find('.articletotal').html(msg.articletotal);
+	     simplebody.find('.tagtotal').html(msg.tagtotal);
+	     simplebody.find('.commenttotal').html(msg.commenttotal);
+	   }
+	});
+}

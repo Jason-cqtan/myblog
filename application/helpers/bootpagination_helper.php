@@ -35,19 +35,19 @@ if ( ! function_exists('bootpagination'))
 		//向上要显示的页码
 		$prevshowpage = $current_page-$pageoffset;
 		if($prevshowpage>=0){
-			$page_str .= "<li class='paginate_button'><a href='#' pageval='".$prevshowpage."'><<<</a></li>";
+			$page_str .= "<li class='paginate_button'><a href='javascript:;' pageval='".$prevshowpage."'><<<</a></li>";
 		}
 		for($i=$start_page;$i<=$end_page;$i++){
 			if($current_page==$i){
-				$page_str .= "<li class='paginate_button active'><a  href='#' pageval='".$i."'>".$i."</a></li>";
+				$page_str .= "<li class='paginate_button active'><a  href='javascript:;' pageval='".$i."'>".$i."</a></li>";
 			}else{
-				$page_str .= "<li class='paginate_button'><a  href='#' pageval='".$i."'>".$i."</a></li>";
+				$page_str .= "<li class='paginate_button'><a  href='javascript:;' pageval='".$i."'>".$i."</a></li>";
 			}
 		}
 		//向下要显示的页码
 		$nextshowpage = $current_page+$pageoffset;
 		if($nextshowpage<=$total_page){
-			$page_str .= "<li class='paginate_button'><a href='#' pageval='".$nextshowpage."'>>>></a></li>";
+			$page_str .= "<li class='paginate_button'><a href='javascript:;' pageval='".$nextshowpage."'>>>></a></li>";
 		}
 
 

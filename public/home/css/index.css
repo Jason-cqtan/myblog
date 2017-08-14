@@ -11,6 +11,11 @@
 .allarticle .box-footer span{
     margin-right: 20px;
 }
+/*分页*/
+.pagination p{
+	margin:0 0 5px;
+	line-height: 30px;
+}
 /*右侧*/
 .hots .box-body ul li,.random .box-body ul li{
 	height: 30px;

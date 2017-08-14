@@ -24,6 +24,7 @@ class Article_model extends CI_Model
             'page_index' => isset($data['page_index'])?(int)$data['page_index']:1,
             'page_size' => isset($data['page_size'])?(int)$data['page_size']:10,
             'title' => isset($data['title'])?$data['title']:'',
+            'module_name' => isset($data['module_name'])?$data['module_name']:'',
             'monthly' => isset($data['monthly'])?$data['monthly']:'',
             'module_ids' => isset($data['module_ids'])?$data['module_ids']:[],
             'tag_ids' => isset($data['tag_ids'])?$data['tag_ids']:[],
@@ -35,6 +36,9 @@ class Article_model extends CI_Model
     	if(strlen(trim($data['title'])) >= 1){
     		$this->db->like('title', $data['title']);
     	}
+        if(strlen(trim($data['module_name'])) >= 1){
+            $this->db->where('module_name', $data['module_name']);
+        }
     	if(strlen(trim($data['monthly']))){
     		$this->db->where('monthly', $data['monthly']);
     	}
@@ -301,6 +305,66 @@ class Article_model extends CI_Model
             return [];
         }
     }
+
+    public function getMonthy()
+    {
+        $query = $this->db->get('monthly');
+        return $query->result();
+    }
+
+    public function getStatisticsTags()
+    {
+        $needarr1 = [];
+        // (object)array(
+        //     'id' => '1',
+        //     'name' => 'xxx',
+        //     'num' => 123
+        // )
+        //先获取module是tag的id列表
+        $moduletags = $this->db->where('is_tag',1)->get('module')->result();
+        foreach ($moduletags as $key => $module_tag) {
+            $sql = 'select count(module_id) as num from  article_has_modules where module_id='.$module_tag->id;
+            $numobj = $this->db->query($sql)->row();
+            $num = (int)$numobj->num;
+            if($num !== 0){
+                $needarr1[] = (object)[
+                    'id' => $module_tag->id,
+                    'type' => 'moduletag',
+                    'name' => $module_tag->name,
+                    'num' => $num
+                ];
+            }
+            
+        }
+        //获取tag
+        $tags = $this->db->where('deleted',0)->get('tags')->result();
+        $needarr2 = [];
+        foreach ($tags as $key => $tag) {
+           $sql = 'select count(tag_id) as num from  article_has_tags where tag_id='.$tag->id;
+            $numobj = $this->db->query($sql)->row();
+            $num = (int)$numobj->num;
+            if($num !== 0){
+                $needarr2[] = (object)[
+                    'id' => $tag->id,
+                    'type' => 'tag',
+                    'name' => $tag->name,
+                    'num' => $num
+                ];
+            }
+        }
+        return array_merge($needarr1,$needarr2);
+    }
+
+    public function getSimpleStatistics()
+    {
+        //文章总数、标签总数、评论总数、访问排行
+        $articletotal = $this->db->query('select count(*) as num from article where deleted=0')->row()->num;
+        $tagtotal = $this->db->query('select count(*) as num from tags where deleted=0')->row()->num;
+        $tagtotal += $this->db->query('select count(*) as num from module where deleted=0 and is_tag = 1')->row()->num;
+        $commenttotal = 0;
+        return ['articletotal'=>$articletotal,'tagtotal'=>$tagtotal,'commenttotal'=>$commenttotal];
+    }
+
 
 
 }

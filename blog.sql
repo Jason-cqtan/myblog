@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: 2017-08-14 09:30:27
--- 服务器版本： 5.6.35
--- PHP Version: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 2017-08-14 11:35:35
+-- 服务器版本： 5.7.14
+-- PHP Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -181,7 +179,7 @@ CREATE TABLE `content` (
 
 INSERT INTO `content` (`id`, `content`, `article_id`) VALUES
 (8, '<p>水电费说的发售的发售的水电费说的发售的发售的水电费说的发售的发售的</p><p>水电费说的发售的发售的</p><p>水电费说的发售的发售的</p><p>水电费说的发售的发售的</p><p>水电费说的发售的发售的</p><p>水电费说的发售的发售的</p><p>水电费说的发售的发售的</p><p>水电费说的发售的发售的</p>', 11),
-(9, '<p>sdfsd12142342sdfsd12142342sdfsd12142342sdfsd12142342sdfsd12142342sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>v</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 143px;\"><span style=\"white-space: normal;\">sdfsd12142342</span></p><p style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 143px;\"><span style=\"white-space: normal;\"><br/></span></p><p style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;\"><span style=\"white-space: normal;\">sdfsd12142342</span></p><p style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;\"><span style=\"white-space: normal;\"><br/></span></p><p style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;\"><span style=\"white-space: normal;\">sdfsd12142342</span></p><p style=\"position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;\"><span style=\"white-space: normal;\"><br/></span></p>', 12),
+(9, '<p>sdfsd12142342sdfsd12142342sdfsd12142342sdfsd12142342sdfsd12142342sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>v</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p>sdfsd12142342</p><p style="position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 143px;"><span style="white-space: normal;">sdfsd12142342</span></p><p style="position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 143px;"><span style="white-space: normal;"><br/></span></p><p style="position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;"><span style="white-space: normal;">sdfsd12142342</span></p><p style="position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;"><span style="white-space: normal;"><br/></span></p><p style="position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;"><span style="white-space: normal;">sdfsd12142342</span></p><p style="position: absolute; width: 1px; height: 1px; overflow: hidden; left: -1000px; white-space: nowrap; top: 197px;"><span style="white-space: normal;"><br/></span></p>', 12),
 (10, '<p>sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf</p>', 13),
 (11, '<p>sdfsdfsdfasfsdfsdfsdfasfsdfsdfsdfasfsdfsdfsdfasfsdfsdfsdfasfsdfsdfsdfasfsdfsdfsdfasf124345</p>', 14),
 (12, '<p>sdfsdfsdf</p>', 15),
@@ -232,7 +230,11 @@ INSERT INTO `module` (`id`, `name`, `pid`, `deleted`, `is_tag`, `is_nav`) VALUES
 (25, '建站工具', 0, 0, 0, 0),
 (26, '在线学习', 0, 0, 0, 0),
 (27, '国内', 26, 0, 0, 0),
-(28, '国外', 26, 0, 0, 0);
+(28, '国外', 26, 0, 0, 0),
+(29, '生活娱乐', 0, 0, 0, 1),
+(30, '音乐', 29, 0, 1, 0),
+(31, '游戏', 29, 0, 1, 0),
+(32, '健身', 29, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -329,7 +331,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `pwd`, `level`, `avatar`, `reg_time`, `position`, `last_online`, `address`, `signature`, `gender`, `keywords`) VALUES
-(1, 'tjc', '78354a342d40fc34f3ba825f26527f56', 1, NULL, NULL, NULL, 1502204343, NULL, NULL, NULL, NULL);
+(1, 'tjc', '78354a342d40fc34f3ba825f26527f56', 1, NULL, NULL, NULL, 1502693782, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -402,13 +404,15 @@ ALTER TABLE `article`
 -- Indexes for table `article_has_modules`
 --
 ALTER TABLE `article_has_modules`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `module_id` (`module_id`);
 
 --
 -- Indexes for table `article_has_tags`
 --
 ALTER TABLE `article_has_tags`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tag_id` (`tag_id`);
 
 --
 -- Indexes for table `comments`
@@ -432,7 +436,8 @@ ALTER TABLE `content`
 -- Indexes for table `module`
 --
 ALTER TABLE `module`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `name` (`name`);
 
 --
 -- Indexes for table `monthly`
@@ -508,7 +513,7 @@ ALTER TABLE `content`
 -- 使用表AUTO_INCREMENT `module`
 --
 ALTER TABLE `module`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- 使用表AUTO_INCREMENT `monthly`
 --
@@ -538,8 +543,7 @@ ALTER TABLE `websites`
 -- 使用表AUTO_INCREMENT `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;COMMIT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -23,7 +23,7 @@ class Article extends MY_Controller
      */
 	public function allarticle()
 	{
-		$data['modules'] = $this->module->getNavModules();
+		$data['modules'] = $this->module->getNavModuleTags();
         //默认显示10条文章列表
         $data['page_size'] = 10;//每页显示几条
         $data['page_index'] = (!empty($this->uri->segment(4)))?(int)$this->uri->segment(4):1;//当前第几页
@@ -167,7 +167,7 @@ class Article extends MY_Controller
      */
     public function createArticle()
     {
-    	$data['modules'] = $this->module->getNavModules();
+    	$data['modules'] = $this->module->getNavModuleTags();
     	$this->load->view('admin/newblog',$data);
     }
     

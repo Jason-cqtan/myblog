@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
 	<?php $this->load->view('home/meta') ?>
-	<title>首页</title>
+	<title>分类为<?php echo '['.urldecode($module_name).']' ?>的所有文章</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/index.css') ?>">
 	
 </head>
@@ -16,6 +16,15 @@
         <div class="row">
            <!-- 左部 -->
            <div class="col-xs-12 col-sm-8 allarticle">
+				<!-- 面包屑 -->
+				<section class="content-header">
+			        <ol class="breadcrumb">
+			          <li <?php if(!isset($crumbs)){echo 'active';} ?>><i class="fa fa-map-pin"></i> 你当前所在：<a href="<?php echo base_url() ?>">主页</a></li>
+			          <?php if(isset($crumbs)){foreach ($crumbs as $key => $crumb){ ?>
+			          	<li <?php if($key+1 == count($crumbs)){echo 'class="active"';} ?>><a href="#"><?php echo $crumb ?></a></li>
+			          <?php }} ?>
+			        </ol>
+				</section>
 				<?php foreach ($list as $key => $article): ?>
 			    <div class="box box-solid">
 	              <div class="box-header with-border">
@@ -52,6 +61,7 @@
 	            </div>
 	            <?php endforeach ?>
 	            <!-- 分页 -->
+	            <?php if($totalnum > 0){ ?>
 				<section class="row">
 					  <div class="col-xs-6 col-sm-3 text-center">
 						  <div class="pagination">
@@ -76,6 +86,13 @@
 							</ul>
 					  </div>
 				</section>
+				<?php }else{ ?>
+                    <div class="alert alert-warning alert-dismissible">
+		                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		                <h4><i class="icon fa fa-warning"></i> 提示!</h4>
+		                该分类下暂无数据，查看其它的吧:>
+		            </div>
+				<?php } ?>
            </div>
            <!-- 右部 -->
            <div class="col-xs-12 col-sm-4 right_aside">
@@ -106,7 +123,7 @@
 	            <!-- 随机 -->
 	            <div class="box box-primary random">
 		            <div class="box-header with-border">
-		              <h3 class="box-title">喔唷，手气不错</h3>
+		              <h3 class="box-title">相关推荐</h3>
 		              <div class="box-tools pull-right">
 		                <button data-toggle="tooltip" title="点击随机" class="btn btn-box-tool"  data-original-title="点击随机" onclick="getrand()"><i class="fa fa-refresh"></i></button>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>

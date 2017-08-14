@@ -10,44 +10,21 @@
 	        </div>
 	        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 	          <ul class="nav navbar-nav">
-	            <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">前端 <span class="caret"></span></a>
-	              <ul class="dropdown-menu" role="menu">
-	                <li><a href="#">html5</a></li>
-	                <li><a href="#">css3</a></li>
-	                <li><a href="#">js</a></li>
-	              </ul>
-	            </li>
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">后端 <span class="caret"></span></a>
-	              <ul class="dropdown-menu" role="menu">
-	                <li><a href="#">php</a></li>
-	                <li><a href="#">java</a></li>
-	              </ul>
-	            </li>
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">移动端 <span class="caret"></span></a>
-	              <ul class="dropdown-menu" role="menu">
-	                <li><a href="#">android</a></li>
-	                <li><a href="#">ios</a></li>
-	              </ul>
-	            </li>
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">服务器／os <span class="caret"></span></a>
-	              <ul class="dropdown-menu" role="menu">
-	                <li><a href="#">Linux</a></li>
-	                <li><a href="#">apache</a></li>
-	                <li><a href="#">nginx</a></li>
-	                <li class="divider"></li>
-	                <li><a href="#">windows</a></li>
-	                <li><a href="#">mac</a></li>
-	              </ul>
-	            </li>
-	            <li><a href="manual.html" target="view_window">开发手册</a></li>
+	            <li class="active"><a href="<?php echo base_url() ?>">首页<span class="sr-only">(current)</span></a></li>
+	            <?php foreach ($_SESSION['navs'] as $key => $nav){if(isset($nav->children)){ ?>
+                    <li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $nav->name ?> <span class="caret"></span></a>
+		              <ul class="dropdown-menu" role="menu">
+		                <?php foreach ($nav->children as $key => $child): ?>
+		                	<li><a href="<?php echo site_url('home/moduleArticle/'.$child->name) ?>"><?php echo $child->name ?></a></li>
+		                <?php endforeach ?>
+		              </ul>
+		            </li>
+	            <?php }else{ ?>
+	                <li><a href="<?php echo site_url('home/moduleArticle/'.$nav->name) ?>"><?php echo $nav->name ?></a></li>
+	            <?php }} ?>
 	            <li><a href="<?php echo site_url('website') ?>" target="view_window">优站推荐</a></li>
-	            <li><a href="#">生活娱乐</a></li>
-	            <li><a href="#">关于我</a></li>
+	            <li><a href="<?php echo site_url('home/aboutme') ?>">关于我</a></li>
 				<li id="search"><a href="#"><i class="fa fa-search"></i></a></li>
 	          </ul>
 	        </div>

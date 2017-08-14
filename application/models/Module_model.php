@@ -6,14 +6,26 @@
 class Module_model extends CI_Model
 {
 	/**
-	 * 获取文章模块导航
+	 * 获取文章模块标签
 	 * @return [type] [description]
 	 */
-    public function getNavModules()
+    public function getNavModuleTags()
     {
     	$query = $this->db->where(array('is_tag' => 1, 'deleted' => 0,'pid !='=>0))->get('module');
     	return $query->result();        
     }
+
+    /**
+     * 获取前台导航模块
+     * @return [type] [description]
+     */
+    public function getNavModules()
+    {
+        $query =  $this->db->where('is_tag !=', 0)->where('deleted',0)->or_where('is_nav !=', 0)->get('module');
+        return $query->result();        
+    }
+
+
     
     /**
      * 获取所有模块
@@ -50,6 +62,20 @@ class Module_model extends CI_Model
         }else{
             $sql = 'select * from module where id = '.$module->pid;
             return $this->db->query($sql)->result();
+        }
+    }
+
+    public function getCrumbsByModulename($modulename)
+    {
+        $modulename = trim(urldecode($modulename));
+        $sql = 'select * from module where is_tag = 1 and name = "'.$modulename.'"';
+        $module = $this->db->query($sql)->row();
+        if($module->pid == 0){
+            return [$modulename];
+        }else{
+            $sql = 'select * from module where id = '.$module->pid;
+            $parent = $this->db->query($sql)->row();
+            return [$parent->name,$modulename];
         }
     }
     
