@@ -37,6 +37,73 @@ class Home extends CI_Controller {
         // print_R($data);exit;
 		$this->load->view('home/index',$data);
 	}
+
+    public function ajaxGetArticles()
+    {
+        $data['page_index'] = (int)$this->input->post('page_index')==0?1:(int)$this->input->post('page_index');
+        $data['page_size'] = (int)$this->input->post('page_size'); 
+        $res = $this->article->getArticles($data);
+        //var_dump($res);
+        $totalnum = $res['total_count'];//(int)$res->count;//总条数
+        $total_page = $res['total_page'];
+        $pagestr = bootpagination($data['page_index'],$total_page,3);//分页
+        $statistics = array('currentpage'=>$data['page_index'],'total_page'=>$total_page,'totalnum'=>$totalnum);
+        $ajaxcontent = $this->AjaxHtmlFormat($res['data']);
+        echo json_encode(array('list'=>$ajaxcontent,'pagestr'=>$pagestr,'statistics'=>$statistics));
+        exit;
+    }
+
+    /**
+     * 表体html文件格式化
+     * @param array $data [description]
+     */
+    private function AjaxHtmlFormat($data = array())
+    {
+         $str = '';
+         if($data){
+            foreach ($data as $key => $item) {    
+                $str .= '<div class="box box-solid">';
+                $str .= '<div class="box-header with-border">';
+                $str .= '<h3 class="box-title"><a href="info.html">'.$item->module_name.'</a></h3>';
+                $str .= '</div>';
+                $str .= '<div class="box-body">';
+                $str .= '<h3><a href="#" class="title">'.$item->title.'</a></h3>';
+                $str .= '<h4>';
+                if(strlen($item->tag_ids) > 1){
+                    $needarr = [];
+                    $tag_name = explode(',',$item->tag_names);
+                    $tag_id = explode(',',$item->tag_ids);
+                    foreach ($tag_name as $key => $tag) {
+                        $needarr[] = (object)array(
+                            'id' =>  $tag_id[$key],
+                            'name' => $tag
+                        );
+                    }
+                    foreach ($needarr as $key => $tag) {
+                        $str .= '<a type="button" href="" class="btn btn-xs bg-gray">'.$tag->name.'</a>';
+                    }
+                }
+                $str .= '<span><small class="text-gray">  '.$item->remark.'</small></span>';
+                $str .= '</h4>';
+                $str .= $item->brief;
+                $str .= '<a type="button" href="#" class="btn btn-primary btn-sm">查看详情&gt;&gt;</a>';
+                $str .= '</div>';
+                $str .= '<div class="box-footer">';
+                $str .= '<span data-toggle="tooltip" title="" data-original-title="'.date("Y-m-d H:i",$item->create_time).'"><i class="fa fa-calendar"></i> '.$this->common->formatTime($item->create_time).'</span>';
+                $str .= '<span><i class="fa fa-eye"></i> ( '.$item->views.' )</span>';
+                $str .= '<a href="#"><span><i class="fa fa-comment"></i> ( 0 )</span></a>';
+                $str .= '</div>';
+                $str .= '</div>';
+            }
+         }else{
+            $str .= '<div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> 提示!</h4>
+                        该分类下暂无数据，查看其它的吧:>
+                    </div>';
+         }
+         return $str;
+    }
     
     /**
      * 获取热门文章列表

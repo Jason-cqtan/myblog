@@ -16,6 +16,7 @@
         <div class="row">
            <!-- 左部 -->
            <div class="col-xs-12 col-sm-8 allarticle">
+                <div id="articlebody">
 				<?php foreach ($list as $key => $article): ?>
 			    <div class="box box-solid">
 	              <div class="box-header with-border">
@@ -51,11 +52,14 @@
 	              <!-- /.box-body -->
 	            </div>
 	            <?php endforeach ?>
+	            </div>
 	            <!-- 分页 -->
 				<section class="row">
+				    <form id="pageform">	
+				      <input type="hidden" name="page_index" value="1">			
 					  <div class="col-xs-6 col-sm-3 text-center">
 						  <div class="pagination">
-						      <p><span>共</span><b><?php echo $totalnum ?></b><span>条</span> <span>第</span><b><?php echo $page_index ?></b><span>页/共</span><b><?php echo $total_page ?></b><span>页</span></p>
+						      <p><span>共</span><b id="totalnum"><?php echo $totalnum ?></b><span>条</span> <span>第</span><b id="page_index"><?php echo $page_index ?></b><span>页/共</span><b id="total_page"><?php echo $total_page ?></b><span>页</span></p>
 						  </div>
 					  </div>
 					  <div class="col-xs-6 col-sm-4 text-center">
@@ -71,10 +75,11 @@
 						  </div>						    
 					  </div>
 					  <div class="col-xs-12 col-sm-5 text-center">
-							<ul class="pagination">
+							<ul class="pagination" id="pagestr">
 							<?php echo $pagestr ?>
 							</ul>
 					  </div>
+					</form>
 				</section>
            </div>
            <!-- 右部 -->
