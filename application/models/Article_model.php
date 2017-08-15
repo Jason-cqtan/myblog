@@ -32,7 +32,7 @@ class Article_model extends CI_Model
     	];    	
     	$start_count = ($data['page_index']-1)*$data['page_size'];
     	$this->db->start_cache();
-    	$this->db->from("article as a");//文章主表
+    	// $this->db->from("article");//文章主表
     	if(strlen(trim($data['title'])) >= 1){
     		$this->db->like('title', $data['title']);
     	}
@@ -40,10 +40,10 @@ class Article_model extends CI_Model
             $this->db->where('module_name', $data['module_name']);
         }
     	if(strlen(trim($data['monthly']))){
-    		$this->db->where('monthly', $data['monthly']);
+    		$this->db->where('monthy', $data['monthly']);
     	}
     	if(!empty($data['module_ids'])){
-            $this->db->where_in('a.module_id', $data['module_ids']);
+            $this->db->where_in('module_id', $data['module_ids']);
     	}
     	if(!empty($data['tag_ids'])){//再去查tags 
     		$ids = join(',',$data['tag_ids']);
@@ -51,15 +51,15 @@ class Article_model extends CI_Model
     		$this->db->where_in('id', $sql,false);
     	}
     	$this->db->stop_cache();
-    	$pagingsql = $this->db->where('a.deleted',$deleted)
-		    	         ->where('a.create_time >= ', $data['create_time'])
-		    	         ->order_by('a.id', 'DESC')
+    	$pagingsql = $this->db->where('deleted',$deleted)
+		    	         ->where('create_time >= ', $data['create_time'])
+		    	         ->order_by('id', 'DESC')
 		                 ->limit($data['page_size'],$start_count)
-		                 ->get_compiled_select();
-		$totalsql = $this->db->where('a.deleted',$deleted)
-		    	         ->where('a.create_time >= ', $data['create_time'])
-		    	         ->order_by('a.id', 'DESC')
-		    	         ->get_compiled_select();
+		                 ->get_compiled_select('article');
+		$totalsql = $this->db->where('deleted',$deleted)
+		    	         ->where('create_time >= ', $data['create_time'])
+		    	         ->order_by('id', 'DESC')
+		    	         ->get_compiled_select('article');
 		$res = $this->db->query($pagingsql)->result();
 		$total_count = $this->db->query($totalsql)->num_rows();
         return [
@@ -75,8 +75,9 @@ class Article_model extends CI_Model
      */
     public function getHots()
     {
-        $this->db->select('id, module_id, module_name,title,views');
-        $result = $this->db->order_by('views', 'DESC')->limit(5)->get('article')->result();       
+        $this->db->reset_query();
+        $sql = 'SELECT `id`, `module_id`, `module_name`, `title`, `views` FROM `article` ORDER BY `views` DESC LIMIT 5';
+        $result = $this->db->query($sql)->result();  
         return $result;
     }
     
@@ -87,14 +88,16 @@ class Article_model extends CI_Model
      */
     public function getRandArticle()
     {
-        $count = $this->db->select_max('id')->get('article')->result()[0]->id;
+        $sql = 'SELECT MAX(`id`) AS `id` FROM `article`';
+        $count = $this->db->query($sql)->row()->id;
         $randarr = [];
         for ($i=0; $i < 10; $i++) { 
             $randarr[] = rand(1,$count);
         }
         $needarr = [];
         for ($i=0; $i < 10; $i++) { 
-            $res = $this->db->get_where('article', array('id' => $randarr[$i]))->result();
+            $randsql = 'SELECT * FROM `article`  WHERE `id` = '.$randarr[$i];
+            $res = $this->db->query($randsql)->result();
             if($res){
                 if(count($needarr) < 5 && $res[0]->deleted == 0){
                     $needarr[] = $res[0];
@@ -285,14 +288,78 @@ class Article_model extends CI_Model
 
 
     /**
-     * 获取单个
+     * 获取文章基本信息
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
     public function getArticle($id)
     {
         $this->db->where('id', $id);
-        return $this->db->get('article')->result()[0];
+        $res =  $this->db->get('article')->result();
+        if($res){
+            return $res[0];
+        }else{
+            return [];
+        }
+    }
+    
+    /**
+     * 获取文章内容
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function getArticleContent($id)
+    {
+        $sql = 'select * from `content` where article_id ='.$id;
+        $res = $this->db->query($sql)->row();
+        return $res;
+    }
+    
+    /**
+     * 获取上一篇
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function getPrevArticle($id)
+    {
+        $sql = "SELECT * FROM article WHERE id < $id AND deleted = 0 ORDER BY id DESC LIMIT 1";
+        $res = $this->db->query($sql)->row();
+        return $res;
+    }
+    
+    /**
+     * 获取下一篇
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function getNextArticle($id)
+    {
+        $sql = "SELECT * FROM article WHERE id > $id AND deleted = 0 LIMIT 1";
+        $res = $this->db->query($sql)->row();
+        return $res;
+    }
+    
+    /**
+     * 文章详情获取推荐文章列表
+     * @param  [type] $module_name [description]
+     * @return [type]              [description]
+     */
+    public function getInfoRecommend($module_id,$artile_id)
+    {
+        $sql = "SELECT article_id FROM `article_has_modules` where `module_id` = $module_id";
+        $res = $this->db->query($sql)->result();
+        $needarr = [];
+        foreach ($res as $key => $id) {
+            $needarr[] = $id->article_id;
+        }
+        $total = count($needarr);
+        if($total <= 2){
+            return [];
+        }
+        $num = $total >= 8?8:$total;
+        $ids = array_rand(array_flip($needarr),$num);
+        $res = $this->db->where_in('id', $ids)->where('id !=',$artile_id)->get('article')->result();
+        return $res;
     }
 
     public function editArticle($data)

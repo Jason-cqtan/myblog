@@ -1,175 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="../../common/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../common/bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="../../common/bower_components/Ionicons/css/ionicons.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="../../common/plugins/iCheck/all.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../common/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../common/dist/css/skins/_all-skins.min.css">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <link rel="stylesheet" type="text/css" href="../css/common.css">
-  <link rel="stylesheet" type="text/css" href="../css/info.css">
-  <title>详情页</title>
+  <?php $this->load->view('home/meta') ?>
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/info.css') ?>">
+  <title><?php echo $articlebasic->title ?></title>
 </head>
 <body class="hold-transition skin-blue-light layout-top-nav fixed">
 <div class="wrapper">
 
-  <header class="main-header">
-    <!-- 导航 -->
-    <nav class="navbar navbar-static-top ">
-      <div class="container">
-          <div class="navbar-header">
-            <a href="../../index2.html" class="navbar-brand"><b>Admin</b>LTE</a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-              <i class="fa fa-bars"></i>
-            </button>
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">前端 <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">html5</a></li>
-                  <li><a href="#">css3</a></li>
-                  <li><a href="#">js</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">后端 <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">php</a></li>
-                  <li><a href="#">java</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">移动端 <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">android</a></li>
-                  <li><a href="#">ios</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">服务器／os <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Linux</a></li>
-                  <li><a href="#">apache</a></li>
-                  <li><a href="#">nginx</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">windows</a></li>
-                  <li><a href="#">mac</a></li>
-                </ul>
-              </li>
-              <li><a href="manual.html" target="view_window">开发手册</a></li>
-              <li><a href="website.html" target="view_window">优站推荐</a></li>
-              <li><a href="#">生活娱乐</a></li>
-              <li><a href="#">关于我</a></li>
-              <li id="search"><a href="#"><i class="fa fa-search"></i></a></li>
-            </ul>
-          </div>
-          <!-- /.navbar-collapse -->
-          <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-
-              <!-- Notifications Menu -->
-              <li class="dropdown notifications-menu">
-                <!-- Menu toggle button -->
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">你有10条信息</li>
-                  <li>
-                    <!-- Inner Menu: contains the notifications -->
-                    <ul class="menu">
-                      <li><!-- start notification -->
-                        <a href="#" title=“dsfsdf在《xxxxxxxxxxxxxxxxxxxxxxxxxxxxx》回复了你”>
-                          <i class="fa fa-users text-aqua"></i> @dsfsdf在《xxxxxxxxxxxxxxxxxxxxxxxxxxxxx》回复了你
-                        </a>
-                      </li>
-                      <!-- end notification -->
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">查看所有</a></li>
-                </ul>
-              </li>
-
-              <!-- User Account Menu -->
-              <li class="dropdown user user-menu">
-                <!-- Menu Toggle Button -->
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <!-- The user image in the navbar-->
-                  <img src="../../common/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">Alexander Pierce</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- The user image in the menu -->
-                  <li class="user-header">
-                    <img src="../../common/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                    <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
-                    </p>
-                  </li>
-                  <!-- Menu Body -->
-                  <li class="user-body">
-                    <div class="row">
-                      <div class="col-xs-4 text-center">
-                        <a href="#">Followers</a>
-                      </div>
-                      <div class="col-xs-4 text-center">
-                        <a href="#">Sales</a>
-                      </div>
-                      <div class="col-xs-4 text-center">
-                        <a href="#">Friends</a>
-                      </div>
-                    </div>
-                    <!-- /.row -->
-                  </li>
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- /.navbar-custom-menu -->
-      <!-- /.container-fluid -->
-    </nav>
-  </header>
-  <!-- Full Width Column -->
+  <?php $this->load->view('home/header')?>
   <div class="content-wrapper">
     <div class="container">
       <!-- Main content -->
@@ -179,47 +18,46 @@
             <ol class="breadcrumb">
               <li><i class="fa fa-map-pin"></i> 你当前所在：<a href="#">主页</a></li>
               <li><a href="#">分类名</a></li>
-              <li class="active">文章标题文章标题文章标题文章标题</li>
+              <li class="active"><?php echo $articlebasic->title ?></li>
             </ol>
           </section>
           <!-- 文章详情 -->
           <section class="info">
             <div class="row">
-              <h1 class="text-center">文章标题文章标题</h1>
+              <h1 class="text-center"><?php echo $articlebasic->title ?></h1>
             </div>
             <div class="row extra">
                <div class="col-xs-4 col-sm-3">
                  <span><i class="fa fa-user"></i> 谭佳成</span>
                </div>
                <div class="col-xs-4 col-sm-3">
-                 <span><i class="fa fa-edit"></i> 2017-7-14</span>
+                 <span data-toggle="tooltip" data-placement="top" title="<?php echo date("Y-m-d H:i",$articlebasic->create_time) ?>"><i class="fa fa-edit"></i> <?php echo $this->common->formatTime($articlebasic->create_time) ?></span>
                </div>
                <div class="col-xs-4 col-sm-3">
-                 <span><i class="fa fa-eye"></i> (123456)</span>
+                 <span><i class="fa fa-eye"></i> (<?php echo $articlebasic->views ?>)</span>
                </div>
                <div class="col-xs-4 col-sm-3">
-                 <span><i class="fa fa-tags"></i> <a href="#" class="btn btn-xs btn-primary">xxx</a> <a href="#" class="btn btn-xs btn-primary">xxx</a></span>
+                 <span><i class="fa fa-tags"></i> 
+                     <?php 
+                         if(strlen($articlebasic->tag_ids) > 1){
+                            $needarr = [];
+                            $tag_name = explode(',',$articlebasic->tag_names);
+                            $tag_id = explode(',',$articlebasic->tag_ids);
+                            foreach ($tag_name as $key => $tag) {
+                              $needarr[] = (object)array(
+                                    'id' =>  $tag_id[$key],
+                                    'name' => $tag
+                              );
+                            }
+                            foreach ($needarr as $key => $tag) {?>
+                     <a href="<?php echo site_url('home/tagArticle/'.$tag->name) ?>" target="_blank" class="btn btn-xs btn-primary"><?php echo $tag->name ?></a> 
+                     <?php }} ?>
+                 </span>
                </div>
             </div>
             <hr>
             <!-- 主要内容 -->
-            <div id="article-body">
-               <!-- div class="asset-body" -->
-              <p>1、</p>
-              <p>2017年初，网上<a href="http://finance.sina.com.cn/chanjing/cyxw/2017-03-16/doc-ifycnikk0820270.shtml">流传</a>华为公司正在清理34岁以上的员工。</p>
-              <!-- /div -->
-              <!-- div id="more" class="asset-more" -->
-              <blockquote>
-              <p>"中国区开始集中清理34+的交付员工，......去向是跟海外服务部门交换今年新毕业的校招员工，也就是进新人，出旧人。</p>
-              <p>这些旧人目测要被输出去海外，实际上就是变相裁员，这些30多岁的老杆子，英语又不好，拖家带口，能出去海外安心奋斗的没几个，即使出去了幸存的也不多。"</p></blockquote>
-              <p><img src="#" alt="" title="" /></p>
-              <p>华为公司<a href="#">否认</a>该消息。但是，不久以后又传出了一个<a href="#">消息</a>华为规定45岁必须退休。</p>
-              <blockquote>
-              <p>"为保持公司年轻化，退休政策即将微调，从"45岁可以退休"改变为"45岁须退休"，想继续工作的，需人力资源部重新审批。"</p>
-              </blockquote>
-              <p><img src="#" alt="" title="" /></p>
-              <p>一时间，网上议论纷纷：34岁清理一批，45岁强制离职，这是什么样的人事政策啊！</p>
-            </div>
+            <div id="article-body"><?php echo $articlecontent->content ?></div>
             <p id="announcement"><i class="fa fa-volume-up"></i> 自由转载，但请尽量附上本文地址：<span>http://www.tjc.cn/xxx/xxx/1.html</span></p>
             <hr>     
             <!-- 评分、分享、打赏 -->
@@ -236,28 +74,35 @@
             </div>
             <!-- 上下篇 -->
             <div class="row prev-next">
+              <?php if($prevarticle){ ?>
               <div class="col-xs-12">
-                <p>上一篇：<a href="#" title="文章标题文章标题文章标题文章标题">文章标题文章标题文章标题文章标题章标题文章标</a></p>
+                <p>上一篇：<a href="<?php echo site_url('info/index/'.$prevarticle->id) ?>" title="<?php echo $prevarticle->title ?>"><?php echo $prevarticle->title ?></a></p>
               </div>
+              <?php } ?>
+              <?php if($nextarticle){ ?>
               <div class="col-xs-12">
-                <p>下一篇：<a href="#">xxxxxx</a></p>
+                <p>下一篇：<a href="<?php echo site_url('info/index/'.$nextarticle->id) ?>" title="<?php echo $nextarticle->title ?>"><?php echo $nextarticle->title ?></a></p>
               </div>
+              <?php } ?>
             </div>
             <!-- 相关推荐 -->
             <div class="box box-primary related">
               <div class="box-header with-border">
                 <h3 class="box-title">相关推荐</h3>
                 <div class="box-tools pull-right">
-                  <button data-toggle="tooltip" title="" class="btn btn-box-tool"  data-original-title=""><i class="fa fa-refresh"></i> 换一换</button>
+                  <button data-toggle="tooltip" onclick="getRandRecommend()" title="" class="btn btn-box-tool"  data-original-title=""><i class="fa fa-refresh"></i> 换一换</button>
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
               </div>
               <div class="box-body">
-                <ul class="list-unstyled">
-                  <li class="col-xs-12 col-xs-6"><span><a href="#" title="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li>
-                  <li class="col-xs-12 col-xs-6"><span><a href="#" itle="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li>
-                  <li class="col-xs-12 col-xs-6"><span><a href="#" title="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li>
-                  <li class="col-xs-12 col-xs-6"><span><a href="#" title="文章标题文章标题">文章标题文章标题</a></span></li>
+                <form id="recommendform" class="hidden">
+                    <input type="hidden" name="article_id" value="<?php echo $articlebasic->id?>">
+                    <input type="hidden" name="module_id" value="<?php echo $articlebasic->module_id?>">
+                </form>
+                <ul class="list-unstyled" id="recommendbody">
+                  <?php foreach ($recommend as $key => $rec): ?>
+                  <li class="col-xs-12 col-xs-6"><span><a href="<?php echo site_url('info/index/'.$rec->id) ?>" title="<?php echo $rec->title ?>"><?php echo $rec->title ?></a></span></li>
+                  <?php endforeach ?>                  
                 </ul>
               </div>
             </div>
@@ -301,7 +146,7 @@
                     <div class="logined hidden">
                       <div class="col-xs-12 col-sm-6">
                         <div id="userinfo">
-                          <span><img src="../../common/dist/img/avatar.png" alt="头像" class="img-circle" width="30" height="30"></span>
+                          <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" alt="头像" class="img-circle" width="30" height="30"></span>
                           <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>
                         </div>
                         <div id="userextra">
@@ -335,7 +180,7 @@
                     <ul class="list-unstyled">
                         <li class="col-xs-12">
                           <div class="col-xs-2 col-sm-1 u-left text-center">
-                              <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                              <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                               <p class="lv"><span class="text-center">Lv.11</span></p>
                           </div>
                           <div class="col-xs-10 col-sm-11">
@@ -360,7 +205,7 @@
                         </li>
                         <li class="col-xs-12">
                           <div class="col-xs-2 col-sm-1 u-left text-center">
-                              <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                              <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                               <p class="lv"><span class="text-center">Lv.11</span></p>
                           </div>
                           <div class="col-xs-10 col-sm-11">
@@ -385,7 +230,7 @@
                         </li>
                         <li class="col-xs-12">
                           <div class="col-xs-2 col-sm-1 u-left text-center">
-                              <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                              <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                               <p class="lv"><span class="text-center">Lv.11</span></p>
                           </div>
                           <div class="col-xs-10 col-sm-11">
@@ -407,7 +252,7 @@
                             <ul class="list-unstyled belong">
                               <li class="col-xs-12">
                                 <div class="col-xs-2 col-sm-1 u-left text-center">
-                                    <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                                    <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                                     <p class="lv"><span class="text-center">Lv.11</span></p>
                                 </div>
                                 <div class="col-xs-10 col-sm-11">
@@ -430,7 +275,7 @@
                               </li>
                               <li class="col-xs-12">
                                 <div class="col-xs-2 col-sm-1 u-left text-center">
-                                    <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                                    <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                                     <p class="lv"><span class="text-center">Lv.11</span></p>
                                 </div>
                                 <div class="col-xs-10 col-sm-11">
@@ -453,7 +298,7 @@
                               </li>
                               <li class="col-xs-12">
                                 <div class="col-xs-2 col-sm-1 u-left text-center">
-                                    <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                                    <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                                     <p class="lv"><span class="text-center">Lv.11</span></p>
                                 </div>
                                 <div class="col-xs-10 col-sm-11">
@@ -486,7 +331,7 @@
                     <ul class="list-unstyled">
                         <li class="col-xs-12">
                           <div class="col-xs-2 col-sm-1 u-left text-center">
-                              <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                              <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                               <p class="lv"><span class="text-center">Lv.11</span></p>
                           </div>
                           <div class="col-xs-10 col-sm-11">
@@ -518,7 +363,7 @@
                         </li>
                         <li class="col-xs-12">
                           <div class="col-xs-2 col-sm-1 u-left text-center">
-                              <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                              <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                               <p class="lv"><span class="text-center">Lv.11</span></p>
                           </div>
                           <div class="col-xs-10 col-sm-11">
@@ -549,7 +394,7 @@
                             <ul class="list-unstyled belong">
                               <li class="col-xs-12">
                                 <div class="col-xs-2 col-sm-1 u-left text-center">
-                                    <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                                    <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                                     <p class="lv"><span class="text-center">Lv.11</span></p>
                                 </div>
                                 <div class="col-xs-10 col-sm-11">
@@ -572,7 +417,7 @@
                               </li>
                               <li class="col-xs-12">
                                 <div class="col-xs-2 col-sm-1 u-left text-center">
-                                    <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                                    <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                                     <p class="lv"><span class="text-center">Lv.11</span></p>
                                 </div>
                                 <div class="col-xs-10 col-sm-11">
@@ -595,7 +440,7 @@
                               </li>
                               <li class="col-xs-12">
                                 <div class="col-xs-2 col-sm-1 u-left text-center">
-                                    <span><img src="../../common/dist/img/avatar.png" class="img-circle" alt="头像" width="30" height="30"></span>
+                                    <span><img src="<?php echo base_url('public/common/dist/img/avatar.png') ?>" class="img-circle" alt="头像" width="30" height="30"></span>
                                     <p class="lv"><span class="text-center">Lv.11</span></p>
                                 </div>
                                 <div class="col-xs-10 col-sm-11">
@@ -633,76 +478,8 @@
     </div>
     <!-- /.container -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="pull-right hidden-xs">
-        <b>Version</b> 2.4.0
-      </div>
-      <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-      reserved.
-    </div>
-    <!-- /.container -->
-  </footer>
-  <section>
-    <div class="modal fade" tabindex="-1" role="dialog" id="searchModal" data-backdrop="false">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">搜索本站文章</h4>
-          </div>
-          <div class="modal-body">
-            <form class="form-horizontal">
-            <div class="box-body">
-              <div class="form-group">
-                <label for="articletitle" class="col-sm-2 control-label">文章标题</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="articletitle" placeholder="请输入文章标题">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                  <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                </div>
-              </div>
-            </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> 开始搜索</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-  </section>
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery 3 -->
-<script src="../../common/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../../common/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../common/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../common/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- iCheck -->
-<script src="../../common/plugins/iCheck/iCheck.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../common/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../common/dist/js/demo.js"></script>
-<script type="text/javascript">
-  $("#panel").find('input[type="radio"]').iCheck({
-    radioClass:'iradio_minimal-blue'
-  });
-  $("#search").on("click",function(){
-    //清空表单
-    $("#searchModal").modal("toggle");
-  })
-</script>
+ <?php $this->load->view('home/footer')?>
+ <!-- 下面加载自己的js -->
+ <script src="<?php echo base_url('public/home/js/info.js')?>"></script>
 </body>
 </html>

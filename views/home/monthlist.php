@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
 	<?php $this->load->view('home/meta') ?>
-	<title>首页</title>
+	<title><?php echo '['.$monthly.']' ?>所有文章</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/index.css') ?>">
 	
 </head>
@@ -16,14 +16,20 @@
         <div class="row">
            <!-- 左部 -->
            <div class="col-xs-12 col-sm-8 allarticle">
-                <div id="articlebody">
+				<!-- 面包屑 -->
+				<section class="content-header">
+			        <ol class="breadcrumb">
+			          <li <?php if(!isset($crumbs)){echo 'class="active"';} ?>><i class="fa fa-map-pin"></i> 你当前所在：<a href="<?php echo base_url() ?>">主页</a></li>
+			          <li class="active"><i class="fa fa-calendar"></i> <a href="#"><?php echo $monthly ?></a></li>
+			        </ol>
+				</section>
 				<?php foreach ($list as $key => $article): ?>
 			    <div class="box box-solid">
 	              <div class="box-header with-border">
 	                <h3 class="box-title"><a href="<?php echo site_url('home/moduleArticle/'.$article->module_name) ?>"><?php echo $article->module_name ?></a></h3>
 	              </div>
 	              <div class="box-body">
-	                <h3><a href="<?php echo site_url('info/index/'.$article->id) ?>" class="title"><?php echo $article->title ?></a></h3>
+	                <h3><a href="#" class="title"><?php echo $article->title ?></a></h3>
 	                <h4>
 	                <?php                 
 	                if(strlen($article->tag_ids) > 1){
@@ -42,7 +48,7 @@
 	                    <span><small class="text-gray"><?php echo $article->remark ?></small></span>
 	                </h4>
 	                <?php echo $article->brief ?>
-	                <a type="button" href="<?php echo site_url('info/index/'.$article->id) ?>" class="btn btn-primary btn-sm">查看详情>></a>
+	                <a type="button" href="#" class="btn btn-primary btn-sm">查看详情>></a>
 	              </div>
 	              <div class="box-footer">
 	                 <span data-toggle="tooltip"  title="<?php echo date("Y-m-d H:i",$article->create_time) ?>"><i class="fa fa-calendar"></i> <?php echo $this->common->formatTime($article->create_time) ?></span>
@@ -52,11 +58,12 @@
 	              <!-- /.box-body -->
 	            </div>
 	            <?php endforeach ?>
-	            </div>
 	            <!-- 分页 -->
+	            <?php if($totalnum > 0){ ?>
 				<section class="row">
-				    <form id="pageform">	
-				      <input type="hidden" name="page_index" value="1">			
+					  <form id="pageform">	
+				      <input type="hidden" name="page_index" value="1">	
+				      <input type="hidden" name="monthly" value="<?php echo $monthly ?>">		
 					  <div class="col-xs-6 col-sm-3 text-center">
 						  <div class="pagination">
 						      <p><span>共</span><b id="totalnum"><?php echo $totalnum ?></b><span>条</span> <span>第</span><b id="page_index"><?php echo $page_index ?></b><span>页/共</span><b id="total_page"><?php echo $total_page ?></b><span>页</span></p>
@@ -81,6 +88,13 @@
 					  </div>
 					</form>
 				</section>
+				<?php }else{ ?>
+                    <div class="alert alert-warning alert-dismissible">
+		                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		                <h4><i class="icon fa fa-warning"></i> 提示!</h4>
+		                该分类下暂无数据，查看其它的吧:>
+		            </div>
+				<?php } ?>
            </div>
            <!-- 右部 -->
            <div class="col-xs-12 col-sm-4 right_aside">
@@ -105,7 +119,7 @@
 	              <div class="box-body">
 	                <ul class="list-unstyled">
 	                  <?php foreach ($hots as $key => $hot): ?>
-	                  	<li><span><?php echo ($key + 1) ?></span><span><a href="<?php echo site_url('home/moduleArticle/'.$hot->module_name)?>">[<?php echo $hot->module_name ?>]</a></span><b><a href="<?php echo site_url('info/index/'.$hot->id) ?>" title="<?php echo $hot->title ?>"><?php echo $hot->title ?></a></b></li>
+	                  	<li><span><?php echo ($key + 1) ?></span><span><a href="<?php echo site_url('home/moduleArticle/'.$hot->module_name)?>">[<?php echo $hot->module_name ?>]</a></span><b><a href="#" title="<?php echo $hot->title ?>"><?php echo $hot->title ?></a></b></li>
 	                  <?php endforeach ?>
 	                  <!-- <li><span>1</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li> -->
 	                </ul>
@@ -123,7 +137,7 @@
 		            <div class="box-body">
 		              <ul class="list-unstyled">
 		                <?php foreach ($rands as $key => $rand): ?>
-		                	<li><span><a href="<?php echo site_url('home/moduleArticle/'.$rand->module_name)?>">[<?php echo $rand->module_name ?>]</a></span> <span><a href="<?php echo site_url('info/index/'.$rand->id) ?>" title="<?php echo $rand->title ?>"><?php echo $rand->title ?></a></span></li>
+		                	<li><span><a href="<?php echo site_url('home/moduleArticle/'.$rand->module_name)?>">[<?php echo $rand->module_name ?>]</a></span> <span><a href="#" title="<?php echo $rand->title ?>"><?php echo $rand->title ?></a></span></li>
 		                <?php endforeach ?>
 		                <!-- <li><span><a href="#">[分类名]</a></span> <span><a href="#" title="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li> -->
 		              </ul>
@@ -197,6 +211,6 @@
  <?php $this->load->view('home/footer')?>
  <!-- 下面加载自己的js -->
  <script src="<?php echo base_url('public/home/js/rightmodule.js')?>" async="true"></script>
- <script src="<?php echo base_url('public/home/js/index.js')?>" async="true"></script>
+ <script src="<?php echo base_url('public/home/js/monthlist.js')?>" async="true"></script>
 </body>
 </html>

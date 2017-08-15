@@ -1,4 +1,4 @@
-function getArticles(init1) {
+function getModuleArticles(init1) {
 	var objform = $("#pageform");
 	if (init1) {
 		//初始化为第一页
@@ -7,7 +7,7 @@ function getArticles(init1) {
 	var index = layer.load(1);
 	$.ajax({
 		type: "POST",
-		url: site_url + "home/ajaxGetArticles",
+		url: site_url + "home/ajaxgetModuleArticles",
 		data: objform.serialize(),
 		dataType: "json",
 		success: function(msg) {
@@ -25,7 +25,7 @@ function getArticles(init1) {
 }
 //改变每页显示条数
 $("#pageform").on('change','select',function(){
-	getArticles(true);
+	getModuleArticles(true);
 })
 //点击分页
 $("#pagestr").on("click",'li',function(){
@@ -35,6 +35,6 @@ $("#pagestr").on("click",'li',function(){
 	}
 	var page_index = parseInt(obj.find('a').attr('pageval'));
 	$("#pageform").find("input[name='page_index']").val(page_index);
-	getArticles(false);
+	getModuleArticles(false);
 	return false;
 })

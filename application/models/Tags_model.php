@@ -63,5 +63,19 @@ class Tags_model extends CI_Model
         	return [];
         }
     }
+
+    public function getTagidByName($name)
+    {
+        $sql = "select * from `tags` where `name` ='$name'";
+        $res = $this->db->query($sql)->row();
+        return $res;
+    }
+
+    public function getModuleidByTagid($tagid)
+    {
+        $sql = "select * from `tags` where `id` ='$tagid'";
+        $res = $this->db->query($sql)->row();
+        return $res->module_id;
+    }
     
 }
