@@ -78,6 +78,12 @@ class CI_Controller {
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
 		log_message('info', 'Controller Class Initialized');
+		//保存用户访问信息到session
+		$_SESSION['assip'] = getip();
+		$_SESSION['ipaddress'] = getipaddress();
+		$accessinfo = $this->common->getAccessInfo();
+		$_SESSION['platform'] = $accessinfo['platform'];
+		$_SESSION['browserdesc'] = $accessinfo['browser'].' '.substr($accessinfo ['version'],0,stripos($accessinfo ['version'],'.')+2);
 	}
 
 	// --------------------------------------------------------------------

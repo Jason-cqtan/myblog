@@ -8,6 +8,16 @@
 
     widht: 100%;
 }
+.visitor p{
+    position: relative;
+    margin-top: 5px;
+    text-indent: 10px;
+}
+.visitor p .pull-right{
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
 .content-header > .breadcrumb
 {
     font-size: 12px;

@@ -7,10 +7,8 @@
     </div>
     <!-- /.container -->
   </footer>
-
-</div>
 <!-- ./wrapper -->
-
+</div>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url('public/common/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -32,4 +30,17 @@
   })
   var site_url = "<?php echo site_url()?>";
   var base_url = "<?php echo base_url()?>";
+  //游客点击查看信息
+  $("#visitormenu").on("click",function(){
+    if($(this).hasClass('open')){
+      //
+    }
+  })
+  //前端登录
+  $(".homelogin").on("click",function(){
+layer.open({
+  type: 1,
+  content: '<div>hello world!</div>' //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+});
+  })
 </script>

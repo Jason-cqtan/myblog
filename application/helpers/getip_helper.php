@@ -37,13 +37,15 @@ if ( ! function_exists('getipaddress'))
 	 * @param  array  $arr [description]
 	 * @return [type]      [description]
 	 */
-	function getipaddress($ip = '125.84.81.170')
+	function getipaddress($ip = '125.84.82.2')
 	{
         $ip = $ip == '0.0.0.0'?getip():$ip;
 	    $url = 'http://ip.taobao.com/service/getIpInfo.php?ip='.$ip; 
-	    $ch = curl_init($url); 
+	    $ch = curl_init();//初始化
+		curl_setopt($ch,CURLOPT_URL,$url);//设置参数
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: text/xml; charset=utf-8"));
 	    curl_setopt($ch,CURLOPT_ENCODING ,'utf8'); 
-	    curl_setopt($ch, CURLOPT_TIMEOUT, 10); 
+	    curl_setopt($ch, CURLOPT_TIMEOUT, 0); 
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ; // 获取数据返回 
 	    $location = curl_exec($ch); 
 	    $location = json_decode($location); 
