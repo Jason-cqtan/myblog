@@ -16,7 +16,7 @@ function getrand() {
 				$.each(msg.list, function(key, val) {
 					var list = '<li>\
               <span><a href="'+site_url+'home/moduleArticle/'+val.module_name+'">[' + val.module_name + ']</a></span>\
-              <span><a href="#" title="' + val.title + '">' + val.title + '</a></span>\
+              <span><a href="'+site_url+'info/index/'+val.id+'" title="' + val.title + '">' + val.title + '</a></span>\
               </li>';
 					listobj.append(list);
 				});

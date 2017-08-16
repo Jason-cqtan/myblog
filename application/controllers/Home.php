@@ -75,7 +75,7 @@ class Home extends CI_Controller {
                 $str .= '<h3 class="box-title"><a href="'.site_url('home/moduleArticle/'.$item->module_name).'">'.$item->module_name.'</a></h3>';
                 $str .= '</div>';
                 $str .= '<div class="box-body">';
-                $str .= '<h3><a href="#" class="title">'.$item->title.'</a></h3>';
+                $str .= '<h3><a href="'.site_url('info/index/'.$item->id).'" class="title">'.$item->title.'</a></h3>';
                 $str .= '<h4>';
                 if(strlen($item->tag_ids) > 1){
                     $needarr = [];
@@ -94,7 +94,7 @@ class Home extends CI_Controller {
                 $str .= '<span><small class="text-gray">  '.$item->remark.'</small></span>';
                 $str .= '</h4>';
                 $str .= $item->brief;
-                $str .= '<a type="button" href="#" class="btn btn-primary btn-sm">查看详情&gt;&gt;</a>';
+                $str .= '<a type="button" href="'.site_url('info/index/'.$item->id).'" class="btn btn-primary btn-sm">查看详情&gt;&gt;</a>';
                 $str .= '</div>';
                 $str .= '<div class="box-footer">';
                 $str .= '<span data-toggle="tooltip" title="" data-original-title="'.date("Y-m-d H:i",$item->create_time).'"><i class="fa fa-calendar"></i> '.$this->common->formatTime($item->create_time).'</span>';

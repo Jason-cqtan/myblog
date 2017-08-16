@@ -27,3 +27,19 @@ function getRandRecommend()
 	});
 	return false;
 }
+//查看文章修改文章浏览数
+function viewadd1()
+{
+	$.ajax({
+	   type: "POST",
+	   url: site_url + "info/articleViewadd1",
+	   data: "id="+$("#article_id").val(),
+	   success: function(msg){
+	     
+	   }
+	});
+	return false;
+}
+$(function(){
+	viewadd1();
+})

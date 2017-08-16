@@ -362,6 +362,13 @@ class Article_model extends CI_Model
         return $res;
     }
 
+    public function articleViewadd1($id)
+    {
+        $this->db->set('views', 'views+1',false);
+        $this->db->where('id', $id);
+        $this->db->update('article');
+    }
+
     public function editArticle($data)
     {
         $this->db->set('content', $data['content']);

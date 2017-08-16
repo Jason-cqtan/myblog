@@ -23,6 +23,7 @@
           </section>
           <!-- 文章详情 -->
           <section class="info">
+            <input type="hidden" id="article_id" name="article_id" value="<?php echo $articlebasic->id?>">
             <div class="row">
               <h1 class="text-center"><?php echo $articlebasic->title ?></h1>
             </div>
@@ -36,24 +37,25 @@
                <div class="col-xs-4 col-sm-3">
                  <span><i class="fa fa-eye"></i> (<?php echo $articlebasic->views ?>)</span>
                </div>
+               <?php 
+                   if(strlen($articlebasic->tag_ids) > 1){
+                    $needarr = [];
+                    $tag_name = explode(',',$articlebasic->tag_names);
+                    $tag_id = explode(',',$articlebasic->tag_ids);
+                    foreach ($tag_name as $key => $tag) {
+                      $needarr[] = (object)array(
+                            'id' =>  $tag_id[$key],
+                            'name' => $tag
+                      );
+                    }?>
                <div class="col-xs-4 col-sm-3">
                  <span><i class="fa fa-tags"></i> 
-                     <?php 
-                         if(strlen($articlebasic->tag_ids) > 1){
-                            $needarr = [];
-                            $tag_name = explode(',',$articlebasic->tag_names);
-                            $tag_id = explode(',',$articlebasic->tag_ids);
-                            foreach ($tag_name as $key => $tag) {
-                              $needarr[] = (object)array(
-                                    'id' =>  $tag_id[$key],
-                                    'name' => $tag
-                              );
-                            }
-                            foreach ($needarr as $key => $tag) {?>
+                     <?php foreach ($needarr as $key => $tag) {?>
                      <a href="<?php echo site_url('home/tagArticle/'.$tag->name) ?>" target="_blank" class="btn btn-xs btn-primary"><?php echo $tag->name ?></a> 
-                     <?php }} ?>
+                     <?php } ?>
                  </span>
                </div>
+               <?php } ?>
             </div>
             <hr>
             <!-- 主要内容 -->
