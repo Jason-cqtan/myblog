@@ -25,31 +25,17 @@
 	            <?php }} ?>
 	            <li><a href="<?php echo site_url('website') ?>" target="view_window">优站推荐</a></li>
 	            <li><a href="<?php echo site_url('home/aboutme') ?>">关于我</a></li>
-				<li id="search"><a href="#"><i class="fa fa-search"></i></a></li>
+				<li id="search"><a href="<?php echo site_url('home/search') ?>"><i class="fa fa-search"></i></a></li>
 	          </ul>
 	        </div>
 	        <?php if(!isset($_SESSION['home_username'])){ ?>
 	        <div class="navbar-custom-menu">
 	        	<ul class="nav navbar-nav">
-                    <li class="dropdown user user-menu visitormenu">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	                <span>当前身份：游客</span>
-	              </a>
-	              <ul class="dropdown-menu visitor">
-	                <li><p>访问IP <span class="pull-right"><?php echo $_SESSION['assip'] ?></span></p></li>
-	                <li><p>归属地 <span class="pull-right"><?php echo $_SESSION['ipaddress'] ?></span></p></li>
-	                <li><p>系统 <span class="pull-right"><?php echo $_SESSION['platform'] ?></span></p></li>
-	                <li><p>浏览器 <span class="pull-right"><?php echo $_SESSION['browserdesc'] ?></span></p></li>
-	                <li class="user-footer">
-	                  <!-- <div class="pull-left">
-	                    <a href="#" class="btn btn-default btn-flat"></a>
-	                  </div> -->
-	                  <div class="pull-right">
-	                    <a href="#" class="btn btn-default btn-flat homelogin">登录解锁更多权限</a>
-	                  </div>
-	                </li>
-	              </ul>
-	            </li>
+                    <li class="dropdown user user-menu" >
+		              <a href="#" data-toggle="modal" data-target="#loginmodal">
+		                <span>当前身份：游客</span>
+		              </a>
+	            	</li>
 	        	</ul>
 	        </div>
 	        <?php }else{ ?>

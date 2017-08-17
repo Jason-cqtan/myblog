@@ -76,7 +76,7 @@ class Article_model extends CI_Model
     public function getHots()
     {
         $this->db->reset_query();
-        $sql = 'SELECT `id`, `module_id`, `module_name`, `title`, `views` FROM `article` ORDER BY `views` DESC LIMIT 5';
+        $sql = 'SELECT `id`, `module_id`, `module_name`, `title`, `views` FROM `article` where deleted = 0 ORDER BY `views` DESC LIMIT 5';
         $result = $this->db->query($sql)->result();  
         return $result;
     }
@@ -225,6 +225,103 @@ class Article_model extends CI_Model
 		}
 		return true;		
     }
+    
+    /**
+     * 修改文章
+     * @param  [type] $data [description]
+     * @return [type]       [description]
+     */
+    public function updateArticle($data)
+    {
+        //有新的标签，需要新增标签并使用新增的标签id绑定
+        //截取内容一部分(开始到第10个</p>)作为简介
+        ////返回字符串中的前255字符串长度的字符作为简介
+        $content_01 = $data["content"];//从数据库获取富文本content
+        $content_02 = htmlspecialchars_decode($content_01);//把一些预定义的 HTML 实体转换为字符
+        $content_03 = str_replace("&nbsp;","",$content_02);//将空格替换成空
+        $contents = strip_tags($content_03);//函数剥去字符串中的 HTML、XML 以及 PHP 的标签,获取纯文本内容
+        $brief = mb_substr($contents, 0, 255,"utf-8");
+        $id = $data['id'];
+        $base = array(
+            'module_id' => $data['module_id'],
+            'module_name' => $data['module_name'],
+            'user_id' => $_SESSION['user_id'],
+            'title' => $data['title'],
+            'brief' => $brief,
+            'remark' => $data['remark'],
+            'update_time' => time(),
+            'tag_ids' => '',
+            'tag_names' => ''
+        );
+        if(!$this->db->where('id', $id)->update('article', $base)){//修改基本表
+            return $this->db->error();
+        }
+        //修改主要内容
+        $this->db->where('article_id', $id)->update('content', ['content'=>$data["content"]]);
+        $tag_ids = $tag_names = '';
+        //article_has_modules表修改数据
+        if(!$this->db->where('article_id', $id)->update('article_has_modules', ['module_id'=>$data['module_id']])){
+            return $this->db->error();
+        }
+        //article_has_tags表修改数据
+        //先删除关联表的数据
+        $this->db->where('article_id', $id)->delete('article_has_tags');
+        if(!empty($data['tag_ids'])){//选了tag,组装成1,2,名称tag1,tag2，然后修改中间表
+            $tag_ids .= join(',',$data['tag_ids']);
+            $num = count($data['tag_ids']);
+            foreach ($data['tag_ids'] as $key => $tagid) {
+                //通过id查询tag名称
+                $name = $this->db->where('id', $tagid)->get('tags')->result()[0]->name;
+                $tag_names .= ($key+1 <$num)?$name.',':$name;               
+                if(!$this->db->insert('article_has_tags', ['tag_id'=>$tagid,'article_id'=>$id])){
+                    return $this->db->error();
+                }
+                
+            }
+        }
+        if(!empty($data['tagnames'])){//新增标签，使用新增后的id再绑定
+            $tag_names .= (strlen($tag_names) >= 1)?','.join(',',$data['tagnames']):join(',',$data['tagnames']);
+            $num = count($data['tagnames']);
+            foreach ($data['tagnames'] as $key => $tag) {
+                //先查询有没有，有使用已经存在id
+                $tag = trim($tag);
+                $exsit = $this->db->where(['name'=>$tag,'module_id'=>$data['module_id']])->limit(1)->get('tags')->result();
+                if($exsit){
+                    $tagid = $exsit[0]->id;
+                    if($key+1 < $num){
+                        $tag_ids .= (strlen($tag_ids) >= 1)?','.$tagid.',':$tagid.',';
+                    }else{
+                        $tag_ids .= (strlen($tag_ids) >= 1)?','.$tagid:$tagid;
+                    }
+                    if(!$this->db->insert('article_has_tags', ['tag_id'=>$tagid,'article_id'=>$id])){
+                        return $this->db->error();
+                    }
+                }else{
+                    if(!$this->db->insert('tags', ['name'=>$tag,'module_id'=>$data['module_id']])){
+                        return $this->db->error();
+                    }
+                    $tagid = $this->db->insert_id();
+                    if($key+1 < $num){
+                        $tag_ids .= (strlen($tag_ids) >= 1)?','.$tagid.',':$tagid.',';
+                    }else{
+                        $tag_ids .= (strlen($tag_ids) >= 1)?','.$tagid:$tagid;
+                    }
+                    if(!$this->db->insert('article_has_tags', ['tag_id'=>$tagid,'article_id'=>$id])){
+                        return $this->db->error();
+                    }
+                }
+                
+            }
+        }
+        if(strlen($tag_ids) >= 1){//有标签，更新
+            $data = array(
+                'tag_ids' => $tag_ids,
+                'tag_names' => $tag_names
+            );
+            $this->db->where('id', $id)->update('article', $data);
+        }
+        return true;
+    }
 
      /**
      * 移至回收站
@@ -233,14 +330,17 @@ class Article_model extends CI_Model
      */
     public function recycleArticle($id)
     {
-        $data = array(
-            'deleted' => 1
-        );
-        $this->db->where('id', $id);
-        if(!$this->db->update('article', $data)){
-            return $this->db->error();
-        }else{
+        $info = $this->db->query("select * from article where id = $id")->row();
+        //修改文章状态、模块、标签关联状态、按月归档减1
+        $this->db->where('id', $id)->update('article', ['deleted'=>1]);
+        $this->db->where('article_id', $id)->update('article_has_modules', ['deleted'=>1]);
+        $this->db->where('article_id', $id)->update('article_has_tags', ['deleted'=>1]);
+        $this->db->set('num', 'num-1', FALSE)->where('month', $info->monthy)->update('monthly');
+        $result = $this->db->error();
+        if($result['code'] === 0){
             return [];
+        }else{
+            return $result;
         }
     }
 
@@ -257,9 +357,6 @@ class Article_model extends CI_Model
         $this->db->delete('article_has_modules', array('article_id' => $id));//删除module关系表
         $this->db->where('article_id', $id);
         $this->db->delete('article_has_tags');//删除tag关系表
-        $this->db->set('num', 'num-1', FALSE);
-		$this->db->where('month', $monthy);
-		$this->db->update('monthly');//按月统计数
 		$result = $this->db->error();
 		if($result['code'] === 0){
 			return [];
@@ -275,14 +372,17 @@ class Article_model extends CI_Model
      */
     public function restoreArticle($id)
     {
-        $data = array(
-            'deleted' => 0
-        );
-        $this->db->where('id', $id);
-        if(!$this->db->update('article', $data)){
-            return $this->db->error();
-        }else{
+        $info = $this->db->query("select * from article where id = $id")->row();
+        //修改文章状态、模块、标签关联状态、按月归档+1
+        $this->db->where('id', $id)->update('article', ['deleted'=>0]);
+        $this->db->where('article_id', $id)->update('article_has_modules', ['deleted'=>0]);
+        $this->db->where('article_id', $id)->update('article_has_tags', ['deleted'=>0]);
+        $this->db->set('num', 'num+1', FALSE)->where('month', $info->monthy)->update('monthly');
+        $result = $this->db->error();
+        if($result['code'] === 0){
             return [];
+        }else{
+            return $result;
         }
     }
 
@@ -397,7 +497,7 @@ class Article_model extends CI_Model
         //先获取module是tag的id列表
         $moduletags = $this->db->where('is_tag',1)->get('module')->result();
         foreach ($moduletags as $key => $module_tag) {
-            $sql = 'select count(module_id) as num from  article_has_modules where module_id='.$module_tag->id;
+            $sql = 'select count(module_id) as num from  article_has_modules where deleted = 0 and module_id='.$module_tag->id;
             $numobj = $this->db->query($sql)->row();
             $num = (int)$numobj->num;
             if($num !== 0){
@@ -414,7 +514,7 @@ class Article_model extends CI_Model
         $tags = $this->db->where('deleted',0)->get('tags')->result();
         $needarr2 = [];
         foreach ($tags as $key => $tag) {
-           $sql = 'select count(tag_id) as num from  article_has_tags where tag_id='.$tag->id;
+           $sql = 'select count(tag_id) as num from  article_has_tags where deleted = 0 and tag_id='.$tag->id;
             $numobj = $this->db->query($sql)->row();
             $num = (int)$numobj->num;
             if($num !== 0){

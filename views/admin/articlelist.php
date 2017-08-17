@@ -112,7 +112,7 @@
                                   <td data-id="<?php echo $article->id?>">
                                       <a href="#">查看</a>
                                       <a href="#">置顶</a>
-                                      <a href="#">修改</a>
+                                      <a href="<?php echo site_url('admin/article/editArticleShow/'.$article->id) ?>">修改</a>
                                       <a href="#" class="del">移至回收站</a>
                                   </td>
                                 </tr>

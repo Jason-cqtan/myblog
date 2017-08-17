@@ -112,7 +112,7 @@
 	            <!-- 热度排行 -->
 	            <div class="box box-primary hots">
 	              <div class="box-header with-border">
-	                  <h3 class="box-title">最热文章</h3>
+	                  <h3 class="box-title">热门文章</h3>
 	                  <div class="box-tools pull-right">
 	                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 	                  </button>
@@ -150,7 +150,7 @@
 		            <div class="box-header with-border">
 		              <h3 class="box-title">唧唧复唧唧</h3>
 		              <div class="box-tools pull-right">
-		                <button data-toggle="tooltip" title="换一个" class="btn btn-box-tool"  data-original-title="换一个" id="getsoul"><i class="fa fa-refresh"></i></button>
+		                <button data-toggle="tooltip" title="换一个" class="btn btn-box-tool"  data-original-title="换一个" onclick="getsoul()"><i class="fa fa-refresh"></i></button>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		              </div>
 		            </div>

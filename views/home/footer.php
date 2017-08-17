@@ -8,6 +8,31 @@
     <!-- /.container -->
   </footer>
 <!-- ./wrapper -->
+<!-- 登录模态框 -->
+<div class="modal fade" tabindex="-1" role="dialog" data-backdrop="false" id="loginmodal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">登录、无需注册使用快捷登录</h4>
+      </div>
+      <div class="modal-body">
+        <a class="btn btn-block btn-social btn-github">
+          <i class="fa fa-github"></i> GitHub账号登录
+        </a>
+        <a class="btn btn-block btn-social btn-google">
+          <i class="fa fa-weibo"></i> 新浪微博登录
+        </a>
+        <a class="btn btn-block btn-social btn-twitter">
+          <i class="fa fa-weixin"></i> 微信登录
+        </a>
+        <a class="btn btn-block btn-social btn-facebook">
+          <i class="fa fa-qq"></i> qq账号登录
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url('public/common/bower_components/jquery/dist/jquery.min.js') ?>"></script>

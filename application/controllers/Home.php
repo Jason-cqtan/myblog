@@ -355,5 +355,10 @@ class Home extends CI_Controller {
         $this->load->view('home/aboutme');
     }
 
+    public function search()
+    {
+        $this->load->view('home/search');
+    }
+
 
 }

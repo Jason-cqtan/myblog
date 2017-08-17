@@ -100,7 +100,7 @@ class Article extends MY_Controller
                 $str .= '<td>'.date("Y-m-d h:i:s",$item->update_time).'</td>';
                 $str .= '<td data-id="'.$item->id.'">';
                 $str .= '<a href="#">置顶</a>
-                      <a href="#">修改</a>
+                      <a href="'.site_url('admin/article/editArticleShow/'.$item->id).'">修改</a>
                       <a href="#" class="del">移至回收站</a>';
                 $str .= '</td>';
                 $str .= '</tr>';
@@ -314,6 +314,39 @@ class Article extends MY_Controller
         }
     }
 
+    public function editArticleShow($id)
+    {
+        $data['articlebasic'] = $this->article->getArticle($id);
+        $data['articlecontent'] = $this->article->getArticleContent($id);
+        $data['modules'] = $this->module->getNavModuleTags();
+        //获取模型的标签列表
+        $data['module_tags'] = $this->tag->getTagsBymoduleids([$data['articlebasic']->module_id]);
+        // print_r($data);exit;
+        $this->load->view('admin/edit',$data);
+    }
+
+    public function editArticle()
+    {
+        //表单验证
+        $data['id'] = $this->input->post('id');
+        $module_id_name = explode('-',$this->input->post('module_id_name'));
+        $data['module_id'] = $module_id_name[0];//已选的模型id
+        $data['module_name'] = $module_id_name[1];//已选的模型名称
+        $data['tag_ids'] = empty($this->input->post('tag_ids'))?[]:$this->input->post('tag_ids');//已选的标签id列表
+        $data['tagnames'] = empty($this->input->post('tagnames'))?[]:$this->input->post('tagnames');//打算新增的标签名称列表
+        $data['title'] = trim($this->input->post('title'));
+        $data['remark'] = trim($this->input->post('remark'));
+        $data['content'] = trim($this->input->post('content'));
+        $res = $this->article->updateArticle($data);
+        if(!is_array($res)){
+            echo json_encode(array('status'=>0,'url'=>'../allarticle'));
+            exit;
+        }else{
+            $error = $res['message'];
+            echo json_encode(array('status'=>1,'msg'=>$error));
+            exit;
+        }
+    }
 
 
 
