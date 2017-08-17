@@ -21,11 +21,7 @@ class Home extends CI_Controller {
      */
 	public function index()
 	{
-        if(!isset($_SESSION['navs'])){
-            $navmodules = $this->module->getNavModules();
-            $data['navmodules'] = $this->common->getTree($navmodules,0);
-            $_SESSION['navs'] = $data['navmodules'];//导航保存session
-        }
+        
         //默认显示10条文章列表
         $data['page_size'] = 10;//每页显示几条
         $data['page_index'] = (!empty($this->uri->segment(4)))?(int)$this->uri->segment(4):1;//当前第几页
@@ -355,10 +351,7 @@ class Home extends CI_Controller {
         $this->load->view('home/aboutme');
     }
 
-    public function search()
-    {
-        $this->load->view('home/search');
-    }
+
 
 
 }

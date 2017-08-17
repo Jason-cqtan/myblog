@@ -78,6 +78,11 @@ class CI_Controller {
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
 		log_message('info', 'Controller Class Initialized');
+		if(!isset($_SESSION['navs'])){
+            $navmodules = $this->module->getNavModules();
+            $data['navmodules'] = $this->common->getTree($navmodules,0);
+            $_SESSION['navs'] = $data['navmodules'];//导航保存session
+        }
 	}
 
 	// --------------------------------------------------------------------

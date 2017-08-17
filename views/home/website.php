@@ -18,9 +18,10 @@
           <div class="col-xs-12">
 		    <!-- 面包屑 -->
 			<section class="content-header">
-		        <ol class="breadcrumb">
-		          <li class="active"><i class="fa fa-map-pin"></i> 你当前所在：优站推荐</li>
-		        </ol>
+          <ol class="breadcrumb">
+              <li><i class="fa fa-map-pin"></i> 你当前所在：<a href="<?php echo base_url() ?>">主页</a></li>
+              <li class="active">优站推荐</li>
+            </ol>
 		    </section>
 		    <div class="callout callout-info">
                 <h4>hey，你来啦！</h4>
@@ -114,7 +115,7 @@
                 <label><input type="radio" name="orderby"> <span>最早</span></label>
               </div>
               <div class="box-body">
-                <div class="row comment-body">
+                <div class="row comment-body hidden">
                       <ul class="list-unstyled">
                           <li class="col-xs-12">
                             <div class="col-xs-2 col-sm-1 u-left text-center">
@@ -261,7 +262,11 @@
                             </div>
                           </li>                      
                       </ul>
-                    </div>
+                </div>
+                <div class="callout callout-info">
+                <h4>暂无评论</h4>
+                <p>或许你有话说</p>
+              </div>
               </div>
             </div>
          

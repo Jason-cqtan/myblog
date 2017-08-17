@@ -31,6 +31,7 @@ $(".addtag").on("click",function(){
 	  layer.close(index);
 	});
 })
+window.UEDITOR_HOME_URL = base_url + 'public/common/plugins/';
 // 实例化编辑器
 var ue = UE.getEditor('container');
 

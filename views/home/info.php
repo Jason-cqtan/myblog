@@ -4,6 +4,7 @@
   <?php $this->load->view('home/meta') ?>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/common/plugins/iCheck/all.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/info.css') ?>">  
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/common/plugins/prism/prism.css')?>">
   <title><?php echo $articlebasic->title ?></title>
 </head>
 <body class="hold-transition skin-blue-light layout-top-nav fixed">
@@ -64,10 +65,10 @@
             <p id="announcement"><i class="fa fa-volume-up"></i> 自由转载，但请尽量附上本文地址：<span>http://www.tjc.cn/xxx/xxx/1.html</span></p>
             <hr>     
             <!-- 评分、分享、打赏 -->
-            <div class="row interactive">
-              <div class="col-xs-12 col-sm-6">
+            <div class="row interactive hidden">
+              <!-- <div class="col-xs-12 col-sm-6">
                 <p>打分：<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <span>4.6分</span> <span>目前共 <b>5</b>人参与评分</span></p>
-              </div>
+              </div> -->
               <div class="col-xs-12 col-sm-6">
                 <div class="bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1500299313094"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到豆瓣网" href="#" class="bds_douban" data-cmd="douban"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到邮件分享" href="#" class="bds_mail" data-cmd="mail"></a></div>
               </div>
@@ -89,6 +90,7 @@
               <?php } ?>
             </div>
             <!-- 相关推荐 -->
+            <?php if(count($recommend) >= 2){ ?>
             <div class="box box-primary related">
               <div class="box-header with-border">
                 <h3 class="box-title">相关推荐</h3>
@@ -109,6 +111,7 @@
                 </ul>
               </div>
             </div>
+            <?php } ?>
             <!-- 发表评论 -->
             <div class="box box-primary postcomment">
               <div class="box-header with-border">
@@ -150,7 +153,7 @@
                 <label><input type="radio" name="orderby"> <span>最早</span></label>
               </div>
               <div class="box-body">
-                <div class="row comment-body">
+                <div class="row comment-body hidden">
                       <ul class="list-unstyled">
                           <li class="col-xs-12">
                             <div class="col-xs-2 col-sm-1 u-left text-center">
@@ -297,7 +300,11 @@
                             </div>
                           </li>                      
                       </ul>
-                    </div>
+                </div>
+                <div class="callout callout-info">
+                <h4>暂无评论</h4>
+                <p>或许你有话说</p>
+              </div>
               </div>
             </div>
           </section>
@@ -311,6 +318,22 @@
  <!-- 下面加载自己的js -->
  <script src="<?php echo base_url('public/common/plugins/iCheck/icheck.min.js') ?>"></script>
  <script src="<?php echo base_url('public/home/js/info.js')?>"></script>
- 
+ <script src="<?php echo base_url('public/common/plugins/prism/prism.js')?>"></script>
+ <script>
+  //
+  //prism代码亮高
+  // 
+  var doc_pre = $("#article-body pre");
+    doc_pre.each(function(){
+        var class_val = $(this).attr('class');
+        var class_arr = new Array();
+        class_arr = class_val.split(';');
+        class_arr = class_arr['0'].split(':');
+        var lan_class = 'language-'+class_arr['1'];
+        var pre_content = '<code class="'+lan_class+'">'+$(this).html()+'</code>';
+        $(this).html(pre_content);
+        $(this).attr("class",'line-numbers '+lan_class);
+    }); 
+ </script>
 </body>
 </html>

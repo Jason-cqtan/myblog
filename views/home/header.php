@@ -3,7 +3,7 @@
     <nav class="navbar navbar-static-top ">
       <div class="container">
 			<div class="navbar-header">
-	          <a href="../../index2.html" class="navbar-brand"><b>Admin</b>LTE</a>
+	          <a href="../../index2.html" class="navbar-brand"><b>93jc</b></a>
 	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 	            <i class="fa fa-bars"></i>
 	          </button>
@@ -25,7 +25,6 @@
 	            <?php }} ?>
 	            <li><a href="<?php echo site_url('website') ?>" target="view_window">优站推荐</a></li>
 	            <li><a href="<?php echo site_url('home/aboutme') ?>">关于我</a></li>
-				<li id="search"><a href="<?php echo site_url('home/search') ?>"><i class="fa fa-search"></i></a></li>
 	          </ul>
 	        </div>
 	        <?php if(!isset($_SESSION['home_username'])){ ?>

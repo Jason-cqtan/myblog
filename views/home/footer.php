@@ -2,7 +2,7 @@
   <footer class="main-footer">
     <div class="container">
      <div class="col-xs-12">
-       <strong>Copyright &copy; 2015-2017 <a href="#">xxx</a>.</strong> 存手工打造
+       <strong>Copyright &copy; 2015-2017.</strong> 纯手工打造
      </div>
     </div>
     <!-- /.container -->
@@ -55,17 +55,26 @@
   })
   var site_url = "<?php echo site_url()?>";
   var base_url = "<?php echo base_url()?>";
-  //游客点击查看信息
-  $("#visitormenu").on("click",function(){
-    if($(this).hasClass('open')){
-      //
-    }
-  })
-  //前端登录
-  $(".homelogin").on("click",function(){
-layer.open({
-  type: 1,
-  content: '<div>hello world!</div>' //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
-});
-  })
+  function show_date_time() {
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay = new Date("2015-10-23 18:55:49:12");
+    today = new Date();
+    //总时间
+    timeold = (today.getTime() - BirthDay.getTime());
+    sectimeold = timeold / 1000
+    secondsold = Math.floor(sectimeold); 
+    msPerDay = 24 * 60 * 60 * 1000
+    e_daysold = timeold / msPerDay
+    daysold = Math.floor(e_daysold);
+    e_hrsold = (e_daysold - daysold) * 24;
+    hrsold = Math.floor(e_hrsold);
+    e_minsold = (e_hrsold - hrsold) * 60;
+    minsold = Math.floor((e_hrsold - hrsold) * 60);
+    seconds = Math.floor((e_minsold - minsold) * 60);
+    var str = daysold + "天" + hrsold + "小时" + minsold + "分" + seconds + "秒";
+    $("#runtotaltime").html(str);
+}
+show_date_time();
+
+
 </script>

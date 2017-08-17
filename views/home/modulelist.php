@@ -103,10 +103,10 @@
 				<!-- 什么网站 -->
 	            <div class="box box-primary box-solid">
 	              <div class="box-header">
-	                <h3 class="box-title">这是什么网站</h3>
+	                <h3 class="box-title">What's this?</h3>
 	              </div>
 	              <div class="box-body">
-	                您好,本站是个人博客，主要记录和分享个人web开发中的一些问题笔记，如有疑问，随时欢迎大家参与互动，共同探讨。
+	                本站是个人博客，主要记录和分享个人软件开发生涯中的一些经验、笔记，随时欢迎大家参与互动，共同学习：）
 	              </div>
 	            </div>
 	            <!-- 热度排行 -->
@@ -192,14 +192,14 @@
 			                <li class="list-group-item">
 			                  <b>标签总数</b> <a class="pull-right tagtotal"></a>
 			                </li>
-			                <li class="list-group-item">
+			                <li class="list-group-item hidden">
 			                  <b>评论总数</b> <a class="pull-right commenttotal"></a>
 			                </li>
-							<li class="list-group-item" data-toggle="tooltip" data-placement="top" title="你在今日访问本站排行">
-			                  <b >访问排行</b> <a class="pull-right viewrank"></a>
+							<li class="list-group-item hidden">
+			                  <b >今日访问本站排行</b> <a class="pull-right viewrank"></a>
 			                </li>
 			                <li class="list-group-item">
-			                  <b>网站已运行</b> <a class="pull-right">123天12小时12分钟12秒</a>
+			                  <b>网站已运行</b> <a class="pull-right" id="runtotaltime"></a>
 			                </li>
 			              </ul>
 					 </div>
