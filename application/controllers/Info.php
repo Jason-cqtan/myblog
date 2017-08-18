@@ -37,7 +37,9 @@ class Info extends CI_Controller
         $data['nextarticle'] = $this->article->getNextArticle($articleid);
         //相关推荐
         $data['recommend'] = $this->article->getInfoRecommend($data['articlebasic']->module_id,$data['articlebasic']->id);
-        // print_r($data['recommend']);exit;
+        //面包屑
+        $data['crumbs'] = $this->module->getCrumbsByModulename($data['articlebasic']->module_name);
+        // print_r($data['crumbs']);exit;
         $this->load->view('home/info',$data);
 	}
     

@@ -15,8 +15,8 @@ function getrand() {
 				listobj.html('');
 				$.each(msg.list, function(key, val) {
 					var list = '<li>\
-              <span><a href="'+site_url+'home/moduleArticle/'+val.module_name+'">[' + val.module_name + ']</a></span>\
-              <span><a href="'+site_url+'info/index/'+val.id+'" title="' + val.title + '">' + val.title + '</a></span>\
+              <span><a href="'+site_url+'module/'+val.module_name+'.html">[' + val.module_name + ']</a></span>\
+              <span><a href="'+site_url+'desc/'+val.id+'.html" title="' + val.title + '">' + val.title + '</a></span>\
               </li>';
 					listobj.append(list);
 				});
@@ -81,7 +81,7 @@ function getMonthly() {
 			var obj = $("#monthbody");
 			obj.html('');
 			$.each(msg.list, function(key, val) {
-				var one = '<li><a href="'+site_url+'home/getMonththArticles/'+val.month+'" class="btn btn-primary btn-sm">' + val.month + ' <small>(' + val.num + ')</small></a></li>';
+				var one = '<li><a href="'+site_url+'month/'+val.month+'.html" class="btn btn-primary btn-sm">' + val.month + ' <small>(' + val.num + ')</small></a></li>';
 				obj.append(one);
 			});
 			return false;
@@ -102,9 +102,9 @@ function getTags() {
 			$.each(msg.list, function(key, val) {
 				var one = '<li><a href="';
 				if(val.type == 'moduletag'){
-                    one += site_url + 'home/moduleArticle/'+val.name+'"';
+                    one += site_url + 'module/'+val.name+'.html"';
 				}else{
-					one += site_url + 'home/tagArticle/'+val.name+'"';
+					one += site_url + 'tag/'+val.name+'.html"';
 				}
 				one += ' class="btn btn-primary btn-sm">' + val.name + ' <small>(' + val.num + ')</small></a></li>';
 				obj.append(one);

@@ -18,8 +18,10 @@
           <!-- 面包屑 -->
           <section class="content-header">
             <ol class="breadcrumb">
-              <li><i class="fa fa-map-pin"></i> 你当前所在：<a href="#">主页</a></li>
-              <li><a href="#">分类名</a></li>
+              <li><i class="fa fa-map-pin"></i> 你当前所在：<a href="<?php echo base_url() ?>">主页</a></li>
+              <?php if(isset($crumbs)){foreach ($crumbs as $key => $crumb){ ?>
+                  <li <?php if($key+1 == count($crumbs)){echo 'class="active"';} ?>><a href="#"><?php echo $crumb ?></a></li>
+                <?php }} ?>
               <li class="active"><?php echo $articlebasic->title ?></li>
             </ol>
           </section>
@@ -30,13 +32,13 @@
               <h1 class="text-center"><?php echo $articlebasic->title ?></h1>
             </div>
             <div class="row extra">
-               <div class="col-xs-4 col-sm-3">
+               <div class="col-xs-2 col-sm-3 col-md-1">
                  <span><i class="fa fa-user"></i> 谭佳成</span>
                </div>
-               <div class="col-xs-4 col-sm-3">
+               <div class="col-xs-3 col-sm-3 col-md-2">
                  <span data-toggle="tooltip" data-placement="top" title="<?php echo date("Y-m-d H:i",$articlebasic->create_time) ?>"><i class="fa fa-edit"></i> <?php echo $this->common->formatTime($articlebasic->create_time) ?></span>
                </div>
-               <div class="col-xs-4 col-sm-3">
+               <div class="col-xs-2 col-sm-3 col-md-1">
                  <span><i class="fa fa-eye"></i> (<?php echo $articlebasic->views ?>)</span>
                </div>
                <?php 
@@ -50,19 +52,22 @@
                             'name' => $tag
                       );
                     }?>
-               <div class="col-xs-4 col-sm-3">
+               <div class="col-xs-4 col-sm-3 col-md-3">
                  <span><i class="fa fa-tags"></i> 
                      <?php foreach ($needarr as $key => $tag) {?>
-                     <a href="<?php echo site_url('home/tagArticle/'.$tag->name) ?>" target="_blank" class="btn btn-xs btn-primary"><?php echo $tag->name ?></a> 
+                     <a href="<?php echo site_url('tag/'.$tag->name) ?>" target="_blank" class="btn btn-xs btn-primary"><?php echo $tag->name ?></a> 
                      <?php } ?>
                  </span>
                </div>
                <?php } ?>
+               <div class="hidden-xs hidden-sm col-md-5">
+                 <span><i class="fa fa-send"></i> 使用<?php echo $articlebasic->platform ?> 在<?php echo $articlebasic->browserdesc?>发布</span>
+               </div>
             </div>
             <hr>
             <!-- 主要内容 -->
             <div id="article-body"><?php echo $articlecontent->content ?></div>
-            <p id="announcement"><i class="fa fa-volume-up"></i> 自由转载，但请尽量附上本文地址：<span>http://www.tjc.cn/xxx/xxx/1.html</span></p>
+            <p id="announcement"><i class="fa fa-volume-up"></i> 如无说明，本站文章均为原创，转载或引用注明来源：<span><?php echo site_url('desc/'.$articlebasic->id) ?></span></p>
             <hr>     
             <!-- 评分、分享、打赏 -->
             <div class="row interactive hidden">
@@ -80,22 +85,22 @@
             <div class="row prev-next">
               <?php if($prevarticle){ ?>
               <div class="col-xs-12">
-                <p>上一篇：<a href="<?php echo site_url('info/index/'.$prevarticle->id) ?>" title="<?php echo $prevarticle->title ?>"><?php echo $prevarticle->title ?></a></p>
+                <p>上一篇：<a href="<?php echo site_url('desc/'.$prevarticle->id) ?>" title="<?php echo $prevarticle->title ?>"><?php echo $prevarticle->title ?></a></p>
               </div>
               <?php } ?>
               <?php if($nextarticle){ ?>
               <div class="col-xs-12">
-                <p>下一篇：<a href="<?php echo site_url('info/index/'.$nextarticle->id) ?>" title="<?php echo $nextarticle->title ?>"><?php echo $nextarticle->title ?></a></p>
+                <p>下一篇：<a href="<?php echo site_url('desc/'.$nextarticle->id) ?>" title="<?php echo $nextarticle->title ?>"><?php echo $nextarticle->title ?></a></p>
               </div>
               <?php } ?>
             </div>
-            <!-- 相关推荐 -->
+            <!-- 猜你喜欢 -->
             <?php if(count($recommend) >= 2){ ?>
             <div class="box box-primary related">
               <div class="box-header with-border">
-                <h3 class="box-title">相关推荐</h3>
+                <h3 class="box-title">猜你喜欢</h3>
                 <div class="box-tools pull-right">
-                  <button data-toggle="tooltip" onclick="getRandRecommend()" title="" class="btn btn-box-tool"  data-original-title=""><i class="fa fa-refresh"></i> 换一换</button>
+                  <button data-toggle="tooltip" onclick="getRandRecommend()" title="" class="btn btn-box-tool hidden"  data-original-title=""><i class="fa fa-refresh"></i> 换一换</button>
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
               </div>
@@ -106,14 +111,14 @@
                 </form>
                 <ul class="list-unstyled" id="recommendbody">
                   <?php foreach ($recommend as $key => $rec): ?>
-                  <li class="col-xs-12 col-xs-6"><span><a href="<?php echo site_url('info/index/'.$rec->id) ?>" title="<?php echo $rec->title ?>"><?php echo $rec->title ?></a></span></li>
+                  <li class="col-xs-12 col-xs-6"><span><a href="<?php echo site_url('desc/'.$rec->id) ?>" title="<?php echo $rec->title ?>"><?php echo $rec->title ?></a></span></li>
                   <?php endforeach ?>                  
                 </ul>
               </div>
             </div>
             <?php } ?>
             <!-- 发表评论 -->
-            <div class="box box-primary postcomment">
+            <div class="box box-primary postcomment hidden">
               <div class="box-header with-border">
                 <h3 class="box-title">发表评论</h3>
                 <div class="box-tools pull-right">
@@ -145,7 +150,7 @@
               </div>
             </div>
             <!-- 所有评论 -->
-            <div class="box box-primary allcomments">
+            <div class="box box-primary allcomments hidden">
               <div class="box-header">
                 <h3 class="box-title">所有评论</h3>
                 <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-refresh"></i> 刷新</button>
@@ -310,6 +315,10 @@
           </section>
         </div>
       </section>
+      <div class="go-top">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </div>
       <!-- /.content -->
     </div>
     <!-- /.container -->

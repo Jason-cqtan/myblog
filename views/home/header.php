@@ -3,28 +3,29 @@
     <nav class="navbar navbar-static-top ">
       <div class="container">
 			<div class="navbar-header">
-	          <a href="../../index2.html" class="navbar-brand"><b>93jc</b></a>
+	          <a href="<?php echo base_url() ?>" class="navbar-brand"><b>93jc</b></a>
 	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 	            <i class="fa fa-bars"></i>
 	          </button>
 	        </div>
 	        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 	          <ul class="nav navbar-nav">
-	            <li class="active"><a href="<?php echo base_url() ?>">首页<span class="sr-only">(current)</span></a></li>
+	            <?php $segmentone = $this->uri->segment(1); ?>
+	            <li class="<?php if(strlen($segmentone) <= 1 || $segmentone == 'tag' || $segmentone == 'month'){echo 'active';} ?>"><a href="<?php echo base_url() ?>">首页<span class="sr-only">(current)</span></a></li>
 	            <?php foreach ($_SESSION['navs'] as $key => $nav){if(isset($nav->children)){ ?>
-                    <li class="dropdown">
+                    <li class="dropdown <?php if(isset($crumbs)){ if($crumbs[0] == $nav->name){echo 'active';}} ?>">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $nav->name ?> <span class="caret"></span></a>
 		              <ul class="dropdown-menu" role="menu">
 		                <?php foreach ($nav->children as $key => $child): ?>
-		                	<li><a href="<?php echo site_url('home/moduleArticle/'.$child->name) ?>"><?php echo $child->name ?></a></li>
+		                	<li><a href="<?php echo site_url('module/'.$child->name) ?>"><?php echo $child->name ?></a></li>
 		                <?php endforeach ?>
 		              </ul>
 		            </li>
 	            <?php }else{ ?>
-	                <li><a href="<?php echo site_url('home/moduleArticle/'.$nav->name) ?>"><?php echo $nav->name ?></a></li>
+	                <li><a href="<?php echo site_url('module/'.$nav->name) ?>"><?php echo $nav->name ?></a></li>
 	            <?php }} ?>
-	            <li><a href="<?php echo site_url('website') ?>" target="view_window">优站推荐</a></li>
-	            <li><a href="<?php echo site_url('home/aboutme') ?>">关于我</a></li>
+	            <li <?php if($this->uri->segment(1) == 'website'){echo 'class="active"';} ?>><a href="<?php echo site_url('website') ?>" target="view_window">优站推荐</a></li>
+	            <li <?php if($this->uri->segment(1) == 'aboutme'){echo 'class="active"';} ?>><a href="<?php echo site_url('aboutme') ?>">关于我</a></li>
 	          </ul>
 	        </div>
 	        <?php if(!isset($_SESSION['home_username'])){ ?>

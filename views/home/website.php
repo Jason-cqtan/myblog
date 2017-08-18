@@ -75,7 +75,7 @@
 	        </div>
             <?php endforeach ?>
             <!-- 发表评论 -->
-            <div class="box box-primary postcomment">
+            <div class="box box-primary postcomment hidden">
               <div class="box-header with-border">
                 <h3 class="box-title">发表评论</h3>
                 <div class="box-tools pull-right">
@@ -107,7 +107,7 @@
               </div>
             </div>
             <!-- 所有评论 -->
-            <div class="box box-primary allcomments">
+            <div class="box box-primary allcomments hidden">
               <div class="box-header">
                 <h3 class="box-title">所有评论</h3>
                 <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-refresh"></i> 刷新</button>

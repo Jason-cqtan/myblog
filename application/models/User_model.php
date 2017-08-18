@@ -32,7 +32,7 @@ class User_model extends CI_Model
     public function loginTime($user_id)
     {
         $now = time();
-        $sql = "UPDATE user SET last_online = '{$now}' WHERE id = {$user_id}";
+        $sql = "UPDATE user SET last_login_time = '{$now}' WHERE id = {$user_id}";
         $query = $this->db->query($sql);
     }
 

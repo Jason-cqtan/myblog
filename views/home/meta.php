@@ -21,4 +21,6 @@
 
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<!-- Pace style -->
+  <link rel="stylesheet" href="<?php echo base_url('public/common/plugins/pace/pace.min.css') ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/common.css') ?>">

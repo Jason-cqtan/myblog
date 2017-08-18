@@ -68,10 +68,10 @@ class Home extends CI_Controller {
             foreach ($data as $key => $item) {    
                 $str .= '<div class="box box-solid">';
                 $str .= '<div class="box-header with-border">';
-                $str .= '<h3 class="box-title"><a href="'.site_url('home/moduleArticle/'.$item->module_name).'">'.$item->module_name.'</a></h3>';
+                $str .= '<h3 class="box-title"><a href="'.site_url('module/'.$item->module_name).'">'.$item->module_name.'</a></h3>';
                 $str .= '</div>';
                 $str .= '<div class="box-body">';
-                $str .= '<h3><a href="'.site_url('info/index/'.$item->id).'" class="title">'.$item->title.'</a></h3>';
+                $str .= '<h3><a href="'.site_url('desc/'.$item->id).'" class="title">'.$item->title.'</a></h3>';
                 $str .= '<h4>';
                 if(strlen($item->tag_ids) > 1){
                     $needarr = [];
@@ -84,16 +84,20 @@ class Home extends CI_Controller {
                         );
                     }
                     foreach ($needarr as $key => $tag) {
-                        $str .= '  <a type="button" href="'.site_url('home/tagArticle/'.$tag->name).'" class="btn btn-xs bg-gray">'.$tag->name.'</a>';
+                        $str .= '  <a type="button" href="'.site_url('tag/'.$tag->name).'" class="btn btn-xs bg-gray">'.$tag->name.'</a>';
                     }
                 }
                 $str .= '<span><small class="text-gray">  '.$item->remark.'</small></span>';
                 $str .= '</h4>';
+                $str .= '<p class="brief">';
                 $str .= $item->brief;
-                $str .= '<a type="button" href="'.site_url('info/index/'.$item->id).'" class="btn btn-primary btn-sm">查看详情&gt;&gt;</a>';
+                $str .= '</p>';
+                $str .= '<p>';
+                $str .= '<a type="button" href="'.site_url('desc/'.$item->id).'" class="btn btn-primary btn-sm">查看详情&gt;&gt;</a>';
+                $str .= '</p>';
                 $str .= '</div>';
                 $str .= '<div class="box-footer">';
-                $str .= '<span data-toggle="tooltip" title="" data-original-title="'.date("Y-m-d H:i",$item->create_time).'"><i class="fa fa-calendar"></i> '.$this->common->formatTime($item->create_time).'</span>';
+                $str .= '<span data-toggle="tooltip" title="" data-original-title="'.date("Y-m-d H:i",$item->create_time).'"><i class="fa fa-edit"></i> '.$this->common->formatTime($item->create_time).'</span>';
                 $str .= '<span><i class="fa fa-eye"></i> ( '.$item->views.' )</span>';
                 $str .= '<a href="#"><span><i class="fa fa-comment"></i> ( 0 )</span></a>';
                 $str .= '</div>';
@@ -181,7 +185,7 @@ class Home extends CI_Controller {
      */
     public function moduleArticle($cate)
     {
-        $data['page_index'] = empty($this->uri->segment(4))?1:(int)$this->uri->segment(4);
+        $data['page_index'] = empty($this->uri->segment(3))?1:(int)$this->uri->segment(3);
         if($data['page_index'] < 1){
             $data['page_index'] = 1;
         }
@@ -232,7 +236,7 @@ class Home extends CI_Controller {
     public function tagArticle($tag)
     {
         $tag = urldecode(trim($tag));
-        $data['page_index'] = empty($this->uri->segment(4))?1:(int)$this->uri->segment(4);
+        $data['page_index'] = empty($this->uri->segment(3))?1:(int)$this->uri->segment(3);
         if($data['page_index'] < 1){
             $data['page_index'] = 1;
         }
@@ -300,7 +304,7 @@ class Home extends CI_Controller {
     public function getMonththArticles($monthly)
     {        
         $monthly = urldecode(trim($monthly));
-        $data['page_index'] = empty($this->uri->segment(4))?1:(int)$this->uri->segment(4);
+        $data['page_index'] = empty($this->uri->segment(3))?1:(int)$this->uri->segment(3);
         if($data['page_index'] < 1){
             $data['page_index'] = 1;
         }
@@ -339,16 +343,6 @@ class Home extends CI_Controller {
         $ajaxcontent = $this->AjaxHtmlFormat($res['data']);
         echo json_encode(array('list'=>$ajaxcontent,'pagestr'=>$pagestr,'statistics'=>$statistics));
         exit;
-    }
-
-    
-    /**
-     * 关于我
-     * @return [type] [description]
-     */
-    public function aboutme()
-    {
-        $this->load->view('home/aboutme');
     }
 
 

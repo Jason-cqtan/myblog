@@ -99,7 +99,7 @@ class Article extends MY_Controller
                 $str .= '<td>'.date("Y-m-d h:i:s",$item->create_time).'</td>';
                 $str .= '<td>'.date("Y-m-d h:i:s",$item->update_time).'</td>';
                 $str .= '<td data-id="'.$item->id.'">';
-                $str .= '<a target="_blank" href="'.site_url('info/index/'.$item->id).'">查看</a>
+                $str .= '<a target="_blank" href="'.site_url('desc/'.$item->id).'">查看</a>
                       <a href="#">置顶</a>
                       <a href="'.site_url('admin/article/editArticleShow/'.$item->id).'">修改</a>
                       <a href="#" class="del">移至回收站</a>';

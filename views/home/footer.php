@@ -2,11 +2,12 @@
   <footer class="main-footer">
     <div class="container">
      <div class="col-xs-12">
-       <strong>Copyright &copy; 2015-2017.</strong> 纯手工打造
+       <strong>Copyright &copy; 2015-2017.</strong> 纯手工打造 <a href="<?php echo base_url() ?>"><?php echo base_url() ?></a>
      </div>
     </div>
     <!-- /.container -->
   </footer>
+  
 <!-- ./wrapper -->
 <!-- 登录模态框 -->
 <div class="modal fade" tabindex="-1" role="dialog" data-backdrop="false" id="loginmodal">
@@ -46,15 +47,15 @@
 <script src="<?php echo base_url('public/common/dist/js/adminlte.min.js') ?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('public/common/dist/js/demo.js') ?>"></script>
+<!-- PACE -->
+<script src="<?php echo base_url('public/common/plugins/pace/pace.min.js') ?>"></script>
 <!-- layer -->
 <script src="<?php echo base_url('public/common/plugins/layer/layer.js')?>"></script>
 <script type="text/javascript">
-  $("#search").on("click",function(){
-    //清空表单
-    $("#searchModal").modal("toggle");
-  })
+  $(document).ajaxStart(function() { Pace.restart(); });
   var site_url = "<?php echo site_url()?>";
   var base_url = "<?php echo base_url()?>";
+  // 计时
   function show_date_time() {
     window.setTimeout("show_date_time()", 1000);
     BirthDay = new Date("2015-10-23 18:55:49:12");
@@ -75,6 +76,14 @@
     $("#runtotaltime").html(str);
 }
 show_date_time();
-
-
+// 返回顶部
+$(window).scroll(function() {
+    if ($(window).scrollTop() > 200)
+        $('div.go-top').show();
+    else
+        $('div.go-top').hide();
+});
+$('div.go-top').click(function() {
+    $('html, body').animate({scrollTop: 0}, 1000);
+});
 </script>

@@ -52,3 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+//伪静态链接
+$route['module/(:any)'] = 'home/moduleArticle/$1';//模块文章
+$route['tag/(:any)'] = 'home/tagArticle/$1';//标签文章
+$route['month/(:any)'] = 'home/getMonththArticles/$1';//按月归档
+$route['desc/(:any)'] = 'info/index/$1';//文章详情
