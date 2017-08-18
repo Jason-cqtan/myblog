@@ -71,6 +71,18 @@
                     <input type="text" class="form-control" id="aremark" placeholder="备注" name="remark">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="create_time" class="col-sm-2 control-label">创建时间戳</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="create_time" placeholder="创建时间戳，用于处理以前的文章导入" name="create_time">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="views" class="col-sm-2 control-label">浏览数</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="views" placeholder="浏览数，用于处理以前的文章导入" name="views">
+                  </div>
+                </div>
                 <div class="form-group">               
                   <div class="col-xs-12">
                     <!-- 加载编辑器的容器 -->

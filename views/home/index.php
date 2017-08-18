@@ -28,7 +28,7 @@
 	                </h3>
 	                <h4>
 		                <?php                 
-		                if(strlen($article->tag_ids) > 1){
+		                if(strlen($article->tag_ids) >= 1){
 		                    $needarr = [];
 			                $tag_name = explode(',',$article->tag_names);
 			                $tag_id = explode(',',$article->tag_ids);
@@ -145,7 +145,7 @@
 		              </div>
 		            </div>
 		            <div class="box-body">
-		              <?php echo $soul->content ?>
+		              <?php if(isset($soul->content)){echo $soul->content;} ?>
 		              <!-- <span>学而不思则亡，思而不学则殆。</span> -->
 		            </div>
 		        </div>

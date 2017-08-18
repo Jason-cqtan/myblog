@@ -73,7 +73,7 @@ class Home extends CI_Controller {
                 $str .= '<div class="box-body">';
                 $str .= '<h3><a href="'.site_url('desc/'.$item->id).'" class="title">'.$item->title.'</a></h3>';
                 $str .= '<h4>';
-                if(strlen($item->tag_ids) > 1){
+                if(strlen($item->tag_ids) >= 1){
                     $needarr = [];
                     $tag_name = explode(',',$item->tag_names);
                     $tag_id = explode(',',$item->tag_ids);
@@ -189,7 +189,7 @@ class Home extends CI_Controller {
         if($data['page_index'] < 1){
             $data['page_index'] = 1;
         }
-        $data['module_name'] = $cate;
+        $data['module_name'] = urldecode($cate);
         $res = $this->article->getArticles($data);
         // print_r($res);exit;
         $data['total_page'] = $res['total_page'];//总页数

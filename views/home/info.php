@@ -32,17 +32,17 @@
               <h1 class="text-center"><?php echo $articlebasic->title ?></h1>
             </div>
             <div class="row extra">
-               <div class="col-xs-2 col-sm-3 col-md-1">
+               <div class="col-xs-2 col-sm-3">
                  <span><i class="fa fa-user"></i> 谭佳成</span>
                </div>
-               <div class="col-xs-3 col-sm-3 col-md-2">
+               <div class="col-xs-3 col-sm-3">
                  <span data-toggle="tooltip" data-placement="top" title="<?php echo date("Y-m-d H:i",$articlebasic->create_time) ?>"><i class="fa fa-edit"></i> <?php echo $this->common->formatTime($articlebasic->create_time) ?></span>
                </div>
-               <div class="col-xs-2 col-sm-3 col-md-1">
+               <div class="col-xs-2 col-sm-3">
                  <span><i class="fa fa-eye"></i> (<?php echo $articlebasic->views ?>)</span>
                </div>
                <?php 
-                   if(strlen($articlebasic->tag_ids) > 1){
+                   if(strlen($articlebasic->tag_ids) >= 1){
                     $needarr = [];
                     $tag_name = explode(',',$articlebasic->tag_names);
                     $tag_id = explode(',',$articlebasic->tag_ids);
@@ -52,7 +52,7 @@
                             'name' => $tag
                       );
                     }?>
-               <div class="col-xs-4 col-sm-3 col-md-3">
+               <div class="col-xs-4 col-sm-3">
                  <span><i class="fa fa-tags"></i> 
                      <?php foreach ($needarr as $key => $tag) {?>
                      <a href="<?php echo site_url('tag/'.$tag->name) ?>" target="_blank" class="btn btn-xs btn-primary"><?php echo $tag->name ?></a> 
@@ -60,9 +60,6 @@
                  </span>
                </div>
                <?php } ?>
-               <div class="hidden-xs hidden-sm col-md-5">
-                 <span><i class="fa fa-send"></i> 使用<?php echo $articlebasic->platform ?> 在<?php echo $articlebasic->browserdesc?>发布</span>
-               </div>
             </div>
             <hr>
             <!-- 主要内容 -->

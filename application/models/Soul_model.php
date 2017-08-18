@@ -103,9 +103,14 @@ class Soul_model extends CI_Model
         for ($i=0; $i <= 3; $i++) { 
             $randsql = 'SELECT * FROM `words` WHERE `id` = '.$randarr[$i];
             $res = $this->db->query($randsql)->result();
-            if($res[0]->deleted == 0){
-                return $res[0];
+            if($res){
+                if($res[0]->deleted == 0){
+                    return $res[0];
+                }
+            }else{
+                return [];
             }
+            
         }
     }
 }

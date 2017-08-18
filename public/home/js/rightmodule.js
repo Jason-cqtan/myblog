@@ -39,7 +39,9 @@ function getsoul() {
 		data: "",
 		dataType: "json",
 		success: function(msg) {
-			obj.html('').append('<span>' + msg.word.content + '</span>');
+			if(msg.word.hasOwnProperty('content')){
+				obj.html('').append('<span>' + msg.word.content + '</span>');
+			}			
 			$(".soul").find('.overlay').remove();
 		}
 	});

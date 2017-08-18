@@ -180,6 +180,8 @@ class Article extends MY_Controller
     {
     	//表单验证
     	$module_id_name = explode('-',$this->input->post('module_id_name'));
+        $data['create_time'] = strlen($this->input->post('create_time')) >= 2?$this->input->post('create_time'):time();
+        $data['views'] = strlen($this->input->post('views')) >= 1?$this->input->post('views'):1;
     	$data['module_id'] = $module_id_name[0];//已选的模型id
     	$data['module_name'] = $module_id_name[1];//已选的模型名称
     	$data['tag_ids'] = empty($this->input->post('tag_ids'))?[]:$this->input->post('tag_ids');//已选的标签id列表

@@ -126,7 +126,7 @@ class Article_model extends CI_Model
 		$brief = mb_substr($contents, 0, 100,"utf-8");
     	//获取ip所在的地址、平台信息、浏览器信息
     	$accessinfo = $this->common->getAccessInfo();
-    	$month = date('Y-m');
+    	$month = date('Y-m',$data['create_time']);
     	$base = array(
 		    'module_id' => $data['module_id'],
 		    'module_name' => $data['module_name'],
@@ -135,7 +135,8 @@ class Article_model extends CI_Model
 		    'title' => $data['title'],
 		    'brief' => $brief,
 		    'remark' => $data['remark'],
-		    'create_time' => time(),
+		    'create_time' => $data['create_time'],
+            'views' => $data['views'],
 		    'update_time' => time(),
 		    'platform' =>  $accessinfo['platform'],
 		    'browserdesc' => $accessinfo['browser'].' '.substr($accessinfo ['version'],0,stripos($accessinfo ['version'],'.')+2),

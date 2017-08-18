@@ -32,7 +32,7 @@
 	                <h3><a href="<?php echo site_url('desc/'.$article->id)?>" class="title"><?php echo $article->title ?></a></h3>
 	                <h4>
 	                <?php                 
-	                if(strlen($article->tag_ids) > 1){
+	                if(strlen($article->tag_ids) >= 1){
 	                    $needarr = [];
 		                $tag_name = explode(',',$article->tag_names);
 		                $tag_id = explode(',',$article->tag_ids);

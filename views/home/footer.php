@@ -58,7 +58,7 @@
   // 计时
   function show_date_time() {
     window.setTimeout("show_date_time()", 1000);
-    BirthDay = new Date("2015-10-23 18:55:49:12");
+    BirthDay = new Date("2015-10-30 23:09:35");
     today = new Date();
     //总时间
     timeold = (today.getTime() - BirthDay.getTime());
