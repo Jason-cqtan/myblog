@@ -71,7 +71,7 @@ class Home extends CI_Controller {
                 $str .= '<h3 class="box-title"><a href="'.site_url('module/'.$item->module_name).'">'.$item->module_name.'</a></h3>';
                 $str .= '</div>';
                 $str .= '<div class="box-body">';
-                $str .= '<h3><a href="'.site_url('desc/'.$item->id).'" class="title">'.$item->title.'</a></h3>';
+                $str .= '<h3><a href="'.site_url('article/'.$item->id).'" class="title">'.$item->title.'</a></h3>';
                 $str .= '<h4>';
                 if(strlen($item->tag_ids) >= 1){
                     $needarr = [];
@@ -93,7 +93,7 @@ class Home extends CI_Controller {
                 $str .= $item->brief;
                 $str .= '</p>';
                 $str .= '<p>';
-                $str .= '<a type="button" href="'.site_url('desc/'.$item->id).'" class="btn btn-primary btn-sm">查看详情&gt;&gt;</a>';
+                $str .= '<a type="button" href="'.site_url('article/'.$item->id).'" class="btn btn-primary btn-sm">查看详情&gt;&gt;</a>';
                 $str .= '</p>';
                 $str .= '</div>';
                 $str .= '<div class="box-footer">';

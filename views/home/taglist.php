@@ -29,7 +29,7 @@
 	                <h3 class="box-title"><a href="<?php echo site_url('module/'.$article->module_name) ?>"><?php echo $article->module_name ?></a></h3>
 	              </div>
 	              <div class="box-body">
-	                <h3><a href="<?php echo site_url('desc/'.$article->id)?>" class="title"><?php echo $article->title ?></a></h3>
+	                <h3><a href="<?php echo site_url('article/'.$article->id)?>" class="title"><?php echo $article->title ?></a></h3>
 	                <h4>
 	                <?php                 
 	                if(strlen($article->tag_ids) >= 1){
@@ -51,7 +51,7 @@
 	                	<?php echo $article->brief ?>
 	                </p>
 	                <p>
-	                	 <a type="button" href="<?php echo site_url('desc/'.$article->id) ?>" class="btn btn-primary btn-sm">查看详情>></a>               	
+	                	 <a type="button" href="<?php echo site_url('article/'.$article->id) ?>" class="btn btn-primary btn-sm">查看详情>></a>               	
 	                </p>
 	              </div>
 	              <div class="box-footer">
@@ -123,7 +123,7 @@
 	              <div class="box-body">
 	                <ul class="list-unstyled">
 	                  <?php foreach ($hots as $key => $hot): ?>
-	                  	<li><span><?php echo ($key + 1) ?></span><span><a href="<?php echo site_url('module/'.$hot->module_name)?>">[<?php echo $hot->module_name ?>]</a></span><b><a href="<?php echo site_url('desc/'.$hot->id) ?>" title="<?php echo $hot->title ?>"><?php echo $hot->title ?></a></b></li>
+	                  	<li><span><?php echo ($key + 1) ?></span><span><a href="<?php echo site_url('module/'.$hot->module_name)?>">[<?php echo $hot->module_name ?>]</a></span><b><a href="<?php echo site_url('article/'.$hot->id) ?>" title="<?php echo $hot->title ?>"><?php echo $hot->title ?></a></b></li>
 	                  <?php endforeach ?>
 	                  <!-- <li><span>1</span><span><a href="">[文章分类]</a></span><b><a href="#" title="这是文章标题这是文章标题这是文章标题这是文章标题">这是文章标题这是文章标题这是文章标题这是文章标题</a></b></li> -->
 	                </ul>
@@ -141,7 +141,7 @@
 		            <div class="box-body">
 		              <ul class="list-unstyled">
 		                <?php foreach ($recommend as $key => $reco): ?>
-		                	<li><span><a href="<?php echo site_url('module/'.$reco->module_name)?>">[<?php echo $reco->module_name ?>]</a></span> <span><a href="<?php echo site_url('desc/'.$reco->id) ?>" title="<?php echo $reco->title ?>"><?php echo $reco->title ?></a></span></li>
+		                	<li><span><a href="<?php echo site_url('module/'.$reco->module_name)?>">[<?php echo $reco->module_name ?>]</a></span> <span><a href="<?php echo site_url('article/'.$reco->id) ?>" title="<?php echo $reco->title ?>"><?php echo $reco->title ?></a></span></li>
 		                <?php endforeach ?>
 		                <!-- <li><span><a href="#">[分类名]</a></span> <span><a href="#" title="文章标题文章标题">文章标题文章标题文章标题文章标题</a></span></li> -->
 		              </ul>
@@ -218,6 +218,7 @@
   </div>
  <?php $this->load->view('home/footer')?>
  <!-- 下面加载自己的js -->
+ <script>show_date_time();</script>
  <script src="<?php echo base_url('public/home/js/rightmodule.js')?>" async="true"></script>
  <script src="<?php echo base_url('public/home/js/taglist.js')?>" async="true"></script>
 </body>

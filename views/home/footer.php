@@ -75,7 +75,7 @@
     var str = daysold + "天" + hrsold + "小时" + minsold + "分" + seconds + "秒";
     $("#runtotaltime").html(str);
 }
-show_date_time();
+
 // 返回顶部
 $(window).scroll(function() {
     if ($(window).scrollTop() > 200)

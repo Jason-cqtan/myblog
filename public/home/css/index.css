@@ -17,7 +17,7 @@
 	line-height: 30px;
 }
 /*右侧*/
-.hots .box-body ul li,.random .box-body ul li{
+.hots .box-body ul li,.random .box-body ul li,.recommend .box-body ul li{
 	height: 30px;
 	line-height: 30px;
 	word-break:keep-all;/* 不换行 */
