@@ -11,7 +11,7 @@ function getrand() {
 		data: "",
 		dataType: "json",
 		success: function(msg) {
-			if (msg.list.length > 0) {
+			if (msg.list.length >= 1) {
 				listobj.html('');
 				$.each(msg.list, function(key, val) {
 					var list = '<li>\

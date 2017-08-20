@@ -217,7 +217,7 @@ class Home extends CI_Controller {
         $data['page_size'] = (int)$this->input->post('page_size'); 
         $data['module_name'] = $this->input->post('module_name');
         $res = $this->article->getArticles($data);
-        //var_dump($res);
+        // var_dump($res);exit;
         $totalnum = $res['total_count'];//(int)$res->count;//总条数
         $total_page = $res['total_page'];
         $pagestr = bootpagination($data['page_index'],$total_page,3);//分页

@@ -11,7 +11,7 @@ function getArticles(init1) {
 		data: objform.serialize(),
 		dataType: "json",
 		success: function(msg) {
-			if(msg.list.length > 1){
+			if(msg.list.length >= 1){
                 $("#articlebody").html('').append(msg.list);
                 $("#totalnum").html(msg.statistics.totalnum);
                 $("#page_index").html(msg.statistics.currentpage);

@@ -23,6 +23,7 @@
 			          <li class="active"><i class="fa fa-calendar"></i> <a href="#"><?php echo $monthly ?></a></li>
 			        </ol>
 				</section>
+				<div id="articlebody">
 				<?php foreach ($list as $key => $article): ?>
 			    <div class="box box-solid">
 	              <div class="box-header with-border">
@@ -62,6 +63,7 @@
 	              <!-- /.box-body -->
 	            </div>
 	            <?php endforeach ?>
+	            </div>
 	            <!-- 分页 -->
 	            <?php if($totalnum > 0){ ?>
 				<section class="row">

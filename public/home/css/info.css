@@ -27,6 +27,10 @@
 #announcement{
 	color:#db8b0b !important;
 }
+#article-body img{
+	max-width: 100%;
+    height: auto;
+}
 /*相关推荐、上下篇*/
 .related .box-body ul li,.prev-next p{
 	height: 30px;

@@ -196,11 +196,11 @@
 				</div>
 	        </div>
         </div>
-      </section>
-      <div class="go-top">
-        <div class="arrow"></div>
-        <div class="stick"></div>
-      </div>
+        <div class="go-top">
+	        <div class="arrow"></div>
+	        <div class="stick"></div>
+	    </div>
+      </section>      
       <!-- /.content -->
     </div>
   </div>

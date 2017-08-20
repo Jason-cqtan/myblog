@@ -11,7 +11,7 @@ function getTagArticles(init1) {
 		data: objform.serialize(),
 		dataType: "json",
 		success: function(msg) {
-			if(msg.list.length > 1){
+			if(msg.list.length >= 1){
                 $("#articlebody").html('').append(msg.list);
                 $("#totalnum").html(msg.statistics.totalnum);
                 $("#page_index").html(msg.statistics.currentpage);
@@ -53,12 +53,12 @@ function getrecommend()
 		data: objform.serialize(),
 		dataType: "json",
 		success: function(msg) {
-			if (msg.list.length > 0) {
+			if (msg.list.length >= 1) {
 				listobj.html('');
 				$.each(msg.list, function(key, val) {
 					var list = '<li>\
               <span><a href="'+site_url+'module/'+val.module_name+'.html">[' + val.module_name + ']</a></span>\
-              <span><a href="'+site_url+'desc/'+val.id+'.html" title="' + val.title + '">' + val.title + '</a></span>\
+              <span><a href="'+site_url+'article//'+val.id+'.html" title="' + val.title + '">' + val.title + '</a></span>\
               </li>';
 					listobj.append(list);
 				});

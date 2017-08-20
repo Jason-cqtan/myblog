@@ -32,7 +32,7 @@
               <h1 class="text-center"><?php echo $articlebasic->title ?></h1>
             </div>
             <div class="row extra">
-               <div class="col-xs-2 col-sm-3">
+               <div class="col-xs-3 col-sm-3">
                  <span><i class="fa fa-user"></i> 谭佳成</span>
                </div>
                <div class="col-xs-3 col-sm-3">
@@ -64,7 +64,7 @@
             <hr>
             <!-- 主要内容 -->
             <div id="article-body"><?php echo $articlecontent->content ?></div>
-            <p id="announcement"><i class="fa fa-volume-up"></i> 如无说明，本站文章均为原创，转载或引用注明来源：<span><?php echo site_url('desc/'.$articlebasic->id) ?></span></p>
+            <p id="announcement"><i class="fa fa-volume-up"></i> 如无说明，本站文章均为原创，转载或引用注明来源：<span><?php echo site_url('article/'.$articlebasic->id) ?></span></p>
             <hr>     
             <!-- 评分、分享、打赏 -->
             <div class="row interactive hidden">
@@ -82,12 +82,12 @@
             <div class="row prev-next">
               <?php if($prevarticle){ ?>
               <div class="col-xs-12">
-                <p>上一篇：<a href="<?php echo site_url('desc/'.$prevarticle->id) ?>" title="<?php echo $prevarticle->title ?>"><?php echo $prevarticle->title ?></a></p>
+                <p>上一篇：<a href="<?php echo site_url('article/'.$prevarticle->id) ?>" title="<?php echo $prevarticle->title ?>"><?php echo $prevarticle->title ?></a></p>
               </div>
               <?php } ?>
               <?php if($nextarticle){ ?>
               <div class="col-xs-12">
-                <p>下一篇：<a href="<?php echo site_url('desc/'.$nextarticle->id) ?>" title="<?php echo $nextarticle->title ?>"><?php echo $nextarticle->title ?></a></p>
+                <p>下一篇：<a href="<?php echo site_url('article/'.$nextarticle->id) ?>" title="<?php echo $nextarticle->title ?>"><?php echo $nextarticle->title ?></a></p>
               </div>
               <?php } ?>
             </div>
@@ -108,7 +108,7 @@
                 </form>
                 <ul class="list-unstyled" id="recommendbody">
                   <?php foreach ($recommend as $key => $rec): ?>
-                  <li class="col-xs-12 col-xs-6"><span><a href="<?php echo site_url('desc/'.$rec->id) ?>" title="<?php echo $rec->title ?>"><?php echo $rec->title ?></a></span></li>
+                  <li class="col-xs-12 col-xs-6"><span><a href="<?php echo site_url('article/'.$rec->id) ?>" title="<?php echo $rec->title ?>"><?php echo $rec->title ?></a></span></li>
                   <?php endforeach ?>                  
                 </ul>
               </div>

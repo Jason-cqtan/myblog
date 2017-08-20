@@ -17,7 +17,7 @@ function getRandRecommend()
 	     	obj.html('');
 	     	$.each(msg.list,function(key,val){
 	     		var one = '<li class="col-xs-12 col-xs-6">\
-	     		<span><a href="'+site_url+'desc/'+val.id+'.html"\
+	     		<span><a href="'+site_url+'article/'+val.id+'.html"\
 	     		title="'+val.title+'">'+val.title+'</a></span></li>';
 	     		obj.append(one);
 	     	});
