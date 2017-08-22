@@ -3,7 +3,7 @@
 <head>
   <?php $this->load->view('home/meta') ?>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/common/plugins/iCheck/all.css') ?>">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/info.css') ?>">  
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/info.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/common/plugins/prism/prism.css')?>">
   <title><?php echo $articlebasic->title ?></title>
 </head>
@@ -35,13 +35,13 @@
                <div class="col-xs-3 col-sm-3">
                  <span><i class="fa fa-user"></i> 谭佳成</span>
                </div>
-               <div class="col-xs-3 col-sm-3">
+               <div class="col-xs-4 col-sm-3">
                  <span data-toggle="tooltip" data-placement="top" title="<?php echo date("Y-m-d H:i",$articlebasic->create_time) ?>"><i class="fa fa-edit"></i> <?php echo $this->common->formatTime($articlebasic->create_time) ?></span>
                </div>
                <div class="col-xs-2 col-sm-3">
                  <span><i class="fa fa-eye"></i> (<?php echo $articlebasic->views ?>)</span>
                </div>
-               <?php 
+               <?php
                    if(strlen($articlebasic->tag_ids) >= 1){
                     $needarr = [];
                     $tag_name = explode(',',$articlebasic->tag_names);
@@ -53,9 +53,9 @@
                       );
                     }?>
                <div class="col-xs-4 col-sm-3">
-                 <span><i class="fa fa-tags"></i> 
+                 <span><i class="fa fa-tags"></i>
                      <?php foreach ($needarr as $key => $tag) {?>
-                     <a href="<?php echo site_url('tag/'.$tag->name) ?>" target="_blank" class="btn btn-xs btn-primary"><?php echo $tag->name ?></a> 
+                     <a href="<?php echo site_url('tag/'.$tag->name) ?>" target="_blank" class="btn btn-xs btn-primary"><?php echo $tag->name ?></a>
                      <?php } ?>
                  </span>
                </div>
@@ -65,7 +65,7 @@
             <!-- 主要内容 -->
             <div id="article-body"><?php echo $articlecontent->content ?></div>
             <p id="announcement"><i class="fa fa-volume-up"></i> 如无说明，本站文章均为原创，转载或引用注明来源：<span><?php echo site_url('article/'.$articlebasic->id) ?></span></p>
-            <hr>     
+            <hr>
             <!-- 评分、分享、打赏 -->
             <div class="row interactive hidden">
               <!-- <div class="col-xs-12 col-sm-6">
@@ -109,7 +109,7 @@
                 <ul class="list-unstyled" id="recommendbody">
                   <?php foreach ($recommend as $key => $rec): ?>
                   <li class="col-xs-12 col-xs-6"><span><a href="<?php echo site_url('article/'.$rec->id) ?>" title="<?php echo $rec->title ?>"><?php echo $rec->title ?></a></span></li>
-                  <?php endforeach ?>                  
+                  <?php endforeach ?>
                 </ul>
               </div>
             </div>
@@ -137,13 +137,13 @@
                       <div id="userextra">
                             <span><i class="fa fa-map-marker"></i> 重庆市</span>
                             <span><i class="fa fa-windows"></i>win7 旗舰版</span>
-                            <span><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>                    
+                            <span><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>
                       </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 text-right">
                       <button type="button" class="btn btn-primary btn-sm" id="surepost"><i class="fa fa-commenting"></i> 写好了</button>
                     </div>
-                  </div>                
+                  </div>
               </div>
             </div>
             <!-- 所有评论 -->
@@ -164,10 +164,10 @@
                             </div>
                             <div class="col-xs-10 col-sm-11">
                               <p>
-                                  <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;  
+                                  <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;
                                   <span class="hidden-xs">2017-7-14 12:12:12</span>&nbsp;&nbsp;
                                   <span class="location">1楼</span>
                               </p>
@@ -189,10 +189,10 @@
                             </div>
                             <div class="col-xs-10 col-sm-11">
                               <p>
-                                  <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;  
+                                  <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;
                                   <span class="hidden-xs">2017-7-14 12:12:12</span>&nbsp;&nbsp;
                                   <span class="location">2楼</span>
                               </p>
@@ -214,10 +214,10 @@
                             </div>
                             <div class="col-xs-10 col-sm-11">
                               <p>
-                                  <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;  
-                                  <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;  
+                                  <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;
+                                  <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;
                                   <span class="hidden-xs">2017-7-14 12:12:12</span>&nbsp;&nbsp;
                                   <span class="location">3楼</span>
                               </p>
@@ -236,10 +236,10 @@
                                   </div>
                                   <div class="col-xs-10 col-sm-11">
                                     <p>
-                                        <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;  
+                                        <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;
                                         <span class="hidden-xs">2017-7-14 12:12:12</span>&nbsp;&nbsp;
                                         <span class="location">1楼</span>
                                     </p>
@@ -259,10 +259,10 @@
                                   </div>
                                   <div class="col-xs-10 col-sm-11">
                                     <p>
-                                        <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;  
+                                        <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;
                                         <span class="hidden-xs">2017-7-14 12:12:12</span>&nbsp;&nbsp;
                                         <span class="location">2楼</span>
                                     </p>
@@ -282,10 +282,10 @@
                                   </div>
                                   <div class="col-xs-10 col-sm-11">
                                     <p>
-                                        <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;  
-                                        <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;  
+                                        <span><a href="#">这是昵称这是昵称这是昵称</a> <i class="fa fa-user male"></i></span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-map-marker"></i> 重庆市</span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-windows"></i>win7 旗舰版</span>&nbsp;&nbsp;
+                                        <span class="hidden-xs"><i class="fa fa-chrome"></i>谷歌浏览器 49.5</span>&nbsp;&nbsp;
                                         <span class="hidden-xs">2017-7-14 12:12:12</span>&nbsp;&nbsp;
                                         <span class="location">3楼</span>
                                     </p>
@@ -300,7 +300,7 @@
                                 </li>
                               </ul>
                             </div>
-                          </li>                      
+                          </li>
                       </ul>
                 </div>
                 <div class="callout callout-info">
@@ -328,7 +328,7 @@
  <script>
   //
   //prism代码亮高
-  // 
+  //
   var doc_pre = $("#article-body pre");
     doc_pre.each(function(){
         var class_val = $(this).attr('class');
@@ -339,7 +339,7 @@
         var pre_content = '<code class="'+lan_class+'">'+$(this).html()+'</code>';
         $(this).html(pre_content);
         $(this).attr("class",'line-numbers '+lan_class);
-    }); 
+    });
  </script>
 </body>
 </html>

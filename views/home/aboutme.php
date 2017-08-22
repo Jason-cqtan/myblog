@@ -22,7 +22,7 @@
   		      </section>
 			      <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="../../common/dist/img/user4-128x128.jpg" alt="User profile picture">
+                  <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('public/common/img/avatar.png') ?>" alt="User profile picture">
                   <h3 class="profile-username text-center">谭佳成</h3>
                   <p class="text-muted text-center">程序员</p>
                   <strong><i class="fa fa-book margin-r-5"></i> 教育背景</strong>
@@ -46,11 +46,13 @@
                   </p>
                   <hr>
                   <strong><i class="fa fa-file-text-o margin-r-5"></i> 其他说明</strong>
-                  <p>非计算机专业，毕业后培训机构培训php后开始工作，目前还是noob，弄这个网站的目的就是记录一些经验，日积月累，时间长了就是宝贵的财富。终极目标是全栈，能写前端，能搞后台、能做app、饭要一口一口的吃，慢慢来吧。</p>
+                  <p>非计算机专业，毕业后培训机构培训php后开始工作，目前还是noob，弄这个网站的目的就是记录一些经验，日积月累，时间长了就是宝贵的财富。终极目标是全栈，能写前端，能搞后台、能做app、哈哈，想象是美好的，但是多学点没坏处，饭要一口一口的吃，慢慢来吧。网站还有很多功能没达到我的预期，后期会慢慢补上，网站现在搭在虚拟主机，有些访问会不正常，域名93jc.cn还在备案中，暂时先用93jc.pw,9月份服务器正式迁移阿里云服务器和使用93jc.cn域名:)</p>
                   <strong><i class="fa fa-search margin-r-5"></i> 找到我</strong>
-                  <p><button type="btn btn-sm"><i class="fa fa-wechat"></i> 微信</button></p>
+                  <p>
+                  <a target="_blank" href="<?php echo base_url('public/common/img/weixin.jpg')?>"><img width="250px" height="250px" src="<?php echo base_url('public/common/img/weixin.jpg')?>" alt=""></a>
+                  </p>
                 </div>
-            </div>	
+            </div>
            </div>
         </div>
       </section>
