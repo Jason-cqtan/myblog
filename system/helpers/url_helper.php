@@ -61,7 +61,7 @@ if ( ! function_exists('site_url'))
 	 * @param	string	$protocol
 	 * @return	string
 	 */
-	function site_url($uri = '', $protocol = NULL)
+	function site_url($uri = '', $protocol = PROTOCOL)
 	{
 		return get_instance()->config->site_url($uri, $protocol);
 	}
@@ -82,7 +82,7 @@ if ( ! function_exists('base_url'))
 	 * @param	string	$protocol
 	 * @return	string
 	 */
-	function base_url($uri = '', $protocol = NULL)
+	function base_url($uri = '', $protocol = PROTOCOL)
 	{
 		return get_instance()->config->base_url($uri, $protocol);
 	}
