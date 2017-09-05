@@ -2,12 +2,12 @@
   <footer class="main-footer">
     <div class="container">
      <div class="col-xs-12">
-       <strong>Copyright &copy; 2015-2017.</strong> 纯手工打造 <a href="<?php echo base_url() ?>"><?php echo base_url() ?></a>
+       <strong>Copyright &copy; 2015-<?php echo date("Y")?>.All rights reserved</strong>  <a target="_blank" href="http://www.miitbeian.gov.cn/">渝ICP备17011244号</a>
      </div>
     </div>
     <!-- /.container -->
   </footer>
-  
+
 <!-- ./wrapper -->
 <!-- 登录模态框 -->
 <div class="modal fade" tabindex="-1" role="dialog" data-backdrop="false" id="loginmodal">
@@ -63,7 +63,7 @@
     //总时间
     timeold = (today.getTime() - BirthDay.getTime());
     sectimeold = timeold / 1000
-    secondsold = Math.floor(sectimeold); 
+    secondsold = Math.floor(sectimeold);
     msPerDay = 24 * 60 * 60 * 1000
     e_daysold = timeold / msPerDay
     daysold = Math.floor(e_daysold);

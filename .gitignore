@@ -2,5 +2,6 @@
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
+application/config/database.php
 #public/image/*
 .phpintel/*
