@@ -14,14 +14,14 @@ class Home extends CI_Controller {
         $this->load->model("Soul_model",'soul');
         $this->load->helper('bootpagination');
 	}
-    
+
     /**
      * 首页展示
      * @return [type] [description]
      */
 	public function index()
 	{
-        
+
         //默认显示10条文章列表
         $data['page_size'] = 10;//每页显示几条
         $data['page_index'] = (!empty($this->uri->segment(4)))?(int)$this->uri->segment(4):1;//当前第几页
@@ -45,7 +45,7 @@ class Home extends CI_Controller {
     public function ajaxGetArticles()
     {
         $data['page_index'] = (int)$this->input->post('page_index')==0?1:(int)$this->input->post('page_index');
-        $data['page_size'] = (int)$this->input->post('page_size'); 
+        $data['page_size'] = (int)$this->input->post('page_size');
         $res = $this->article->getArticles($data);
         //var_dump($res);
         $totalnum = $res['total_count'];//(int)$res->count;//总条数
@@ -65,7 +65,7 @@ class Home extends CI_Controller {
     {
          $str = '';
          if($data){
-            foreach ($data as $key => $item) {    
+            foreach ($data as $key => $item) {
                 $str .= '<div class="box box-solid">';
                 $str .= '<div class="box-header with-border">';
                 $str .= '<h3 class="box-title"><a href="'.site_url('module/'.$item->module_name).'">'.$item->module_name.'</a></h3>';
@@ -112,8 +112,8 @@ class Home extends CI_Controller {
          }
          return $str;
     }
-    
-    
+
+
     /**
      * 获取随机文章
      * @return [type] [description]
@@ -122,9 +122,9 @@ class Home extends CI_Controller {
     {
         $res = $this->article->getRandArticle();
         echo json_encode(array('list'=>$res));
-        exit;    
+        exit;
     }
-    
+
     /**
      * 记录点击次数
      * @return [type] [description]
@@ -134,7 +134,7 @@ class Home extends CI_Controller {
         echo json_encode(array('num'=>$_SESSION['randsoulnum'],'msg'=>'鸡汤看这么多干嘛，撸代码去！'));
         exit;
     }
-    
+
     /**
      * 获取心灵鸡汤
      * @return [type] [description]
@@ -146,7 +146,7 @@ class Home extends CI_Controller {
         echo json_encode(array('status'=>0,'word'=>$res));
         exit;
     }
-    
+
     /**
      * 按月统计
      * @return [type] [description]
@@ -156,7 +156,7 @@ class Home extends CI_Controller {
          $res = $this->article->getMonthy();
          echo json_encode(array('list'=>$res));exit;
     }
-    
+
     /**
      * 标签统计
      * @return [type] [description]
@@ -166,7 +166,7 @@ class Home extends CI_Controller {
         $res = $this->article->getStatisticsTags();
         echo json_encode(array('list'=>$res));exit;
     }
-    
+
     /**
      * 简单统计
      * @return [type] [description]
@@ -177,7 +177,7 @@ class Home extends CI_Controller {
         echo json_encode($res);
         exit;
     }
-    
+
     /**
      * 通过模块获取文章列表
      * @param  [type] $cate [description]
@@ -191,7 +191,6 @@ class Home extends CI_Controller {
         }
         $data['module_name'] = urldecode($cate);
         $res = $this->article->getArticles($data);
-        // print_r($res);exit;
         $data['total_page'] = $res['total_page'];//总页数
         $data['totalnum'] = $res['total_count'];//总条数
         $data['pagestr'] = bootpagination($data['page_index'],$data['total_page'],3);//分页
@@ -206,7 +205,7 @@ class Home extends CI_Controller {
         $data['soul'] = $this->soul->getRand();
         $this->load->view('home/modulelist',$data);
     }
-    
+
     /**
      * 通过模块ajax获取文章
      * @return [type] [description]
@@ -214,7 +213,7 @@ class Home extends CI_Controller {
     public function ajaxGetModuleArticles()
     {
         $data['page_index'] = (int)$this->input->post('page_index')==0?1:(int)$this->input->post('page_index');
-        $data['page_size'] = (int)$this->input->post('page_size'); 
+        $data['page_size'] = (int)$this->input->post('page_size');
         $data['module_name'] = $this->input->post('module_name');
         $res = $this->article->getArticles($data);
         // var_dump($res);exit;
@@ -260,7 +259,7 @@ class Home extends CI_Controller {
         // print_r($data);exit;
         $this->load->view('home/taglist',$data);
     }
-    
+
     /**
      * 通过标签ajax获取文章
      * @return [type] [description]
@@ -268,7 +267,7 @@ class Home extends CI_Controller {
     public function ajaxGetTagArticles()
     {
         $data['page_index'] = (int)$this->input->post('page_index')==0?1:(int)$this->input->post('page_index');
-        $data['page_size'] = (int)$this->input->post('page_size'); 
+        $data['page_size'] = (int)$this->input->post('page_size');
         $data['tag_ids'] = $this->input->post('tag_ids');
         $res = $this->article->getArticles($data);
         //var_dump($res);
@@ -280,7 +279,7 @@ class Home extends CI_Controller {
         echo json_encode(array('list'=>$ajaxcontent,'pagestr'=>$pagestr,'statistics'=>$statistics));
         exit;
     }
-    
+
     /**
      * 通过标签id获取获取推荐列表
      * @return [type] [description]
@@ -295,14 +294,14 @@ class Home extends CI_Controller {
         echo json_encode(array('list'=>$res['data']));
         exit;
     }
-    
+
     /**
      * 通过月份获取文章列表
      * @param  [type] $monthly [description]
      * @return [type]          [description]
      */
     public function getMonththArticles($monthly)
-    {        
+    {
         $monthly = urldecode(trim($monthly));
         $data['page_index'] = empty($this->uri->segment(3))?1:(int)$this->uri->segment(3);
         if($data['page_index'] < 1){
@@ -324,7 +323,7 @@ class Home extends CI_Controller {
         // print_r($data);exit;
         $this->load->view('home/monthlist',$data);
     }
-    
+
     /**
      * 通过月份ajax获取文章列表
      * @return [type] [description]
@@ -332,7 +331,7 @@ class Home extends CI_Controller {
     public function ajaxGetMonthArticles()
     {
         $data['page_index'] = (int)$this->input->post('page_index')==0?1:(int)$this->input->post('page_index');
-        $data['page_size'] = (int)$this->input->post('page_size'); 
+        $data['page_size'] = (int)$this->input->post('page_size');
         $data['monthly'] = $this->input->post('monthly');
         $res = $this->article->getArticles($data);
         //var_dump($res);
