@@ -38,7 +38,7 @@
                <div class="col-xs-4 col-sm-3">
                  <span data-toggle="tooltip" data-placement="top" title="<?php echo date("Y-m-d H:i",$articlebasic->create_time) ?>"><i class="fa fa-edit"></i> <?php echo $this->common->formatTime($articlebasic->create_time) ?></span>
                </div>
-               <div class="col-xs-2 col-sm-3">
+               <div class="col-xs-3 col-sm-3">
                  <span><i class="fa fa-eye"></i> (<?php echo $articlebasic->views ?>)</span>
                </div>
                <?php
