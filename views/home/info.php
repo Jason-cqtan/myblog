@@ -66,13 +66,20 @@
             <div id="article-body"><?php echo $articlecontent->content ?></div>
             <p id="announcement"><i class="fa fa-volume-up"></i> 如无说明，本站文章均为原创，转载或引用注明来源：<span><?php echo site_url('article/'.$articlebasic->id) ?></span></p>
             <hr>
+            <div class="bdsharebuttonbox">
+              <a href="#" class="bds_more" data-cmd="more"></a>
+              <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+              <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+              <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            </div>
+
             <!-- 评分、分享、打赏 -->
             <div class="row interactive hidden">
               <!-- <div class="col-xs-12 col-sm-6">
                 <p>打分：<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <span>4.6分</span> <span>目前共 <b>5</b>人参与评分</span></p>
               </div> -->
               <div class="col-xs-12 col-sm-6">
-                <div class="bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1500299313094"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到豆瓣网" href="#" class="bds_douban" data-cmd="douban"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到邮件分享" href="#" class="bds_mail" data-cmd="mail"></a></div>
+
               </div>
               <div class="col-xs-12">
                 <p>打赏：本站乐意接受任何形式的打赏，你的鼓励是我最大的动力，我会继续努力，发布更多更好的文章：）</p>
@@ -341,5 +348,6 @@
         $(this).attr("class",'line-numbers '+lan_class);
     });
  </script>
+ <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </body>
 </html>
