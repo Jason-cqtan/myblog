@@ -6,6 +6,8 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/home/css/info.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/common/plugins/prism/prism.css')?>">
   <title><?php echo $articlebasic->title ?></title>
+  <meta name="keywords" content="<?php echo $articlebasic->module_name ?>">
+  <meta name="description" content="<?php echo $articlebasic->title ?>">
 </head>
 <body class="hold-transition skin-blue-light layout-top-nav fixed">
 <div class="wrapper">
@@ -349,5 +351,24 @@
     });
  </script>
  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+   <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?1462a9be658e7d42c0235aeff4f6f90c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'GA_TRACKING_ID');
+  </script>
+
 </body>
 </html>
